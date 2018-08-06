@@ -1,0 +1,72 @@
+mat-card {
+    margin-top: 100px;
+    margin-bottom: 50px;
+    width: 100%;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.upload-form {
+    min-width: 150px;
+    max-width: 1000px;
+    width: 100%;
+  }
+.upload-map {
+    min-width: 150px;
+    max-width: 1000px;
+    width: 400px;
+    padding: 10px;
+  }
+  
+.input-full-width {
+    width: 100%;
+}
+
+ngui-map {
+    height: 350px;
+}
+
+cite {
+    color: grey;
+    font-size: 12px;
+}
+
+mat-form-field {
+    margin-bottom: 15px;
+}
+
+.progress {
+    height: 200px;
+    background-color: #fff;
+}
+
+.center {
+    margin: auto;
+    width: 85%;
+}
+.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.mat-icon svg {
+    width: 50%;
+    transform: scale(2);
+}
+
+.responsive {
+    max-width: 100%;
+    height: auto;
+}

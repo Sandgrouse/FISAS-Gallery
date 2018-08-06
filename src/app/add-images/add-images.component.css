@@ -1,0 +1,25 @@
+/* #upload-images {
+} */
+
+.form {
+    height: 50px;
+}
+
+mat-spinner {
+    height: 200px;
+}
+
+.d-content {
+    height: 300px;
+}
+
+.center {
+    margin: auto;
+    width: 85%;
+}
+.center-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}

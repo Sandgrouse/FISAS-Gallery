@@ -1,0 +1,45 @@
+<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>
+<div mat-dialog-content>
+  <p>What's your favorite animal?</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.animal">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</div> -->
+
+<!-- This is the content of the dialog, containing a list of the files to upload -->
+<h1 mat-dialog-title class="center-text" *ngIf="uploadSuccessful">Done!</h1>
+<h1 mat-dialog-title class="center-text" *ngIf="!uploadSuccessful">Creating new project</h1>
+<div mat-dialog-content>
+    <div *ngIf="uploadSuccessful" class="progress">
+       <img src="../assets/images/like.png" alt="Upload complete" class="responsive center-image">
+      <!-- <mat-icon svgIcon="thumbs-up"></mat-icon> -->
+    </div>
+    
+    <div class="progress" *ngIf="!uploadSuccessful">
+      <mat-spinner class="center"></mat-spinner>
+    </div>
+</div>
+<div class="right" mat-dialog-actions>
+  <button mat-raised-button color="primary" [disabled]="!canBeClosed" (click)="onNoClick()">{{primaryButtonText}}</button>
+</div>
+
+<!-- This are the actions of the dialog, containing the primary and the cancel button
+<mat-dialog-content fxFlex>
+    <mat-list>
+      <mat-list-item>
+        <h4 mat-line *ngIf="!data.uploadComplete">Creating new project</h4>
+        <h4 mat-line *ngIf="data.uploadComplete">Done!</h4>
+        <mat-spinner *ngIf="!data.uploadComplete" ></mat-spinner>
+  
+        <mat-progress-bar *ngIf="progress" mode="determinate" [value]="progress[project_status].progress | async"></mat-progress-bar>
+      </mat-list-item>
+    </mat-list>
+  </mat-dialog-content>
+<mat-dialog-actions class="actions">
+  <button *ngIf="data.showCancelButton" mat-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" [disabled]="!data.canBeClosed" (click)="onNoClick()">{{data.primaryButtonText}}</button>
+</mat-dialog-actions> -->

@@ -1,0 +1,142 @@
+
+<div class="container-fluid">
+    <p><button mat-raised-button color="warning" (click)="backToMap()">Back to map</button></p>
+    <div class="row mx-auto"> 
+        <div class="col-6 col-md-8">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>New Portfolio Item</mat-card-title>
+              <mat-card-subtitle>Add a new project to your portfolio</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <form  class="upload-form" [formGroup]="newProjectForm" (ngSubmit)="openDialog()">
+                  <mat-form-field class="input-full-width">
+                      <input type="text" minlength="5" matInput placeholder="Name" formControlName="name" required>
+                      <mat-error *ngIf="newProjectForm.controls.name.invalid">{{getErrorMessage(name)}}</mat-error>
+                  </mat-form-field>
+                  
+                  <mat-form-field class="input-full-width" hintLabel="Max 300 characters">
+                    <textarea #description matInput placeholder="Describe the project" formControlName="description" maxlength="300" required></textarea>
+                    <mat-hint align="end">{{description.value?.length || 0}}/300</mat-hint>
+                    <mat-error *ngIf="newProjectForm.controls.description.invalid">{{getErrorMessage(description)}}</mat-error>
+                  </mat-form-field>
+          
+                  <table class="input-full-width" cellspacing="10">
+                    <tr>
+                      <td><mat-form-field class="input-full-width" hintLabel="Click on the map and drag marker">
+                          <input type="number" matInput placeholder="Latitude"  formControlName="latitude" required>
+                      </mat-form-field></td>
+                      <td><mat-form-field class="input-full-width">
+                        <input type="number" matInput placeholder="Longitude"  formControlName="longitude" required>
+                      </mat-form-field></td>
+                    </tr>
+                  </table>
+          
+                  <table class="input-full-width" cellspacing="20">
+                    <tr>
+                      <td><mat-form-field class="input-full-width" hintLabel="Pick a date">
+                          <input matInput [matDatepicker]="startpicker" placeholder="When did it start?" formControlName="start_date">
+                          <mat-datepicker-toggle matSuffix [for]="startpicker">
+                          </mat-datepicker-toggle>
+                          <mat-datepicker #startpicker></mat-datepicker>
+                        </mat-form-field>
+                      </td>
+                      <td><mat-form-field class="input-full-width" hintLabel="Pick a date">
+                          <input matInput [matDatepicker]="endpicker" placeholder="When did it end?" formControlName="end_date">
+                          <mat-datepicker-toggle matSuffix [for]="endpicker">
+                          </mat-datepicker-toggle>
+                          <mat-datepicker #endpicker></mat-datepicker>
+                        </mat-form-field>
+                      </td>
+                    </tr>
+                  </table>
+
+                  <input #imageFile type="file" multiple (change)="onFilesAdded($event.target.files)" style="display: none">
+                  <!-- <button mat-stroked-button (click)="openDialog()" color="primary">test dialog</button> -->
+                  <button class="right" mat-raised-button color="primary" type="submit" [disabled]="newProjectForm.invalid || newProjectForm.pristine">Create project</button>
+          
+              </form>
+              <button mat-stroked-button (click)="imageFile.click()">Add images</button><cite *ngIf="filesLoaded"> {{file_count}} image(s) loaded</cite>
+
+            </mat-card-content>
+            <mat-card-actions align="end">
+              
+            </mat-card-actions>
+          </mat-card>
+        </div>
+        <div class="col-6 col-md-4">
+            <mat-card class="upload-map">
+                <mat-form-field class="input-full-width">
+                    <input matInput placeholder="Pan the map here" [(ngModel)]="map_center" name="latitude">
+                </mat-form-field>
+                <ngui-map center={{map_center}} zoom="15" (click)="onMapClick($event)">
+                    <marker [position]="marker_position" draggable="true" #markerRef (dragend)="dragged($event)"></marker>
+                </ngui-map>
+            </mat-card>
+        </div>
+      </div>
+</div> 
+
+<!-- <mat-grid-list cols="2" rowHeight="2:1" [gutterSize]="10">
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-header>
+              <mat-card-title>New Portfolio Item</mat-card-title>
+              <mat-card-subtitle>Add a new project to your portfolio</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <form action="" class="upload-form">
+                  <mat-form-field class="input-full-width">
+                      <input matInput placeholder="Name" value="Land survey">
+                  </mat-form-field>
+                  
+                  <mat-form-field class="input-full-width">
+                    <textarea matInput placeholder="Describe the project"></textarea>
+                  </mat-form-field>
+          
+                  <table class="input-full-width" cellspacing="10">
+                    <tr>
+                      <td><mat-form-field class="input-full-width">
+                        <input matInput placeholder="Longitude">
+                      </mat-form-field></td>
+                      <td><mat-form-field class="input-full-width">
+                        <input matInput placeholder="Latitude">
+                      </mat-form-field></td>
+                    </tr>
+                  </table>
+          
+                  <table class="input-full-width" cellspacing="20">
+                    <tr>
+                      <td><mat-form-field class="input-full-width">
+                          <input matInput [matDatepicker]="startpicker" placeholder="When did it start?">
+                          <mat-datepicker-toggle matSuffix [for]="startpicker">
+                          </mat-datepicker-toggle>
+                          <mat-datepicker #startpicker></mat-datepicker>
+                        </mat-form-field>
+                      </td>
+                      <td><mat-form-field class="input-full-width">
+                          <input matInput [matDatepicker]="endpicker" placeholder="When did it end?">
+                          <mat-datepicker-toggle matSuffix [for]="endpicker">
+                          </mat-datepicker-toggle>
+                          <mat-datepicker #endpicker></mat-datepicker>
+                        </mat-form-field>
+                      </td>
+                    </tr>
+                  </table>
+          
+                  <button mat-button (click)="openDialog()" color="primary">Add images</button>
+              </form>
+            </mat-card-content>
+            <mat-card-actions align="end">
+              <button mat-raised-button color="primary">Create project</button>
+            </mat-card-actions>
+          </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card class="upload-map">
+            <ngui-map center="Lagos, Nigeria" zoom="15" class="">
+            </ngui-map>
+        </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list> -->

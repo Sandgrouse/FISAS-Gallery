@@ -1,0 +1,23 @@
+
+
+<!-- This is the content of the dialog, containing a list of the files to upload -->
+<h1 mat-dialog-title class="center-text" *ngIf="uploadSuccessful">Done!</h1>
+<h1 mat-dialog-title class="center-text" *ngIf="!uploadSuccessful">Add images to this project</h1>
+<div mat-dialog-content class="">
+    <div *ngIf="uploadSuccessful" class="d-content">
+       <img src="../assets/images/like.png" alt="Upload complete" class="responsive center-image">
+      <!-- <mat-icon svgIcon="thumbs-up"></mat-icon> -->
+    </div>
+    
+    <div *ngIf="!uploadSuccessful && !uploading">
+        <form class="form" id="upload-images" [formGroup]="addImagesForm" (ngSubmit)="onSubmit()">
+                <input type="file" multiple (change)="onFilesAdded($event.target.files)" #imageFile required>
+                <button id="submit-button" mat-raised-button color="primary" type="submit" style="display: none">Upload</button>
+        </form>
+    </div>
+    <mat-spinner class="center" *ngIf="uploading"></mat-spinner>
+</div>
+<div class="right" mat-dialog-actions>
+    <button mat-raised-button color="primary" [disabled]="uploading || uploadSuccessful || addImagesForm.invalid" (click)="clickButton()">Upload</button>
+    <button mat-raised-button color='{{secondButtonColor}}' [disabled]="uploading" (click)="closeModal()">{{secondButtonText}}</button>
+</div>

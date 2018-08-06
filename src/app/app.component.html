@@ -1,20 +1,28 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  <h4>
+    Hi {{ user?.name }}!
+  </h4>
+  <h2>
+    Explore {{ title }}!
+  </h2>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+
+<div class="action-area justify-content-end">
+  <!-- <mat-slide-toggle 
+    [color]="color" 
+    [disabled]='switch_disabled'
+    [checked]="switch_checked"
+    [labelPosition]="switch_label_position" >
+      Switch views
+  </mat-slide-toggle> -->
+  <button *ngIf="!isAuthenticated" mat-stroked-button color="primary" (click)="openLoginModal()">Admin</button>
+  <div *ngIf="isAuthenticated">
+    <button mat-raised-button color="primary" (click)="goToUploadForm()">Add a project</button>
+    <button mat-stroked-button color="primary" (click)="onLogout()">Logout</button>
+  </div>
+</div>
+
+<router-outlet class="container"></router-outlet>
 

@@ -1,0 +1,34 @@
+<p>Click on a project to see pictures of our work: </p>
+<ngui-map center="Lagos, Nigeria" zoom="15" class="ze-map">
+  <marker *ngFor="let project of projects" 
+          [position]="project.position" 
+          [title] = "project.name"
+          [label] = "project.name"
+          draggable="false" 
+          (click)="clicked($event, project.description, project.id)" 
+          (initialized$)="onMarkerInit($event, project.description)">
+    <info-window id ="iw">
+      <ngb-carousel *ngIf="images">
+        <ng-template ngbSlide>
+          <img [src]="images[0]" alt="Random first slide" class="info-thumbnail">
+        </ng-template>
+        <ng-template ngbSlide>
+          <img [src]="images[1]" alt="Random second slide" class="info-thumbnail">
+        </ng-template>
+        <ng-template ngbSlide>
+          <img [src]="images[2]" alt="Random third slide" class="info-thumbnail">
+        </ng-template>
+      </ngb-carousel>
+      <section>
+        <p>{{marker.description}}</p>
+      </section>
+
+      <button class='info-button' mat-stroked-button color="primary" (click)="hideMarkerInfo(marker.id)">Gallery</button>
+      <span *ngIf="isAuthenticated">
+        <button class='info-button' mat-stroked-button color="primary" (click)="openDialog()">Add images</button>
+        <button class='info-button' mat-stroked-button color="accent" (click)="deleteProject(marker.id)">Delete</button>  
+      </span>
+    </info-window>
+  </marker>
+
+</ngui-map>

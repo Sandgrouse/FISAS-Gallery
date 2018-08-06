@@ -1,0 +1,12 @@
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.move-up {
+    position: relative;
+    top: -64px;
+}
