@@ -4,6 +4,7 @@ import { Project } from '../_models';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import { catchError } from 'rxjs/operators';
+import { api_base } from '../constants';
 
 
 
@@ -16,7 +17,7 @@ export class GalleryService {
 
   private url = 'https://api.flickr.com/services/rest/';
   private localUrl = 'api/projects/projects.json';
-  private serverUrl = 'http://localhost:8200/api';
+  private serverUrl = api_base;
 
 
   constructor(private http: HttpClient) {
@@ -25,7 +26,7 @@ export class GalleryService {
 
 
   getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.serverUrl + '/projects/');
+    return this.http.get<Project[]>(this.serverUrl + 'projects');
   }
 
   testApi() {
@@ -45,7 +46,7 @@ export class GalleryService {
   }
 
   getProject(id: number | string) {
-    return this.http.get<Project>(this.serverUrl + '/projects/' + id);
+    return this.http.get<Project>(this.serverUrl + 'projects/' + id);
   }
 
   getLocalImages() {
@@ -54,7 +55,7 @@ export class GalleryService {
 
   createProject(payload: FormData) {
 
-    const apiCreateEndpoint = this.serverUrl + '/projects/';
+    const apiCreateEndpoint = this.serverUrl + 'projects';
     const req = new HttpRequest('POST', apiCreateEndpoint, payload, {
       reportProgress: true // for progress data
     });
@@ -62,7 +63,7 @@ export class GalleryService {
   }
   addImages (payload: FormData) {
 
-    const apiCreateEndpoint = this.serverUrl + '/addimage/';
+    const apiCreateEndpoint = this.serverUrl + 'addimage';
     const req = new HttpRequest('POST', apiCreateEndpoint, payload, {
       reportProgress: true // for progress data
     });
@@ -91,7 +92,7 @@ export class GalleryService {
   }
 
   deleteProject (id: number | string) {
-    const url = this.serverUrl + '/projects/' + id;
+    const url = this.serverUrl + 'projects/' + id;
     return this.http.delete(url)
     .pipe(
       catchError(this.handleError('deleteProject'))

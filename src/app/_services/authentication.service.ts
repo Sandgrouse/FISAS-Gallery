@@ -3,11 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UserService } from './user.service';
 import { User } from '../_models';
+import { api_base } from '../constants';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
 
-    private apiUrl = 'http://localhost:8200/api/';
+    private apiUrl = api_base;
 
     constructor(private http: HttpClient) { }
 
