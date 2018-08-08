@@ -16,82 +16,82 @@ class ImagesTableSeeder extends Seeder
         Image::create(array(
             'project_id' => 4,
             'description' => 'When we dug',
-            'image' => 'public/images/projects/4/Sepik.jpg'
+            'image' => 'Sepik.jpg'
         ));
         Image::create(array(
             'project_id' => 4,
             'description' => 'When we scraped',
-            'image' => 'public/images/projects/4/yellow_container.jpg'
+            'image' => 'yellow_container.jpg'
         ));
         Image::create(array(
             'project_id' => 5,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/5/mel.jpg'
+            'image' => 'mel.jpg'
         ));
         Image::create(array(
             'project_id' => 5,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/5/wood_container.jpg'
+            'image' => 'wood_container.jpg'
         ));
         Image::create(array(
             'project_id' => 3,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/3/fabian-grohs.jpg'
+            'image' => 'fabian-grohs.jpg'
         ));
         Image::create(array(
             'project_id' => 3,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/3/green_container.jpg'
+            'image' => 'green_container.jpg'
         ));
         Image::create(array(
             'project_id' => 2,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/2/eiliv-aceron.jpg'
+            'image' => 'eiliv-aceron.jpg'
         ));
         Image::create(array(
             'project_id' => 2,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/2/bread_ui.jpg'
+            'image' => 'bread_ui.jpg'
         ));
         Image::create(array(
             'project_id' => 1,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/1/blue_container.jpg'
+            'image' => 'blue_container.jpg'
         ));
         Image::create(array(
             'project_id' => 1,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/1/ash_container.jpg'
+            'image' => 'ash_container.jpg'
         ));
         Image::create(array(
             'project_id' => 1,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/1/orange_container.jpg'
+            'image' => 'orange_container.jpg'
         ));
         Image::create(array(
             'project_id' => 2,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/2/outdoor_home.jpg'
+            'image' => 'outdoor_home.jpg'
         ));
         Image::create(array(
             'project_id' => 3,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/3/red_container.jpg'
+            'image' => 'red_container.jpg'
         ));
         Image::create(array(
             'project_id' => 4,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/4/hipster-mum.jpg'
+            'image' => 'hipster-mum.jpg'
         ));
         Image::create(array(
             'project_id' => 5,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/5/navy_blue_continer.jpg'
+            'image' => 'navy_blue_continer.jpg'
         ));
         Image::create(array(
             'project_id' => 4,
             'description' => 'When we bored',
-            'image' => 'public/images/projects/4/jeff-sheldon.jpg'
+            'image' => 'jeff-sheldon.jpg'
         ));
     }
         
