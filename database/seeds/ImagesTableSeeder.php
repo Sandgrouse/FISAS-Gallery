@@ -14,42 +14,42 @@ class ImagesTableSeeder extends Seeder
     {
         //
         Image::create(array(
-            'project_id' => 4,
+            'project_id' => 41,
             'description' => 'When we dug',
             'image' => 'Sepik.jpg'
         ));
         Image::create(array(
-            'project_id' => 4,
+            'project_id' => 41,
             'description' => 'When we scraped',
             'image' => 'yellow_container.jpg'
         ));
         Image::create(array(
-            'project_id' => 5,
+            'project_id' => 11,
             'description' => 'When we bored',
             'image' => 'mel.jpg'
         ));
         Image::create(array(
-            'project_id' => 5,
+            'project_id' => 11,
             'description' => 'When we bored',
             'image' => 'wood_container.jpg'
         ));
         Image::create(array(
-            'project_id' => 3,
+            'project_id' => 31,
             'description' => 'When we bored',
             'image' => 'fabian-grohs.jpg'
         ));
         Image::create(array(
-            'project_id' => 3,
+            'project_id' => 31,
             'description' => 'When we bored',
             'image' => 'green_container.jpg'
         ));
         Image::create(array(
-            'project_id' => 2,
+            'project_id' => 21,
             'description' => 'When we bored',
             'image' => 'eiliv-aceron.jpg'
         ));
         Image::create(array(
-            'project_id' => 2,
+            'project_id' => 21,
             'description' => 'When we bored',
             'image' => 'bread_ui.jpg'
         ));
@@ -69,27 +69,27 @@ class ImagesTableSeeder extends Seeder
             'image' => 'orange_container.jpg'
         ));
         Image::create(array(
-            'project_id' => 2,
+            'project_id' => 21,
             'description' => 'When we bored',
             'image' => 'outdoor_home.jpg'
         ));
         Image::create(array(
-            'project_id' => 3,
+            'project_id' => 31,
             'description' => 'When we bored',
             'image' => 'red_container.jpg'
         ));
         Image::create(array(
-            'project_id' => 4,
+            'project_id' => 41,
             'description' => 'When we bored',
             'image' => 'hipster-mum.jpg'
         ));
         Image::create(array(
-            'project_id' => 5,
+            'project_id' => 11,
             'description' => 'When we bored',
             'image' => 'navy_blue_continer.jpg'
         ));
         Image::create(array(
-            'project_id' => 4,
+            'project_id' => 41,
             'description' => 'When we bored',
             'image' => 'jeff-sheldon.jpg'
         ));
