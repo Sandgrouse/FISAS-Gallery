@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
-import { Project } from '../_models';
+import { Project, Data } from '../_models';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import { catchError } from 'rxjs/operators';
@@ -16,7 +16,7 @@ export class GalleryService {
   projects: Project[];
 
   private url = 'https://api.flickr.com/services/rest/';
-  private localUrl = 'api/projects/projects.json';
+  // private localUrl = 'api/projects/projects.json';
   private serverUrl = api_base;
 
 
@@ -25,33 +25,33 @@ export class GalleryService {
   }
 
 
-  getProjects(): Observable<Project[]> {
-    return this.http.get<Project[]>(this.serverUrl + 'projects');
+  getProjects(): Observable<Data> {
+    return this.http.get<Data>(this.serverUrl + 'projects');
   }
 
-  testApi() {
+ /*  testApi() {
 
     const apiUrl = this.serverUrl + '/projects/';
 
-    this.http.get<Project[]>(apiUrl).subscribe((data) => {
+     this.http.get<Project[]>(apiUrl).subscribe((data) => {
       console.table(data);
     });
 
-    /* return this.http.get<Project>(this.serverUrl + '/projects/' + 2).subscribe((data) => {
+    return this.http.get<Project>(this.serverUrl + '/projects/' + 2).subscribe((data) => {
       console.log(data);
-    }); */
+    });
 
     // this.testPost(apiUrl);
 
-  }
+  } */
 
   getProject(id: number | string) {
     return this.http.get<Project>(this.serverUrl + 'projects/' + id);
   }
 
-  getLocalImages() {
+ /*  getLocalImages() {
     return this.http.get<Project[]>(this.localUrl).do(data => console.log('All: ' +  JSON.stringify(data)));
-  }
+  } */
 
   createProject(payload: FormData) {
 
@@ -70,7 +70,7 @@ export class GalleryService {
     return this.http.request(req);
   }
 
-  private testPost (apiUrl) {
+  /* private testPost (apiUrl) {
     const payload = new FormData();
     payload.append('name', 'Calabar Carnival');
     payload.append('description', 'What happens in Cali,stays there');
@@ -89,7 +89,7 @@ export class GalleryService {
       error => {
           console.log('Server error');
       });
-  }
+  } */
 
   deleteProject (id: number | string) {
     const url = this.serverUrl + 'projects/' + id;
