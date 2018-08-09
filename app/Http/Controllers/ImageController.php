@@ -54,7 +54,7 @@ class ImageController extends Controller
 
       #Get location of folder to save files in
       // $destinationPath = 'public/images/'. $file->project_id .'/';
-      $destinationPath = public_path().'/storage/images/projects/'. $project_id .'/';
+      $destinationPath = public_path().'/images/projects/'. $project_id .'/';
 
       #Get the file extension
       $extension = $file->getClientOriginalExtension();
