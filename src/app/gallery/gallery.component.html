@@ -28,7 +28,7 @@
         <mat-grid-tile
             *ngFor="let image of project.data.photos"
             [style.background]="blue">
-          <img src ='../assets/images/{{image.image}}' class="project-image" layout-fill>
+          <img src ='../images/projects/{{image.project_id}}/{{image.image}}' class="project-image" layout-fill>
           <mat-grid-tile-footer> 
                 <span class="image-name">{{image.description}}</span>
           </mat-grid-tile-footer>
