@@ -1516,7 +1516,6 @@ var AppModule = /** @class */ (function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "api_base", function() { return api_base; });
-// export const api_base = 'http://localhost:8200/api/';
 
 var api_base = 'http://fisas-gallery.herokuapp.com/api/';
 
