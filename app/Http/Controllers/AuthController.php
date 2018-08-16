@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use DigitalDrifter\LaravelChromeLogger\LaravelChromeLogger;
 
 class AuthController extends Controller
 {
@@ -32,11 +31,9 @@ class AuthController extends Controller
       $credentials = $request->only(['email', 'password']);
 
       if (!$token = auth()->attempt($credentials)) {
-        LaravelChromeLogger::warn('something went wrong!', $credentials);
         return response()->json(['error' => 'You Are Not A Member'], 401);
       }
 
-      LaravelChromeLogger::log('Hello Jeffo');
       return $this->respondWithToken($token);
     }
 
@@ -58,7 +55,6 @@ class AuthController extends Controller
     public function logout()
     {
         auth()->logout();
-        LaravelChromeLogger::log('See you later');
 
         return response()->json(['message' => 'Successfully logged out']);
     }
