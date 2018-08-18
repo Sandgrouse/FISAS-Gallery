@@ -1,0 +1,21 @@
+<h1 mat-dialog-title class="center-text">Are you sure?</h1>
+
+<div mat-dialog-content class="main-body">
+  <div *ngIf="deleted" class="d-content">
+     <img src="./images/like.png" alt="Upload complete" class="responsive center-image">
+  </div>
+  
+  <div class="center" *ngIf="deleting">
+      <mat-spinner class="center"></mat-spinner>
+  </div>
+
+  <div *ngIf="deleteFailed" class="center">
+      <img src="./images/cancel.png" alt="Upload failed" class="center-image failed">
+   </div>
+</div>
+
+<div class="right" mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="confirmDelete()">Yes</button>
+  <button mat-raised-button color='warn' [mat-dialog-close]="deleted" cdkFocusInitial>Back</button>
+</div>
+
