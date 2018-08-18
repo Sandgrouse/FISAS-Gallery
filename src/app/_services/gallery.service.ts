@@ -16,7 +16,6 @@ export class GalleryService {
   projects: Project[];
 
   private url = 'https://api.flickr.com/services/rest/';
-  // private localUrl = 'api/projects/projects.json';
   private serverUrl = api_base;
 
 
@@ -49,10 +48,6 @@ export class GalleryService {
     return this.http.get<Project>(this.serverUrl + 'projects/' + id);
   }
 
- /*  getLocalImages() {
-    return this.http.get<Project[]>(this.localUrl).do(data => console.log('All: ' +  JSON.stringify(data)));
-  } */
-
   createProject(payload: FormData) {
 
     const apiCreateEndpoint = this.serverUrl + 'projects';
@@ -70,33 +65,15 @@ export class GalleryService {
     return this.http.request(req);
   }
 
-  /* private testPost (apiUrl) {
-    const payload = new FormData();
-    payload.append('name', 'Calabar Carnival');
-    payload.append('description', 'What happens in Cali,stays there');
-    payload.append('latitude', '4.978888276524397');
-    payload.append('longitude', '8.34506153100483');
-    payload.append('start_date', '2018/7/5');
-    payload.append('end_date', '2018/7/5');
-    payload.append('images', '');
-    const req = new HttpRequest('POST', apiUrl, payload, {
-      reportProgress: true // for progress data
-    });
-    return this.http.request(req).subscribe(
-      event => {
-        console.log(event);
-      },
-      error => {
-          console.log('Server error');
-      });
-  } */
-
   deleteProject (id: number | string) {
     const url = this.serverUrl + 'projects/' + id;
-    return this.http.delete(url)
-    .pipe(
+    console.log(url, id);
+
+    return this.http.delete(url);
+    /* .pipe(
       catchError(this.handleError('deleteProject'))
-    );
+    ); */
+
   }
 
   handleError(arg0: any): any {
