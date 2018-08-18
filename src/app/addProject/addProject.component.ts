@@ -175,7 +175,6 @@ export class AddProjectComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed', result);
       this.animal = result;
-      this.backToMap();
     });
   }
 
@@ -207,6 +206,7 @@ export class AddProjectComponent implements OnInit {
 
 export class UploadImageDialogComponent implements OnInit {
 
+  uploadFailed: boolean;
     serverResponse: any;
     fileUploadSub: Subscription;
     progress: any;
@@ -217,10 +217,11 @@ export class UploadImageDialogComponent implements OnInit {
     uploading = false;
     uploadSuccessful = false;
     primaryButtonText = 'Saving';
+    buttonColor = 'primary';
 
   constructor(
     public dialogRef: MatDialogRef<UploadImageDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private galleryService: GalleryService,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private galleryService: GalleryService, private router: Router,
     iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
         iconRegistry.addSvgIcon(
             'thumbs-up',
@@ -275,12 +276,14 @@ export class UploadImageDialogComponent implements OnInit {
   }
 
   onNoClick(): void {
+
+     if (this.uploadSuccessful) {
       this.dialogRef.close();
       this.data.newProjectForm.reset();
-
-    /* if (this.data.uploadSuccessful) {
+      this.router.navigate(['map']);
+    } else {
       this.dialogRef.close();
-    } */
+    }
 
   }
 
@@ -305,10 +308,13 @@ export class UploadImageDialogComponent implements OnInit {
     if (event.type === HttpEventType.Response) {
       // console.log(event.body);
       this.uploadSuccessful = true;
+      this.uploadFailed = false;
+      this.uploading = false;
       this.serverResponse = event.body;
       this.canBeClosed = true;
       // The OK-button should have the text "Finish" now
         this.primaryButtonText = 'Finish';
+        this.buttonColor = 'primary';
       progress.complete();
       console.log('upload complete');
     }
@@ -358,6 +364,11 @@ export class UploadImageDialogComponent implements OnInit {
       },
       error => {
           console.log('Server error');
+          this.uploadFailed = true;
+          this.uploading = false;
+          this.canBeClosed = true;
+          this.primaryButtonText = 'Cancel';
+          this.buttonColor = 'warn';
       });
 
     // const submittedData = projectForm.value;
