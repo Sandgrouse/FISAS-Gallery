@@ -5,28 +5,28 @@
           [title] = "project.name"
           [label] = "project.name"
           draggable="false" 
-          (click)="clicked($event, project.description, project.id)" 
+          (click)="clicked($event, project.description, project.id, project.photos)" 
           (initialized$)="onMarkerInit($event, project.description)">
-    <info-window id ="iw">
+    <info-window id ="iw" [maxWidth]="300">
       <ngb-carousel *ngIf="images">
         <ng-template ngbSlide>
-          <img [src]="images[0]" alt="Random first slide" class="info-thumbnail">
+          <img [src]="marker.images[0]" alt="Random first slide" class="info-thumbnail">
         </ng-template>
         <ng-template ngbSlide>
-          <img [src]="images[1]" alt="Random second slide" class="info-thumbnail">
+          <img [src]="marker.images[1]" alt="Random second slide" class="info-thumbnail">
         </ng-template>
         <ng-template ngbSlide>
-          <img [src]="images[2]" alt="Random third slide" class="info-thumbnail">
+          <img [src]="marker.images[2]" alt="Random third slide" class="info-thumbnail">
         </ng-template>
       </ngb-carousel>
-      <section>
+      <section class="content">
         <p>{{marker.description}}</p>
       </section>
 
       <button class='info-button' mat-stroked-button color="primary" (click)="hideMarkerInfo(marker.id)">Gallery</button>
       <span *ngIf="isAuthenticated">
         <button class='info-button' mat-stroked-button color="primary" (click)="openDialog()">Add images</button>
-        <button class='info-button' mat-stroked-button color="accent" (click)="deleteProject(marker.id)">Delete</button>  
+        <button class='info-button' mat-stroked-button color="accent" (click)="openDeleteDialog(marker.id)">Delete</button>  
       </span>
     </info-window>
   </marker>

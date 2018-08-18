@@ -9,8 +9,11 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Marker } from '@ngui/map';
 import { identity } from 'rxjs';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { AddImagesComponent } from '../add-images/add-images.component';
+import { ProjectImage } from '../_models/project';
+import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
+import { DeleteSuccessComponent } from '../confirm-delete/DeleteSuccess/DeleteSuccess.component';
 
 interface FisasMarker {
   display: boolean;
@@ -18,6 +21,7 @@ interface FisasMarker {
     lng: number;
     description: string;
     id: number;
+    images: string[];
 }
 
 
@@ -39,19 +43,20 @@ export class MapComponent implements OnInit {
     lat: null,
     lng: null,
     description: null,
-    id: null
+    id: null,
+    images: null
   };
 
   constructor(private _http: HttpClient, private _galleryService: GalleryService,
-    private router: Router, public dialog: MatDialog) {
+    private router: Router, public dialog: MatDialog, public snackBar: MatSnackBar) {
     this.positions = this.getRandomMarkers();
   }
 
   ngOnInit() {
     this.checkAuth();
-    this._http.get('https://picsum.photos/list')
+    /* this._http.get('https://picsum.photos/list')
         .pipe(map((images: Array<{id: number}>) => this._randomImageUrls(images)))
-        .subscribe(images => this.images = images);
+        .subscribe(images => this.images = images); */
     this.getallProjects();
   }
 
@@ -61,13 +66,20 @@ export class MapComponent implements OnInit {
       return `https://picsum.photos/900/500?image=${randomId}`;
     });
   }
+  private _ImageUrls(images: ProjectImage[]): Array<string> {
+    return [1, 2, 3].map(() => {
+      const imageObj = images[Math.floor(Math.random() * images.length)];
+      const image = imageObj.image;
+      const project_id = imageObj.project_id;
+      // return `https://picsum.photos/900/500?image=${randomId}`;
+      return `./images/projects/${project_id}/${image}`;
+    });
+  }
 
   private checkAuth () {
     const current_user = JSON.parse(localStorage.getItem('currentUser'));
 
     if (current_user) {
-      // logged in so return true
-      // this.user = current_user.user;
       this.isAuthenticated = true;
     } else {
       this.isAuthenticated = false;
@@ -75,13 +87,13 @@ export class MapComponent implements OnInit {
   }
 
   getallProjects () {
-     this._galleryService.getProjects().subscribe((data) => this.projects = data.data);
-    /* this._galleryService.getProjects().pipe(
-      map(
-        (projects: Project[]) => this._randomImageUrls(images)
-      )
-    ); */
-    // console.log(this.projects);
+     this._galleryService.getProjects().subscribe(
+       (data) => {
+         this.projects = data.data;
+         console.log(this.projects);
+        }
+      );
+
   }
 
   getRandomMarkers() {
@@ -97,14 +109,13 @@ export class MapComponent implements OnInit {
     return positions;
   }
 
-  clicked({target: marker}, description, id) {
+  clicked({target: marker}, description, id, imageArray) {
     this.checkAuth();
     this.marker.lat = marker.getPosition().lat();
     this.marker.lng = marker.getPosition().lng();
     this.marker.description = description;
     this.marker.id = id;
-
-    // console.log(description);
+    this.marker.images = this.images = this._ImageUrls(imageArray);
 
     marker.nguiMapComponent.openInfoWindow('iw', marker);
   }
@@ -120,9 +131,28 @@ export class MapComponent implements OnInit {
   }
 
   deleteProject(id: number | string) {
-    this._galleryService.deleteProject(id).subscribe();
   }
 
+  openDeleteDialog(id: number | string): void {
+    const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
+      width: '50%',
+      // height: '50%',
+      disableClose: true,
+      data: {
+        project_id: this.marker.id.toString()
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The project was deleted or cancelled', result);
+      // this.animal = result;
+      // this.backToMap();
+      if (result === true) {
+        this.openSnackBar();
+        this.getallProjects();
+      }
+    });
+  }
   openDialog(): void {
     const dialogRef = this.dialog.open(AddImagesComponent, {
       width: '50%',
@@ -137,6 +167,12 @@ export class MapComponent implements OnInit {
       console.log('The image upload dialog was closed', result);
       // this.animal = result;
       // this.backToMap();
+    });
+  }
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(DeleteSuccessComponent, {
+      duration: 2000,
     });
   }
 
