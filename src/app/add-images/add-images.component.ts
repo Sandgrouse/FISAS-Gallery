@@ -16,6 +16,7 @@ interface ImageDialogData {
 })
 export class AddImagesComponent implements OnInit {
 
+    uploadFailed: boolean;
     primaryButtonText: string;
     canBeClosed: boolean;
     serverResponse: any;
@@ -88,6 +89,7 @@ export class AddImagesComponent implements OnInit {
           this.serverResponse = event.body;
           this.canBeClosed = true;
           this.uploading = false;
+          this.uploadFailed = false;
           // The OK-button should have the text "Finish" now
           this.secondButtonText = 'Finish';
           this.secondButtonColor = 'primary';
@@ -97,6 +99,7 @@ export class AddImagesComponent implements OnInit {
     }
 
     onSubmit() {
+        this.uploadFailed = false;
         const formModel = this.prepareData();
         this.fileUploadSub = this.galleryService.addImages(formModel).subscribe(
             event => {
@@ -105,6 +108,10 @@ export class AddImagesComponent implements OnInit {
             },
             error => {
                 console.log('Server error');
+                this.uploadFailed = true;
+                this.uploading = false;
+                this.secondButtonText = 'Cancel';
+                this.addImagesForm.reset();
         });
     }
 

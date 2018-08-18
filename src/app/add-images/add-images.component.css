@@ -21,5 +21,15 @@ mat-spinner {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 40%;
+}
+
+.progress {
+    height: 200px;
+    background-color: #fff;
+}
+
+.failed {
+    background-color: #fff;
+    width: 75%;
+    height: auto;
 }
