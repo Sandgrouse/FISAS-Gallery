@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\Image;
 use App\Http\Resources\ImageResource;
-use DigitalDrifter\LaravelChromeLogger\LaravelChromeLogger;
 use Validator;
 
 class ImageController extends Controller
@@ -135,8 +134,6 @@ class ImageController extends Controller
     $file_count = count($files);
     $count = 0;
     $projectId = $request->project_id;
-
-    LaravelChromeLogger::log($projectId);
 
     {
       $this->middleware('auth:api')->except(['index', 'show']);

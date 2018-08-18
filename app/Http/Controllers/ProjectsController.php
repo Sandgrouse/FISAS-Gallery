@@ -124,13 +124,12 @@ class ProjectsController extends Controller
     }
 
   
-    public function destroy(Project $id) {
-      $project = Project::find($id);
-      LaravelChromeLogger::log($project);
+    public function destroy(Project $project) {
+
+      // LaravelChromeLogger::log($project);
   
       $project->delete();
-      return response()->json(null, 204);
+      return response()->json(['Success' => 'Your project has been deleted.'], 200);
   
-      // return Redirect::route('index');
     }
 }
