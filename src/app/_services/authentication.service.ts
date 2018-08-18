@@ -12,6 +12,14 @@ export class AuthenticationService {
 
     constructor(private http: HttpClient) { }
 
+    getToken(): string {
+        return localStorage.getItem('currentUser');
+    }
+
+    setToken(token: string, email: string, res): void {
+        localStorage.setItem('currentUser', JSON.stringify({ email, token: res.access_token, user: res.user }));
+    }
+
 
     login(email: string, password: string) {
         return this.http.post<any>(this.apiUrl + 'login', { email: email, password: password })
@@ -21,7 +29,7 @@ export class AuthenticationService {
 
                 if (res && res.access_token) {
                     // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify({ email, token: res.access_token, user: res.user }));
+                    this.setToken(res.access_token, email, res);
                 }
 
                 return res;
