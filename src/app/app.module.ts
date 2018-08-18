@@ -20,6 +20,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatListModule, MatProgressBarModule } from '@angular/material';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -48,6 +49,8 @@ import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { AuthGuard } from './_guards/auth.guard';
 import { AddImagesComponent } from './add-images/add-images.component';
+import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
+import { DeleteSuccessComponent } from './confirm-delete/DeleteSuccess/DeleteSuccess.component';
 
 
 
@@ -59,9 +62,9 @@ import { AddImagesComponent } from './add-images/add-images.component';
   declarations: [
     AppComponent, LoginComponent,
     MapComponent, AddImagesComponent,
-    GalleryComponent,
+    GalleryComponent, ConfirmDeleteComponent,
     ProjectFoldersComponent,
-    AddProjectComponent,
+    AddProjectComponent, DeleteSuccessComponent,
     UploadImageDialogComponent
   ],
   imports: [
@@ -82,7 +85,7 @@ import { AddImagesComponent } from './add-images/add-images.component';
     MatIconModule,
     MatSelectModule,
     MatInputModule,
-    MatDatepickerModule,
+    MatDatepickerModule, MatSnackBarModule,
     MatNativeDateModule, MatProgressSpinnerModule,
     MatDialogModule, MatListModule, MatProgressBarModule,
 
@@ -91,8 +94,8 @@ import { AddImagesComponent } from './add-images/add-images.component';
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDZeWQdbJXb-6PMmRBvfxHKdj6MJQs4jDY'})
   ],
   entryComponents: [
-    AddProjectComponent, AddImagesComponent,
-    UploadImageDialogComponent, LoginComponent
+    AddProjectComponent, AddImagesComponent, DeleteSuccessComponent,
+    UploadImageDialogComponent, LoginComponent, ConfirmDeleteComponent
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
