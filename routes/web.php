@@ -30,9 +30,8 @@ Route::get('/auth', function(){
   return Auth::user();
 });
 
-Route::get('/projects', array('as' => 'index','uses' => 'ProjectsController@index'));
-// Route::get('/project/{id}', array('as' => 'show_project','uses' => 'ProjectsController@getProject'));
-Route::post('/create-project', array('as' => 'create_project','uses' => 'ProjectsController@store'));
-
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::redirect('/map', '/app', 301);
+Route::redirect('/add-a-project', '/app', 301);
