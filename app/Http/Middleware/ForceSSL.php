@@ -16,7 +16,7 @@ class ForceSSL
     public function handle($request, Closure $next)
     {
         if (!$request->secure() && in_array(env('APP_ENV'), ['stage', 'production'])) {
-            $request->setTrustedProxies( [ $request->getClientIp() ] );
+            // $request->setTrustedProxies( [ $request->getClientIp() ] );
             // return redirect()->secure($request->getRequestUri());
             return redirect()->secure($request->server('HTTP_X_FORWARDED_PROTO') != 'https');
         }
