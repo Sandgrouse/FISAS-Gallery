@@ -35,14 +35,14 @@
                   <table class="input-full-width" cellspacing="20">
                     <tr>
                       <td><mat-form-field class="input-full-width" hintLabel="Pick a date">
-                          <input matInput [matDatepicker]="startpicker" placeholder="When did it start?" formControlName="start_date">
+                          <input matInput [matDatepicker]="startpicker" placeholder="When did the project start?" formControlName="start_date">
                           <mat-datepicker-toggle matSuffix [for]="startpicker">
                           </mat-datepicker-toggle>
                           <mat-datepicker #startpicker></mat-datepicker>
                         </mat-form-field>
                       </td>
                       <td><mat-form-field class="input-full-width" hintLabel="Pick a date">
-                          <input matInput [matDatepicker]="endpicker" placeholder="When did it end?" formControlName="end_date">
+                          <input matInput [matDatepicker]="endpicker" placeholder="When did the project end?" formControlName="end_date">
                           <mat-datepicker-toggle matSuffix [for]="endpicker">
                           </mat-datepicker-toggle>
                           <mat-datepicker #endpicker></mat-datepicker>
@@ -69,74 +69,10 @@
                 <mat-form-field class="input-full-width">
                     <input matInput placeholder="Pan the map here" [(ngModel)]="map_center" name="latitude">
                 </mat-form-field>
-                <ngui-map center={{map_center}} zoom="15" (click)="onMapClick($event)">
+                <ngui-map center={{map_center}} zoom="6" (click)="onMapClick($event)">
                     <marker [position]="marker_position" draggable="true" #markerRef (dragend)="dragged($event)"></marker>
                 </ngui-map>
             </mat-card>
         </div>
       </div>
 </div> 
-
-<!-- <mat-grid-list cols="2" rowHeight="2:1" [gutterSize]="10">
-    <mat-grid-tile>
-        <mat-card>
-            <mat-card-header>
-              <mat-card-title>New Portfolio Item</mat-card-title>
-              <mat-card-subtitle>Add a new project to your portfolio</mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content>
-              <form action="" class="upload-form">
-                  <mat-form-field class="input-full-width">
-                      <input matInput placeholder="Name" value="Land survey">
-                  </mat-form-field>
-                  
-                  <mat-form-field class="input-full-width">
-                    <textarea matInput placeholder="Describe the project"></textarea>
-                  </mat-form-field>
-          
-                  <table class="input-full-width" cellspacing="10">
-                    <tr>
-                      <td><mat-form-field class="input-full-width">
-                        <input matInput placeholder="Longitude">
-                      </mat-form-field></td>
-                      <td><mat-form-field class="input-full-width">
-                        <input matInput placeholder="Latitude">
-                      </mat-form-field></td>
-                    </tr>
-                  </table>
-          
-                  <table class="input-full-width" cellspacing="20">
-                    <tr>
-                      <td><mat-form-field class="input-full-width">
-                          <input matInput [matDatepicker]="startpicker" placeholder="When did it start?">
-                          <mat-datepicker-toggle matSuffix [for]="startpicker">
-                          </mat-datepicker-toggle>
-                          <mat-datepicker #startpicker></mat-datepicker>
-                        </mat-form-field>
-                      </td>
-                      <td><mat-form-field class="input-full-width">
-                          <input matInput [matDatepicker]="endpicker" placeholder="When did it end?">
-                          <mat-datepicker-toggle matSuffix [for]="endpicker">
-                          </mat-datepicker-toggle>
-                          <mat-datepicker #endpicker></mat-datepicker>
-                        </mat-form-field>
-                      </td>
-                    </tr>
-                  </table>
-          
-                  <button mat-button (click)="openDialog()" color="primary">Add images</button>
-              </form>
-            </mat-card-content>
-            <mat-card-actions align="end">
-              <button mat-raised-button color="primary">Create project</button>
-            </mat-card-actions>
-          </mat-card>
-    </mat-grid-tile>
-
-    <mat-grid-tile>
-        <mat-card class="upload-map">
-            <ngui-map center="Lagos, Nigeria" zoom="15" class="">
-            </ngui-map>
-        </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list> -->

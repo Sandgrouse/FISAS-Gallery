@@ -33,7 +33,7 @@ export class AddProjectComponent implements OnInit {
   animal: string;
   user_name = 'Jeffo';
   marker_position = [0, 0];
-  map_center = 'Lagos, Nigeria';
+  map_center = 'Nigeria';
   status = {project_status: null};
 
   // State properties
@@ -106,38 +106,6 @@ export class AddProjectComponent implements OnInit {
 
     return payload;
   }
-
-  /* private handleProgress(event) {
-    // create a new progress-subject for every file
-    const progress = new Subject<number>();
-    this.uploading = true;
-
-    if (event.type === HttpEventType.DownloadProgress) {
-      this.uploading = true;
-      this.uploadProgress  = Math.round(100 * event.loaded / event.total);
-      progress.next(this.uploadProgress);
-    }
-
-    if (event.type === HttpEventType.UploadProgress) {
-      this.uploading = true;
-      this.uploadProgress  = Math.round(100 * event.loaded / event.total);
-      progress.next(this.uploadProgress);
-      console.log('Uploading');
-    }
-
-    if (event.type === HttpEventType.Response) {
-      // console.log(event.body);
-      this.uploadSuccessful = true;
-      this.serverResponse = event.body;
-      progress.complete();
-      console.log('upload complete');
-    }
-
-    // Save every progress-observable in a map of all observables
-    return this.status.project_status = {
-      progress: progress.asObservable()
-    };
-  } */
 
   addFiles() {
   }
