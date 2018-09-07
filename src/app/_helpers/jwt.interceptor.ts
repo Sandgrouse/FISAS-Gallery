@@ -2,9 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
+import { AuthenticationService } from '../_services/authentication.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
+    constructor(private authService: AuthenticationService, private router: Router) {}
+
     openDialog(): any {
         console.log('Session has ended, please sign in again');
     }
@@ -21,6 +25,8 @@ export class JwtInterceptor implements HttpInterceptor {
                     }
                 });
             } else {
+                this.authService.logout();
+                this.router.navigate(['map']);
                 this.openDialog();
             }
         }
@@ -39,7 +45,6 @@ export class JwtInterceptor implements HttpInterceptor {
 
         const date = new Date(0);
         date.setUTCSeconds(decoded.exp);
-        console.log(date);
         return date;
     }
 
@@ -50,7 +55,7 @@ export class JwtInterceptor implements HttpInterceptor {
         const date = this.getTokenExpirationDate(token);
         if (date === undefined) {return false; }
         const answer = !(date.valueOf() > new Date().valueOf());
-        console.log(answer);
+        console.log('Has the access token expired? ', answer);
         return !(date.valueOf() > new Date().valueOf());
     }
 }
