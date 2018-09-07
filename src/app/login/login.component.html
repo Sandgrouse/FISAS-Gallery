@@ -31,7 +31,7 @@
     </form>
 </div>
 <div *ngIf="isAuthenticated" mat-dialog-content>
-    <h1>We global now</h1>
+    <h1>Welcome</h1>
 </div>
 <div class="right move-up" mat-dialog-actions>
     <button *ngIf="!isAuthenticated" mat-flat-button [disabled]="loading" color="warn" (click)="closeModal()">Close</button>

@@ -68,6 +68,7 @@ export class LoginComponent implements OnInit {
                     this.user = data.user;
                     this.loading = false;
                     this.isAuthenticated = true;
+                    setTimeout(this.dialogRef.close(this.user), 1000);
                 },
                 error => {
                     this.error = error;
