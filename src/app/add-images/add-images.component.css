@@ -15,9 +15,8 @@ mat-spinner {
 
 .center {
     margin: auto;
-    width: 85%;
 }
-.center-image {
+.center-image, .center-text {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -32,4 +31,13 @@ mat-spinner {
     background-color: #fff;
     width: 75%;
     height: auto;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.responsive {
+    width: 200px;
+    height: 200px;
 }

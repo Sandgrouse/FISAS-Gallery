@@ -4,7 +4,7 @@
 <h1 mat-dialog-title class="center-text" *ngIf="uploadSuccessful">Done!</h1>
 <h1 mat-dialog-title class="center-text" *ngIf="!uploadSuccessful && !uploadFailed">Add images to this project</h1>
 <h1 mat-dialog-title class="center-text" *ngIf="uploadFailed">Failed</h1>
-<div mat-dialog-content class="">
+<div mat-dialog-content class="center">
     <div *ngIf="uploadSuccessful" class="d-content">
        <img src="./images/like.png" alt="Upload complete" class="responsive center-image">
       <!-- <mat-icon svgIcon="thumbs-up"></mat-icon> -->
