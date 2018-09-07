@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, AfterContentInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { GalleryService } from '../_services';
 import { Project } from '../_models';
+import { google } from 'google-maps';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -14,15 +15,20 @@ import { AddImagesComponent } from '../add-images/add-images.component';
 import { ProjectImage } from '../_models/project';
 import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
 import { DeleteSuccessComponent } from '../confirm-delete/DeleteSuccess/DeleteSuccess.component';
+import { User } from '../_models/user';
+import { UserService } from '../_services/user.service';
 
-interface FisasMarker {
+export interface FisasMarker {
   display: boolean;
     lat: number;
     lng: number;
     description: string;
     id: number;
     images: string[];
+    name: string;
 }
+
+declare function InfoBubble ({}?): void;
 
 
 @Component({
@@ -30,34 +36,59 @@ interface FisasMarker {
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, AfterViewInit, AfterContentInit {
 
+  user: User;
   isAuthenticated: boolean;
   public positions: any[];
   images: Array<string>;
   public projects: Project[];
   headers;
+  message: boolean;
+  map_center = 'Lagos, Nigeria';
 
   marker: FisasMarker = {
+    id: null,
+    name: null,
+    description: null,
     display: false,
     lat: null,
     lng: null,
-    description: null,
-    id: null,
     images: null
   };
 
-  constructor(private _http: HttpClient, private _galleryService: GalleryService,
+  infoBubble: google.maps.infobubble.InfoBubble;
+
+  constructor(private _http: HttpClient, private _galleryService: GalleryService, private userService: UserService,
     private router: Router, public dialog: MatDialog, public snackBar: MatSnackBar) {
-    this.positions = this.getRandomMarkers();
+
   }
 
   ngOnInit() {
+
     this.checkAuth();
-    /* this._http.get('https://picsum.photos/list')
-        .pipe(map((images: Array<{id: number}>) => this._randomImageUrls(images)))
-        .subscribe(images => this.images = images); */
     this.getallProjects();
+    this.infoBubble = new InfoBubble({
+      maxWidth: 390,
+      padding: 0,
+      disableAutoPan: false
+    });
+    console.log(this.infoBubble);
+
+  }
+
+  ngAfterContentInit() {
+  }
+
+  ngAfterViewInit() {
+  }
+
+  goToUploadForm () {
+    this.router.navigate(['add-a-project']);
+  }
+
+  onMapReady(theMap) {
+    console.log('map: ', theMap);
   }
 
   private _randomImageUrls(images: Array<{id: number}>): Array<string> {
@@ -67,13 +98,15 @@ export class MapComponent implements OnInit {
     });
   }
   private _ImageUrls(images: ProjectImage[]): Array<string> {
-    return [1, 2, 3].map(() => {
-      const imageObj = images[Math.floor(Math.random() * images.length)];
-      const image = imageObj.image;
-      const project_id = imageObj.project_id;
-      // return `https://picsum.photos/900/500?image=${randomId}`;
+
+    function getUrls(imageObject) {
+      const image = imageObject.image;
+      const project_id = imageObject.project_id;
       return `./images/projects/${project_id}/${image}`;
-    });
+    }
+
+    const sliced_images = images.slice(0, 3);
+    return sliced_images.map(getUrls);
   }
 
   private checkAuth () {
@@ -90,34 +123,40 @@ export class MapComponent implements OnInit {
      this._galleryService.getProjects().subscribe(
        (data) => {
          this.projects = data.data;
-         console.log(this.projects);
         }
       );
 
   }
 
-  getRandomMarkers() {
-    let randomLat: number, randomLng: number;
 
-    const positions = [];
-    for (let i = 0 ; i < 10; i++) {
-      randomLat = Math.random() * (43.7399 - 43.7300) + 43.7300;
-      randomLng = Math.random() * (-79.7600 - -79.7699) + -79.7699;
-      positions.push([randomLat, randomLng]);
-    }
-
-    return positions;
-  }
-
-  clicked({target: marker}, description, id, imageArray) {
+  clicked({target: marker}, description, id, imageArray, name) {
     this.checkAuth();
     this.marker.lat = marker.getPosition().lat();
     this.marker.lng = marker.getPosition().lng();
     this.marker.description = description;
     this.marker.id = id;
+    this.marker.name = name;
     this.marker.images = this.images = this._ImageUrls(imageArray);
 
-    marker.nguiMapComponent.openInfoWindow('iw', marker);
+
+    const bubble = document.getElementById('bubble-content');
+    console.log(bubble);
+
+
+    this.infoBubble.setContent(bubble);
+
+     // marker.nguiMapComponent.openInfoWindow('iw', marker);
+    // this.infoWindow.open(marker.map, marker);
+    if (!this.infoBubble.isOpen()) {
+       this.infoBubble.open(marker.map, marker);
+    } else {
+      this.infoBubble.close();
+      this.infoBubble.open(marker.map, marker);
+
+    }
+
+    // this.infoBubble.open(marker);
+
   }
 
   onMarkerInit(marker) {
@@ -135,8 +174,7 @@ export class MapComponent implements OnInit {
 
   openDeleteDialog(id: number | string): void {
     const dialogRef = this.dialog.open(ConfirmDeleteComponent, {
-      width: '50%',
-      // height: '50%',
+      width: '25%',
       disableClose: true,
       data: {
         project_id: this.marker.id.toString()
@@ -155,7 +193,7 @@ export class MapComponent implements OnInit {
   }
   openDialog(): void {
     const dialogRef = this.dialog.open(AddImagesComponent, {
-      width: '50%',
+      width: '25%',
       // height: '50%',
       disableClose: true,
       data: {

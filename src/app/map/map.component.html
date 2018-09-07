@@ -1,34 +1,46 @@
-<p>Click on a project to see pictures of our work: </p>
-<ngui-map center="Lagos, Nigeria" zoom="15" class="ze-map">
+
+<div class="action-info">
+  <button *ngIf="isAuthenticated" id="new-project" mat-raised-button color="primary" (click)="goToUploadForm()" [disabled]="">Add a project</button>
+  <p class="map-info">Click on a Marker to see pictures of our work: </p>
+</div>
+<mat-form-field class="input-full-width">
+    <input matInput placeholder="Pan the map here" [(ngModel)]="map_center" name="location">
+</mat-form-field>
+<ngui-map center={{map_center}} zoom="15" class="ze-map" (mapReady$)="onMapReady($event)">
   <marker *ngFor="let project of projects" 
           [position]="project.position" 
           [title] = "project.name"
           [label] = "project.name"
           draggable="false" 
-          (click)="clicked($event, project.description, project.id, project.photos)" 
+          (click)="clicked($event, project.description, project.id, project.photos, project.name)" 
           (initialized$)="onMarkerInit($event, project.description)">
-    <info-window id ="iw" [maxWidth]="300">
-      <ngb-carousel *ngIf="images">
-        <ng-template ngbSlide>
-          <img [src]="marker.images[0]" alt="Random first slide" class="info-thumbnail">
-        </ng-template>
-        <ng-template ngbSlide>
-          <img [src]="marker.images[1]" alt="Random second slide" class="info-thumbnail">
-        </ng-template>
-        <ng-template ngbSlide>
-          <img [src]="marker.images[2]" alt="Random third slide" class="info-thumbnail">
-        </ng-template>
-      </ngb-carousel>
-      <section class="content">
-        <p>{{marker.description}}</p>
-      </section>
 
-      <button class='info-button' mat-stroked-button color="primary" (click)="hideMarkerInfo(marker.id)">Gallery</button>
-      <span *ngIf="isAuthenticated">
-        <button class='info-button' mat-stroked-button color="primary" (click)="openDialog()">Add images</button>
-        <button class='info-button' mat-stroked-button color="accent" (click)="openDeleteDialog(marker.id)">Delete</button>  
-      </span>
-    </info-window>
+    <section id="fake-bubble">
+      <div id ="bubble-content" >
+        <section class="project-title">{{marker.name}}</section>
+        <ngb-carousel *ngIf="images" id="gal-preview">
+          <ng-template ngbSlide>
+            <img [src]="marker.images[0]" alt="Random first slide" class="info-thumbnail">
+          </ng-template>
+          <ng-template ngbSlide>
+            <img [src]="marker.images[1]" alt="Random second slide" class="info-thumbnail">
+          </ng-template>
+          <ng-template ngbSlide>
+            <img [src]="marker.images[2]" alt="Random third slide" class="info-thumbnail">
+          </ng-template>
+        </ngb-carousel>
+        <section class="content">
+          <p>{{marker.description | truncate : 100}}</p>
+          <button class='info-button' mat-stroked-button color="primary" (click)="hideMarkerInfo(marker.id)">Open</button>
+          <span *ngIf="isAuthenticated">
+            <button class='info-button' mat-stroked-button color="primary" (click)="openDialog()">Add images to album</button>
+            <button class='info-button' mat-stroked-button color="accent" (click)="openDeleteDialog(marker.id)">Delete</button>  
+          </span>
+        </section>
+      </div>
+    </section> 
   </marker>
-
+  <ng-content></ng-content>
+  
 </ngui-map>
+
