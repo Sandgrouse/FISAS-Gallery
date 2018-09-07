@@ -51,24 +51,28 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AddImagesComponent } from './add-images/add-images.component';
 import { ConfirmDeleteComponent } from './confirm-delete/confirm-delete.component';
 import { DeleteSuccessComponent } from './confirm-delete/DeleteSuccess/DeleteSuccess.component';
-
-
-
-
+import { TruncateModule } from '@yellowspot/ng-truncate';
+import { RegisterComponent } from './Register/Register.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent,
-    MapComponent, AddImagesComponent,
-    GalleryComponent, ConfirmDeleteComponent,
+    AppComponent,
+    LoginComponent,
+    MapComponent,
+    AddImagesComponent,
+    GalleryComponent,
+    ConfirmDeleteComponent,
     ProjectFoldersComponent,
-    AddProjectComponent, DeleteSuccessComponent,
-    UploadImageDialogComponent
+    AddProjectComponent,
+    DeleteSuccessComponent,
+    UploadImageDialogComponent,
+    RegisterComponent
   ],
-  imports: [
+   imports: [
     BrowserModule,
+    TruncateModule,
     BrowserAnimationsModule,
     HttpClientModule,
     RoutingModule,
@@ -77,25 +81,21 @@ import { DeleteSuccessComponent } from './confirm-delete/DeleteSuccess/DeleteSuc
     GalleryModule.forRoot(),
     LightboxModule.forRoot(),
     GallerizeModule,
-    MatGridListModule,
-    MatSlideToggleModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatSelectModule,
-    MatInputModule,
-    MatDatepickerModule, MatSnackBarModule,
+    MatGridListModule, MatSlideToggleModule,
+    MatButtonModule, MatCardModule, MatFormFieldModule,
+    MatIconModule, MatSelectModule,
+    MatInputModule, MatDatepickerModule, MatSnackBarModule,
     MatNativeDateModule, MatProgressSpinnerModule,
     MatDialogModule, MatListModule, MatProgressBarModule,
 
-    RouterModule.forRoot([]),
+    RouterModule.forRoot([], {useHash: true}),
     NgbModule.forRoot(),
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDZeWQdbJXb-6PMmRBvfxHKdj6MJQs4jDY'})
   ],
   entryComponents: [
     AddProjectComponent, AddImagesComponent, DeleteSuccessComponent,
-    UploadImageDialogComponent, LoginComponent, ConfirmDeleteComponent
+    UploadImageDialogComponent, LoginComponent, ConfirmDeleteComponent,
+    RegisterComponent
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
