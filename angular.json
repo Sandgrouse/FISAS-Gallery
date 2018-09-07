@@ -31,7 +31,8 @@
               ]
             },
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/googlemaps-v3-utility-library/infobubble/src/infobubble.js"
             ]
           },
           "configurations": {
