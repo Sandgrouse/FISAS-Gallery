@@ -3,5 +3,1781 @@
 },removeData:function(a,b){M.remove(a,b)},_data:function(a,b,c){return L.access(a,b,c)},_removeData:function(a,b){L.remove(a,b)}}),n.fn.extend({data:function(a,b){var c,d,e,f=this[0],g=f&&f.attributes;if(void 0===a){if(this.length&&(e=M.get(f),1===f.nodeType&&!L.get(f,"hasDataAttrs"))){c=g.length;while(c--)g[c]&&(d=g[c].name,0===d.indexOf("data-")&&(d=n.camelCase(d.slice(5)),P(f,d,e[d])));L.set(f,"hasDataAttrs",!0)}return e}return"object"==typeof a?this.each(function(){M.set(this,a)}):J(this,function(b){var c,d=n.camelCase(a);if(f&&void 0===b){if(c=M.get(f,a),void 0!==c)return c;if(c=M.get(f,d),void 0!==c)return c;if(c=P(f,d,void 0),void 0!==c)return c}else this.each(function(){var c=M.get(this,d);M.set(this,d,b),-1!==a.indexOf("-")&&void 0!==c&&M.set(this,a,b)})},null,b,arguments.length>1,null,!0)},removeData:function(a){return this.each(function(){M.remove(this,a)})}}),n.extend({queue:function(a,b,c){var d;return a?(b=(b||"fx")+"queue",d=L.get(a,b),c&&(!d||n.isArray(c)?d=L.access(a,b,n.makeArray(c)):d.push(c)),d||[]):void 0},dequeue:function(a,b){b=b||"fx";var c=n.queue(a,b),d=c.length,e=c.shift(),f=n._queueHooks(a,b),g=function(){n.dequeue(a,b)};"inprogress"===e&&(e=c.shift(),d--),e&&("fx"===b&&c.unshift("inprogress"),delete f.stop,e.call(a,g,f)),!d&&f&&f.empty.fire()},_queueHooks:function(a,b){var c=b+"queueHooks";return L.get(a,c)||L.access(a,c,{empty:n.Callbacks("once memory").add(function(){L.remove(a,[b+"queue",c])})})}}),n.fn.extend({queue:function(a,b){var c=2;return"string"!=typeof a&&(b=a,a="fx",c--),arguments.length<c?n.queue(this[0],a):void 0===b?this:this.each(function(){var c=n.queue(this,a,b);n._queueHooks(this,a),"fx"===a&&"inprogress"!==c[0]&&n.dequeue(this,a)})},dequeue:function(a){return this.each(function(){n.dequeue(this,a)})},clearQueue:function(a){return this.queue(a||"fx",[])},promise:function(a,b){var c,d=1,e=n.Deferred(),f=this,g=this.length,h=function(){--d||e.resolveWith(f,[f])};"string"!=typeof a&&(b=a,a=void 0),a=a||"fx";while(g--)c=L.get(f[g],a+"queueHooks"),c&&c.empty&&(d++,c.empty.add(h));return h(),e.promise(b)}});var Q=/[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,R=["Top","Right","Bottom","Left"],S=function(a,b){return a=b||a,"none"===n.css(a,"display")||!n.contains(a.ownerDocument,a)},T=/^(?:checkbox|radio)$/i;!function(){var a=l.createDocumentFragment(),b=a.appendChild(l.createElement("div")),c=l.createElement("input");c.setAttribute("type","radio"),c.setAttribute("checked","checked"),c.setAttribute("name","t"),b.appendChild(c),k.checkClone=b.cloneNode(!0).cloneNode(!0).lastChild.checked,b.innerHTML="<textarea>x</textarea>",k.noCloneChecked=!!b.cloneNode(!0).lastChild.defaultValue}();var U="undefined";k.focusinBubbles="onfocusin"in a;var V=/^key/,W=/^(?:mouse|pointer|contextmenu)|click/,X=/^(?:focusinfocus|focusoutblur)$/,Y=/^([^.]*)(?:\.(.+)|)$/;function Z(){return!0}function $(){return!1}function _(){try{return l.activeElement}catch(a){}}n.event={global:{},add:function(a,b,c,d,e){var f,g,h,i,j,k,l,m,o,p,q,r=L.get(a);if(r){c.handler&&(f=c,c=f.handler,e=f.selector),c.guid||(c.guid=n.guid++),(i=r.events)||(i=r.events={}),(g=r.handle)||(g=r.handle=function(b){return typeof n!==U&&n.event.triggered!==b.type?n.event.dispatch.apply(a,arguments):void 0}),b=(b||"").match(E)||[""],j=b.length;while(j--)h=Y.exec(b[j])||[],o=q=h[1],p=(h[2]||"").split(".").sort(),o&&(l=n.event.special[o]||{},o=(e?l.delegateType:l.bindType)||o,l=n.event.special[o]||{},k=n.extend({type:o,origType:q,data:d,handler:c,guid:c.guid,selector:e,needsContext:e&&n.expr.match.needsContext.test(e),namespace:p.join(".")},f),(m=i[o])||(m=i[o]=[],m.delegateCount=0,l.setup&&l.setup.call(a,d,p,g)!==!1||a.addEventListener&&a.addEventListener(o,g,!1)),l.add&&(l.add.call(a,k),k.handler.guid||(k.handler.guid=c.guid)),e?m.splice(m.delegateCount++,0,k):m.push(k),n.event.global[o]=!0)}},remove:function(a,b,c,d,e){var f,g,h,i,j,k,l,m,o,p,q,r=L.hasData(a)&&L.get(a);if(r&&(i=r.events)){b=(b||"").match(E)||[""],j=b.length;while(j--)if(h=Y.exec(b[j])||[],o=q=h[1],p=(h[2]||"").split(".").sort(),o){l=n.event.special[o]||{},o=(d?l.delegateType:l.bindType)||o,m=i[o]||[],h=h[2]&&new RegExp("(^|\\.)"+p.join("\\.(?:.*\\.|)")+"(\\.|$)"),g=f=m.length;while(f--)k=m[f],!e&&q!==k.origType||c&&c.guid!==k.guid||h&&!h.test(k.namespace)||d&&d!==k.selector&&("**"!==d||!k.selector)||(m.splice(f,1),k.selector&&m.delegateCount--,l.remove&&l.remove.call(a,k));g&&!m.length&&(l.teardown&&l.teardown.call(a,p,r.handle)!==!1||n.removeEvent(a,o,r.handle),delete i[o])}else for(o in i)n.event.remove(a,o+b[j],c,d,!0);n.isEmptyObject(i)&&(delete r.handle,L.remove(a,"events"))}},trigger:function(b,c,d,e){var f,g,h,i,k,m,o,p=[d||l],q=j.call(b,"type")?b.type:b,r=j.call(b,"namespace")?b.namespace.split("."):[];if(g=h=d=d||l,3!==d.nodeType&&8!==d.nodeType&&!X.test(q+n.event.triggered)&&(q.indexOf(".")>=0&&(r=q.split("."),q=r.shift(),r.sort()),k=q.indexOf(":")<0&&"on"+q,b=b[n.expando]?b:new n.Event(q,"object"==typeof b&&b),b.isTrigger=e?2:3,b.namespace=r.join("."),b.namespace_re=b.namespace?new RegExp("(^|\\.)"+r.join("\\.(?:.*\\.|)")+"(\\.|$)"):null,b.result=void 0,b.target||(b.target=d),c=null==c?[b]:n.makeArray(c,[b]),o=n.event.special[q]||{},e||!o.trigger||o.trigger.apply(d,c)!==!1)){if(!e&&!o.noBubble&&!n.isWindow(d)){for(i=o.delegateType||q,X.test(i+q)||(g=g.parentNode);g;g=g.parentNode)p.push(g),h=g;h===(d.ownerDocument||l)&&p.push(h.defaultView||h.parentWindow||a)}f=0;while((g=p[f++])&&!b.isPropagationStopped())b.type=f>1?i:o.bindType||q,m=(L.get(g,"events")||{})[b.type]&&L.get(g,"handle"),m&&m.apply(g,c),m=k&&g[k],m&&m.apply&&n.acceptData(g)&&(b.result=m.apply(g,c),b.result===!1&&b.preventDefault());return b.type=q,e||b.isDefaultPrevented()||o._default&&o._default.apply(p.pop(),c)!==!1||!n.acceptData(d)||k&&n.isFunction(d[q])&&!n.isWindow(d)&&(h=d[k],h&&(d[k]=null),n.event.triggered=q,d[q](),n.event.triggered=void 0,h&&(d[k]=h)),b.result}},dispatch:function(a){a=n.event.fix(a);var b,c,e,f,g,h=[],i=d.call(arguments),j=(L.get(this,"events")||{})[a.type]||[],k=n.event.special[a.type]||{};if(i[0]=a,a.delegateTarget=this,!k.preDispatch||k.preDispatch.call(this,a)!==!1){h=n.event.handlers.call(this,a,j),b=0;while((f=h[b++])&&!a.isPropagationStopped()){a.currentTarget=f.elem,c=0;while((g=f.handlers[c++])&&!a.isImmediatePropagationStopped())(!a.namespace_re||a.namespace_re.test(g.namespace))&&(a.handleObj=g,a.data=g.data,e=((n.event.special[g.origType]||{}).handle||g.handler).apply(f.elem,i),void 0!==e&&(a.result=e)===!1&&(a.preventDefault(),a.stopPropagation()))}return k.postDispatch&&k.postDispatch.call(this,a),a.result}},handlers:function(a,b){var c,d,e,f,g=[],h=b.delegateCount,i=a.target;if(h&&i.nodeType&&(!a.button||"click"!==a.type))for(;i!==this;i=i.parentNode||this)if(i.disabled!==!0||"click"!==a.type){for(d=[],c=0;h>c;c++)f=b[c],e=f.selector+" ",void 0===d[e]&&(d[e]=f.needsContext?n(e,this).index(i)>=0:n.find(e,this,null,[i]).length),d[e]&&d.push(f);d.length&&g.push({elem:i,handlers:d})}return h<b.length&&g.push({elem:this,handlers:b.slice(h)}),g},props:"altKey bubbles cancelable ctrlKey currentTarget eventPhase metaKey relatedTarget shiftKey target timeStamp view which".split(" "),fixHooks:{},keyHooks:{props:"char charCode key keyCode".split(" "),filter:function(a,b){return null==a.which&&(a.which=null!=b.charCode?b.charCode:b.keyCode),a}},mouseHooks:{props:"button buttons clientX clientY offsetX offsetY pageX pageY screenX screenY toElement".split(" "),filter:function(a,b){var c,d,e,f=b.button;return null==a.pageX&&null!=b.clientX&&(c=a.target.ownerDocument||l,d=c.documentElement,e=c.body,a.pageX=b.clientX+(d&&d.scrollLeft||e&&e.scrollLeft||0)-(d&&d.clientLeft||e&&e.clientLeft||0),a.pageY=b.clientY+(d&&d.scrollTop||e&&e.scrollTop||0)-(d&&d.clientTop||e&&e.clientTop||0)),a.which||void 0===f||(a.which=1&f?1:2&f?3:4&f?2:0),a}},fix:function(a){if(a[n.expando])return a;var b,c,d,e=a.type,f=a,g=this.fixHooks[e];g||(this.fixHooks[e]=g=W.test(e)?this.mouseHooks:V.test(e)?this.keyHooks:{}),d=g.props?this.props.concat(g.props):this.props,a=new n.Event(f),b=d.length;while(b--)c=d[b],a[c]=f[c];return a.target||(a.target=l),3===a.target.nodeType&&(a.target=a.target.parentNode),g.filter?g.filter(a,f):a},special:{load:{noBubble:!0},focus:{trigger:function(){return this!==_()&&this.focus?(this.focus(),!1):void 0},delegateType:"focusin"},blur:{trigger:function(){return this===_()&&this.blur?(this.blur(),!1):void 0},delegateType:"focusout"},click:{trigger:function(){return"checkbox"===this.type&&this.click&&n.nodeName(this,"input")?(this.click(),!1):void 0},_default:function(a){return n.nodeName(a.target,"a")}},beforeunload:{postDispatch:function(a){void 0!==a.result&&a.originalEvent&&(a.originalEvent.returnValue=a.result)}}},simulate:function(a,b,c,d){var e=n.extend(new n.Event,c,{type:a,isSimulated:!0,originalEvent:{}});d?n.event.trigger(e,null,b):n.event.dispatch.call(b,e),e.isDefaultPrevented()&&c.preventDefault()}},n.removeEvent=function(a,b,c){a.removeEventListener&&a.removeEventListener(b,c,!1)},n.Event=function(a,b){return this instanceof n.Event?(a&&a.type?(this.originalEvent=a,this.type=a.type,this.isDefaultPrevented=a.defaultPrevented||void 0===a.defaultPrevented&&a.returnValue===!1?Z:$):this.type=a,b&&n.extend(this,b),this.timeStamp=a&&a.timeStamp||n.now(),void(this[n.expando]=!0)):new n.Event(a,b)},n.Event.prototype={isDefaultPrevented:$,isPropagationStopped:$,isImmediatePropagationStopped:$,preventDefault:function(){var a=this.originalEvent;this.isDefaultPrevented=Z,a&&a.preventDefault&&a.preventDefault()},stopPropagation:function(){var a=this.originalEvent;this.isPropagationStopped=Z,a&&a.stopPropagation&&a.stopPropagation()},stopImmediatePropagation:function(){var a=this.originalEvent;this.isImmediatePropagationStopped=Z,a&&a.stopImmediatePropagation&&a.stopImmediatePropagation(),this.stopPropagation()}},n.each({mouseenter:"mouseover",mouseleave:"mouseout",pointerenter:"pointerover",pointerleave:"pointerout"},function(a,b){n.event.special[a]={delegateType:b,bindType:b,handle:function(a){var c,d=this,e=a.relatedTarget,f=a.handleObj;return(!e||e!==d&&!n.contains(d,e))&&(a.type=f.origType,c=f.handler.apply(this,arguments),a.type=b),c}}}),k.focusinBubbles||n.each({focus:"focusin",blur:"focusout"},function(a,b){var c=function(a){n.event.simulate(b,a.target,n.event.fix(a),!0)};n.event.special[b]={setup:function(){var d=this.ownerDocument||this,e=L.access(d,b);e||d.addEventListener(a,c,!0),L.access(d,b,(e||0)+1)},teardown:function(){var d=this.ownerDocument||this,e=L.access(d,b)-1;e?L.access(d,b,e):(d.removeEventListener(a,c,!0),L.remove(d,b))}}}),n.fn.extend({on:function(a,b,c,d,e){var f,g;if("object"==typeof a){"string"!=typeof b&&(c=c||b,b=void 0);for(g in a)this.on(g,b,c,a[g],e);return this}if(null==c&&null==d?(d=b,c=b=void 0):null==d&&("string"==typeof b?(d=c,c=void 0):(d=c,c=b,b=void 0)),d===!1)d=$;else if(!d)return this;return 1===e&&(f=d,d=function(a){return n().off(a),f.apply(this,arguments)},d.guid=f.guid||(f.guid=n.guid++)),this.each(function(){n.event.add(this,a,d,c,b)})},one:function(a,b,c,d){return this.on(a,b,c,d,1)},off:function(a,b,c){var d,e;if(a&&a.preventDefault&&a.handleObj)return d=a.handleObj,n(a.delegateTarget).off(d.namespace?d.origType+"."+d.namespace:d.origType,d.selector,d.handler),this;if("object"==typeof a){for(e in a)this.off(e,b,a[e]);return this}return(b===!1||"function"==typeof b)&&(c=b,b=void 0),c===!1&&(c=$),this.each(function(){n.event.remove(this,a,c,b)})},trigger:function(a,b){return this.each(function(){n.event.trigger(a,b,this)})},triggerHandler:function(a,b){var c=this[0];return c?n.event.trigger(a,b,c,!0):void 0}});var ab=/<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi,bb=/<([\w:]+)/,cb=/<|&#?\w+;/,db=/<(?:script|style|link)/i,eb=/checked\s*(?:[^=]|=\s*.checked.)/i,fb=/^$|\/(?:java|ecma)script/i,gb=/^true\/(.*)/,hb=/^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g,ib={option:[1,"<select multiple='multiple'>","</select>"],thead:[1,"<table>","</table>"],col:[2,"<table><colgroup>","</colgroup></table>"],tr:[2,"<table><tbody>","</tbody></table>"],td:[3,"<table><tbody><tr>","</tr></tbody></table>"],_default:[0,"",""]};ib.optgroup=ib.option,ib.tbody=ib.tfoot=ib.colgroup=ib.caption=ib.thead,ib.th=ib.td;function jb(a,b){return n.nodeName(a,"table")&&n.nodeName(11!==b.nodeType?b:b.firstChild,"tr")?a.getElementsByTagName("tbody")[0]||a.appendChild(a.ownerDocument.createElement("tbody")):a}function kb(a){return a.type=(null!==a.getAttribute("type"))+"/"+a.type,a}function lb(a){var b=gb.exec(a.type);return b?a.type=b[1]:a.removeAttribute("type"),a}function mb(a,b){for(var c=0,d=a.length;d>c;c++)L.set(a[c],"globalEval",!b||L.get(b[c],"globalEval"))}function nb(a,b){var c,d,e,f,g,h,i,j;if(1===b.nodeType){if(L.hasData(a)&&(f=L.access(a),g=L.set(b,f),j=f.events)){delete g.handle,g.events={};for(e in j)for(c=0,d=j[e].length;d>c;c++)n.event.add(b,e,j[e][c])}M.hasData(a)&&(h=M.access(a),i=n.extend({},h),M.set(b,i))}}function ob(a,b){var c=a.getElementsByTagName?a.getElementsByTagName(b||"*"):a.querySelectorAll?a.querySelectorAll(b||"*"):[];return void 0===b||b&&n.nodeName(a,b)?n.merge([a],c):c}function pb(a,b){var c=b.nodeName.toLowerCase();"input"===c&&T.test(a.type)?b.checked=a.checked:("input"===c||"textarea"===c)&&(b.defaultValue=a.defaultValue)}n.extend({clone:function(a,b,c){var d,e,f,g,h=a.cloneNode(!0),i=n.contains(a.ownerDocument,a);if(!(k.noCloneChecked||1!==a.nodeType&&11!==a.nodeType||n.isXMLDoc(a)))for(g=ob(h),f=ob(a),d=0,e=f.length;e>d;d++)pb(f[d],g[d]);if(b)if(c)for(f=f||ob(a),g=g||ob(h),d=0,e=f.length;e>d;d++)nb(f[d],g[d]);else nb(a,h);return g=ob(h,"script"),g.length>0&&mb(g,!i&&ob(a,"script")),h},buildFragment:function(a,b,c,d){for(var e,f,g,h,i,j,k=b.createDocumentFragment(),l=[],m=0,o=a.length;o>m;m++)if(e=a[m],e||0===e)if("object"===n.type(e))n.merge(l,e.nodeType?[e]:e);else if(cb.test(e)){f=f||k.appendChild(b.createElement("div")),g=(bb.exec(e)||["",""])[1].toLowerCase(),h=ib[g]||ib._default,f.innerHTML=h[1]+e.replace(ab,"<$1></$2>")+h[2],j=h[0];while(j--)f=f.lastChild;n.merge(l,f.childNodes),f=k.firstChild,f.textContent=""}else l.push(b.createTextNode(e));k.textContent="",m=0;while(e=l[m++])if((!d||-1===n.inArray(e,d))&&(i=n.contains(e.ownerDocument,e),f=ob(k.appendChild(e),"script"),i&&mb(f),c)){j=0;while(e=f[j++])fb.test(e.type||"")&&c.push(e)}return k},cleanData:function(a){for(var b,c,d,e,f=n.event.special,g=0;void 0!==(c=a[g]);g++){if(n.acceptData(c)&&(e=c[L.expando],e&&(b=L.cache[e]))){if(b.events)for(d in b.events)f[d]?n.event.remove(c,d):n.removeEvent(c,d,b.handle);L.cache[e]&&delete L.cache[e]}delete M.cache[c[M.expando]]}}}),n.fn.extend({text:function(a){return J(this,function(a){return void 0===a?n.text(this):this.empty().each(function(){(1===this.nodeType||11===this.nodeType||9===this.nodeType)&&(this.textContent=a)})},null,a,arguments.length)},append:function(){return this.domManip(arguments,function(a){if(1===this.nodeType||11===this.nodeType||9===this.nodeType){var b=jb(this,a);b.appendChild(a)}})},prepend:function(){return this.domManip(arguments,function(a){if(1===this.nodeType||11===this.nodeType||9===this.nodeType){var b=jb(this,a);b.insertBefore(a,b.firstChild)}})},before:function(){return this.domManip(arguments,function(a){this.parentNode&&this.parentNode.insertBefore(a,this)})},after:function(){return this.domManip(arguments,function(a){this.parentNode&&this.parentNode.insertBefore(a,this.nextSibling)})},remove:function(a,b){for(var c,d=a?n.filter(a,this):this,e=0;null!=(c=d[e]);e++)b||1!==c.nodeType||n.cleanData(ob(c)),c.parentNode&&(b&&n.contains(c.ownerDocument,c)&&mb(ob(c,"script")),c.parentNode.removeChild(c));return this},empty:function(){for(var a,b=0;null!=(a=this[b]);b++)1===a.nodeType&&(n.cleanData(ob(a,!1)),a.textContent="");return this},clone:function(a,b){return a=null==a?!1:a,b=null==b?a:b,this.map(function(){return n.clone(this,a,b)})},html:function(a){return J(this,function(a){var b=this[0]||{},c=0,d=this.length;if(void 0===a&&1===b.nodeType)return b.innerHTML;if("string"==typeof a&&!db.test(a)&&!ib[(bb.exec(a)||["",""])[1].toLowerCase()]){a=a.replace(ab,"<$1></$2>");try{for(;d>c;c++)b=this[c]||{},1===b.nodeType&&(n.cleanData(ob(b,!1)),b.innerHTML=a);b=0}catch(e){}}b&&this.empty().append(a)},null,a,arguments.length)},replaceWith:function(){var a=arguments[0];return this.domManip(arguments,function(b){a=this.parentNode,n.cleanData(ob(this)),a&&a.replaceChild(b,this)}),a&&(a.length||a.nodeType)?this:this.remove()},detach:function(a){return this.remove(a,!0)},domManip:function(a,b){a=e.apply([],a);var c,d,f,g,h,i,j=0,l=this.length,m=this,o=l-1,p=a[0],q=n.isFunction(p);if(q||l>1&&"string"==typeof p&&!k.checkClone&&eb.test(p))return this.each(function(c){var d=m.eq(c);q&&(a[0]=p.call(this,c,d.html())),d.domManip(a,b)});if(l&&(c=n.buildFragment(a,this[0].ownerDocument,!1,this),d=c.firstChild,1===c.childNodes.length&&(c=d),d)){for(f=n.map(ob(c,"script"),kb),g=f.length;l>j;j++)h=c,j!==o&&(h=n.clone(h,!0,!0),g&&n.merge(f,ob(h,"script"))),b.call(this[j],h,j);if(g)for(i=f[f.length-1].ownerDocument,n.map(f,lb),j=0;g>j;j++)h=f[j],fb.test(h.type||"")&&!L.access(h,"globalEval")&&n.contains(i,h)&&(h.src?n._evalUrl&&n._evalUrl(h.src):n.globalEval(h.textContent.replace(hb,"")))}return this}}),n.each({appendTo:"append",prependTo:"prepend",insertBefore:"before",insertAfter:"after",replaceAll:"replaceWith"},function(a,b){n.fn[a]=function(a){for(var c,d=[],e=n(a),g=e.length-1,h=0;g>=h;h++)c=h===g?this:this.clone(!0),n(e[h])[b](c),f.apply(d,c.get());return this.pushStack(d)}});var qb,rb={};function sb(b,c){var d,e=n(c.createElement(b)).appendTo(c.body),f=a.getDefaultComputedStyle&&(d=a.getDefaultComputedStyle(e[0]))?d.display:n.css(e[0],"display");return e.detach(),f}function tb(a){var b=l,c=rb[a];return c||(c=sb(a,b),"none"!==c&&c||(qb=(qb||n("<iframe frameborder='0' width='0' height='0'/>")).appendTo(b.documentElement),b=qb[0].contentDocument,b.write(),b.close(),c=sb(a,b),qb.detach()),rb[a]=c),c}var ub=/^margin/,vb=new RegExp("^("+Q+")(?!px)[a-z%]+$","i"),wb=function(b){return b.ownerDocument.defaultView.opener?b.ownerDocument.defaultView.getComputedStyle(b,null):a.getComputedStyle(b,null)};function xb(a,b,c){var d,e,f,g,h=a.style;return c=c||wb(a),c&&(g=c.getPropertyValue(b)||c[b]),c&&(""!==g||n.contains(a.ownerDocument,a)||(g=n.style(a,b)),vb.test(g)&&ub.test(b)&&(d=h.width,e=h.minWidth,f=h.maxWidth,h.minWidth=h.maxWidth=h.width=g,g=c.width,h.width=d,h.minWidth=e,h.maxWidth=f)),void 0!==g?g+"":g}function yb(a,b){return{get:function(){return a()?void delete this.get:(this.get=b).apply(this,arguments)}}}!function(){var b,c,d=l.documentElement,e=l.createElement("div"),f=l.createElement("div");if(f.style){f.style.backgroundClip="content-box",f.cloneNode(!0).style.backgroundClip="",k.clearCloneStyle="content-box"===f.style.backgroundClip,e.style.cssText="border:0;width:0;height:0;top:0;left:-9999px;margin-top:1px;position:absolute",e.appendChild(f);function g(){f.style.cssText="-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:block;margin-top:1%;top:1%;border:1px;padding:1px;width:4px;position:absolute",f.innerHTML="",d.appendChild(e);var g=a.getComputedStyle(f,null);b="1%"!==g.top,c="4px"===g.width,d.removeChild(e)}a.getComputedStyle&&n.extend(k,{pixelPosition:function(){return g(),b},boxSizingReliable:function(){return null==c&&g(),c},reliableMarginRight:function(){var b,c=f.appendChild(l.createElement("div"));return c.style.cssText=f.style.cssText="-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;display:block;margin:0;border:0;padding:0",c.style.marginRight=c.style.width="0",f.style.width="1px",d.appendChild(e),b=!parseFloat(a.getComputedStyle(c,null).marginRight),d.removeChild(e),f.removeChild(c),b}})}}(),n.swap=function(a,b,c,d){var e,f,g={};for(f in b)g[f]=a.style[f],a.style[f]=b[f];e=c.apply(a,d||[]);for(f in b)a.style[f]=g[f];return e};var zb=/^(none|table(?!-c[ea]).+)/,Ab=new RegExp("^("+Q+")(.*)$","i"),Bb=new RegExp("^([+-])=("+Q+")","i"),Cb={position:"absolute",visibility:"hidden",display:"block"},Db={letterSpacing:"0",fontWeight:"400"},Eb=["Webkit","O","Moz","ms"];function Fb(a,b){if(b in a)return b;var c=b[0].toUpperCase()+b.slice(1),d=b,e=Eb.length;while(e--)if(b=Eb[e]+c,b in a)return b;return d}function Gb(a,b,c){var d=Ab.exec(b);return d?Math.max(0,d[1]-(c||0))+(d[2]||"px"):b}function Hb(a,b,c,d,e){for(var f=c===(d?"border":"content")?4:"width"===b?1:0,g=0;4>f;f+=2)"margin"===c&&(g+=n.css(a,c+R[f],!0,e)),d?("content"===c&&(g-=n.css(a,"padding"+R[f],!0,e)),"margin"!==c&&(g-=n.css(a,"border"+R[f]+"Width",!0,e))):(g+=n.css(a,"padding"+R[f],!0,e),"padding"!==c&&(g+=n.css(a,"border"+R[f]+"Width",!0,e)));return g}function Ib(a,b,c){var d=!0,e="width"===b?a.offsetWidth:a.offsetHeight,f=wb(a),g="border-box"===n.css(a,"boxSizing",!1,f);if(0>=e||null==e){if(e=xb(a,b,f),(0>e||null==e)&&(e=a.style[b]),vb.test(e))return e;d=g&&(k.boxSizingReliable()||e===a.style[b]),e=parseFloat(e)||0}return e+Hb(a,b,c||(g?"border":"content"),d,f)+"px"}function Jb(a,b){for(var c,d,e,f=[],g=0,h=a.length;h>g;g++)d=a[g],d.style&&(f[g]=L.get(d,"olddisplay"),c=d.style.display,b?(f[g]||"none"!==c||(d.style.display=""),""===d.style.display&&S(d)&&(f[g]=L.access(d,"olddisplay",tb(d.nodeName)))):(e=S(d),"none"===c&&e||L.set(d,"olddisplay",e?c:n.css(d,"display"))));for(g=0;h>g;g++)d=a[g],d.style&&(b&&"none"!==d.style.display&&""!==d.style.display||(d.style.display=b?f[g]||"":"none"));return a}n.extend({cssHooks:{opacity:{get:function(a,b){if(b){var c=xb(a,"opacity");return""===c?"1":c}}}},cssNumber:{columnCount:!0,fillOpacity:!0,flexGrow:!0,flexShrink:!0,fontWeight:!0,lineHeight:!0,opacity:!0,order:!0,orphans:!0,widows:!0,zIndex:!0,zoom:!0},cssProps:{"float":"cssFloat"},style:function(a,b,c,d){if(a&&3!==a.nodeType&&8!==a.nodeType&&a.style){var e,f,g,h=n.camelCase(b),i=a.style;return b=n.cssProps[h]||(n.cssProps[h]=Fb(i,h)),g=n.cssHooks[b]||n.cssHooks[h],void 0===c?g&&"get"in g&&void 0!==(e=g.get(a,!1,d))?e:i[b]:(f=typeof c,"string"===f&&(e=Bb.exec(c))&&(c=(e[1]+1)*e[2]+parseFloat(n.css(a,b)),f="number"),null!=c&&c===c&&("number"!==f||n.cssNumber[h]||(c+="px"),k.clearCloneStyle||""!==c||0!==b.indexOf("background")||(i[b]="inherit"),g&&"set"in g&&void 0===(c=g.set(a,c,d))||(i[b]=c)),void 0)}},css:function(a,b,c,d){var e,f,g,h=n.camelCase(b);return b=n.cssProps[h]||(n.cssProps[h]=Fb(a.style,h)),g=n.cssHooks[b]||n.cssHooks[h],g&&"get"in g&&(e=g.get(a,!0,c)),void 0===e&&(e=xb(a,b,d)),"normal"===e&&b in Db&&(e=Db[b]),""===c||c?(f=parseFloat(e),c===!0||n.isNumeric(f)?f||0:e):e}}),n.each(["height","width"],function(a,b){n.cssHooks[b]={get:function(a,c,d){return c?zb.test(n.css(a,"display"))&&0===a.offsetWidth?n.swap(a,Cb,function(){return Ib(a,b,d)}):Ib(a,b,d):void 0},set:function(a,c,d){var e=d&&wb(a);return Gb(a,c,d?Hb(a,b,d,"border-box"===n.css(a,"boxSizing",!1,e),e):0)}}}),n.cssHooks.marginRight=yb(k.reliableMarginRight,function(a,b){return b?n.swap(a,{display:"inline-block"},xb,[a,"marginRight"]):void 0}),n.each({margin:"",padding:"",border:"Width"},function(a,b){n.cssHooks[a+b]={expand:function(c){for(var d=0,e={},f="string"==typeof c?c.split(" "):[c];4>d;d++)e[a+R[d]+b]=f[d]||f[d-2]||f[0];return e}},ub.test(a)||(n.cssHooks[a+b].set=Gb)}),n.fn.extend({css:function(a,b){return J(this,function(a,b,c){var d,e,f={},g=0;if(n.isArray(b)){for(d=wb(a),e=b.length;e>g;g++)f[b[g]]=n.css(a,b[g],!1,d);return f}return void 0!==c?n.style(a,b,c):n.css(a,b)},a,b,arguments.length>1)},show:function(){return Jb(this,!0)},hide:function(){return Jb(this)},toggle:function(a){return"boolean"==typeof a?a?this.show():this.hide():this.each(function(){S(this)?n(this).show():n(this).hide()})}});function Kb(a,b,c,d,e){return new Kb.prototype.init(a,b,c,d,e)}n.Tween=Kb,Kb.prototype={constructor:Kb,init:function(a,b,c,d,e,f){this.elem=a,this.prop=c,this.easing=e||"swing",this.options=b,this.start=this.now=this.cur(),this.end=d,this.unit=f||(n.cssNumber[c]?"":"px")},cur:function(){var a=Kb.propHooks[this.prop];return a&&a.get?a.get(this):Kb.propHooks._default.get(this)},run:function(a){var b,c=Kb.propHooks[this.prop];return this.pos=b=this.options.duration?n.easing[this.easing](a,this.options.duration*a,0,1,this.options.duration):a,this.now=(this.end-this.start)*b+this.start,this.options.step&&this.options.step.call(this.elem,this.now,this),c&&c.set?c.set(this):Kb.propHooks._default.set(this),this}},Kb.prototype.init.prototype=Kb.prototype,Kb.propHooks={_default:{get:function(a){var b;return null==a.elem[a.prop]||a.elem.style&&null!=a.elem.style[a.prop]?(b=n.css(a.elem,a.prop,""),b&&"auto"!==b?b:0):a.elem[a.prop]},set:function(a){n.fx.step[a.prop]?n.fx.step[a.prop](a):a.elem.style&&(null!=a.elem.style[n.cssProps[a.prop]]||n.cssHooks[a.prop])?n.style(a.elem,a.prop,a.now+a.unit):a.elem[a.prop]=a.now}}},Kb.propHooks.scrollTop=Kb.propHooks.scrollLeft={set:function(a){a.elem.nodeType&&a.elem.parentNode&&(a.elem[a.prop]=a.now)}},n.easing={linear:function(a){return a},swing:function(a){return.5-Math.cos(a*Math.PI)/2}},n.fx=Kb.prototype.init,n.fx.step={};var Lb,Mb,Nb=/^(?:toggle|show|hide)$/,Ob=new RegExp("^(?:([+-])=|)("+Q+")([a-z%]*)$","i"),Pb=/queueHooks$/,Qb=[Vb],Rb={"*":[function(a,b){var c=this.createTween(a,b),d=c.cur(),e=Ob.exec(b),f=e&&e[3]||(n.cssNumber[a]?"":"px"),g=(n.cssNumber[a]||"px"!==f&&+d)&&Ob.exec(n.css(c.elem,a)),h=1,i=20;if(g&&g[3]!==f){f=f||g[3],e=e||[],g=+d||1;do h=h||".5",g/=h,n.style(c.elem,a,g+f);while(h!==(h=c.cur()/d)&&1!==h&&--i)}return e&&(g=c.start=+g||+d||0,c.unit=f,c.end=e[1]?g+(e[1]+1)*e[2]:+e[2]),c}]};function Sb(){return setTimeout(function(){Lb=void 0}),Lb=n.now()}function Tb(a,b){var c,d=0,e={height:a};for(b=b?1:0;4>d;d+=2-b)c=R[d],e["margin"+c]=e["padding"+c]=a;return b&&(e.opacity=e.width=a),e}function Ub(a,b,c){for(var d,e=(Rb[b]||[]).concat(Rb["*"]),f=0,g=e.length;g>f;f++)if(d=e[f].call(c,b,a))return d}function Vb(a,b,c){var d,e,f,g,h,i,j,k,l=this,m={},o=a.style,p=a.nodeType&&S(a),q=L.get(a,"fxshow");c.queue||(h=n._queueHooks(a,"fx"),null==h.unqueued&&(h.unqueued=0,i=h.empty.fire,h.empty.fire=function(){h.unqueued||i()}),h.unqueued++,l.always(function(){l.always(function(){h.unqueued--,n.queue(a,"fx").length||h.empty.fire()})})),1===a.nodeType&&("height"in b||"width"in b)&&(c.overflow=[o.overflow,o.overflowX,o.overflowY],j=n.css(a,"display"),k="none"===j?L.get(a,"olddisplay")||tb(a.nodeName):j,"inline"===k&&"none"===n.css(a,"float")&&(o.display="inline-block")),c.overflow&&(o.overflow="hidden",l.always(function(){o.overflow=c.overflow[0],o.overflowX=c.overflow[1],o.overflowY=c.overflow[2]}));for(d in b)if(e=b[d],Nb.exec(e)){if(delete b[d],f=f||"toggle"===e,e===(p?"hide":"show")){if("show"!==e||!q||void 0===q[d])continue;p=!0}m[d]=q&&q[d]||n.style(a,d)}else j=void 0;if(n.isEmptyObject(m))"inline"===("none"===j?tb(a.nodeName):j)&&(o.display=j);else{q?"hidden"in q&&(p=q.hidden):q=L.access(a,"fxshow",{}),f&&(q.hidden=!p),p?n(a).show():l.done(function(){n(a).hide()}),l.done(function(){var b;L.remove(a,"fxshow");for(b in m)n.style(a,b,m[b])});for(d in m)g=Ub(p?q[d]:0,d,l),d in q||(q[d]=g.start,p&&(g.end=g.start,g.start="width"===d||"height"===d?1:0))}}function Wb(a,b){var c,d,e,f,g;for(c in a)if(d=n.camelCase(c),e=b[d],f=a[c],n.isArray(f)&&(e=f[1],f=a[c]=f[0]),c!==d&&(a[d]=f,delete a[c]),g=n.cssHooks[d],g&&"expand"in g){f=g.expand(f),delete a[d];for(c in f)c in a||(a[c]=f[c],b[c]=e)}else b[d]=e}function Xb(a,b,c){var d,e,f=0,g=Qb.length,h=n.Deferred().always(function(){delete i.elem}),i=function(){if(e)return!1;for(var b=Lb||Sb(),c=Math.max(0,j.startTime+j.duration-b),d=c/j.duration||0,f=1-d,g=0,i=j.tweens.length;i>g;g++)j.tweens[g].run(f);return h.notifyWith(a,[j,f,c]),1>f&&i?c:(h.resolveWith(a,[j]),!1)},j=h.promise({elem:a,props:n.extend({},b),opts:n.extend(!0,{specialEasing:{}},c),originalProperties:b,originalOptions:c,startTime:Lb||Sb(),duration:c.duration,tweens:[],createTween:function(b,c){var d=n.Tween(a,j.opts,b,c,j.opts.specialEasing[b]||j.opts.easing);return j.tweens.push(d),d},stop:function(b){var c=0,d=b?j.tweens.length:0;if(e)return this;for(e=!0;d>c;c++)j.tweens[c].run(1);return b?h.resolveWith(a,[j,b]):h.rejectWith(a,[j,b]),this}}),k=j.props;for(Wb(k,j.opts.specialEasing);g>f;f++)if(d=Qb[f].call(j,a,k,j.opts))return d;return n.map(k,Ub,j),n.isFunction(j.opts.start)&&j.opts.start.call(a,j),n.fx.timer(n.extend(i,{elem:a,anim:j,queue:j.opts.queue})),j.progress(j.opts.progress).done(j.opts.done,j.opts.complete).fail(j.opts.fail).always(j.opts.always)}n.Animation=n.extend(Xb,{tweener:function(a,b){n.isFunction(a)?(b=a,a=["*"]):a=a.split(" ");for(var c,d=0,e=a.length;e>d;d++)c=a[d],Rb[c]=Rb[c]||[],Rb[c].unshift(b)},prefilter:function(a,b){b?Qb.unshift(a):Qb.push(a)}}),n.speed=function(a,b,c){var d=a&&"object"==typeof a?n.extend({},a):{complete:c||!c&&b||n.isFunction(a)&&a,duration:a,easing:c&&b||b&&!n.isFunction(b)&&b};return d.duration=n.fx.off?0:"number"==typeof d.duration?d.duration:d.duration in n.fx.speeds?n.fx.speeds[d.duration]:n.fx.speeds._default,(null==d.queue||d.queue===!0)&&(d.queue="fx"),d.old=d.complete,d.complete=function(){n.isFunction(d.old)&&d.old.call(this),d.queue&&n.dequeue(this,d.queue)},d},n.fn.extend({fadeTo:function(a,b,c,d){return this.filter(S).css("opacity",0).show().end().animate({opacity:b},a,c,d)},animate:function(a,b,c,d){var e=n.isEmptyObject(a),f=n.speed(b,c,d),g=function(){var b=Xb(this,n.extend({},a),f);(e||L.get(this,"finish"))&&b.stop(!0)};return g.finish=g,e||f.queue===!1?this.each(g):this.queue(f.queue,g)},stop:function(a,b,c){var d=function(a){var b=a.stop;delete a.stop,b(c)};return"string"!=typeof a&&(c=b,b=a,a=void 0),b&&a!==!1&&this.queue(a||"fx",[]),this.each(function(){var b=!0,e=null!=a&&a+"queueHooks",f=n.timers,g=L.get(this);if(e)g[e]&&g[e].stop&&d(g[e]);else for(e in g)g[e]&&g[e].stop&&Pb.test(e)&&d(g[e]);for(e=f.length;e--;)f[e].elem!==this||null!=a&&f[e].queue!==a||(f[e].anim.stop(c),b=!1,f.splice(e,1));(b||!c)&&n.dequeue(this,a)})},finish:function(a){return a!==!1&&(a=a||"fx"),this.each(function(){var b,c=L.get(this),d=c[a+"queue"],e=c[a+"queueHooks"],f=n.timers,g=d?d.length:0;for(c.finish=!0,n.queue(this,a,[]),e&&e.stop&&e.stop.call(this,!0),b=f.length;b--;)f[b].elem===this&&f[b].queue===a&&(f[b].anim.stop(!0),f.splice(b,1));for(b=0;g>b;b++)d[b]&&d[b].finish&&d[b].finish.call(this);delete c.finish})}}),n.each(["toggle","show","hide"],function(a,b){var c=n.fn[b];n.fn[b]=function(a,d,e){return null==a||"boolean"==typeof a?c.apply(this,arguments):this.animate(Tb(b,!0),a,d,e)}}),n.each({slideDown:Tb("show"),slideUp:Tb("hide"),slideToggle:Tb("toggle"),fadeIn:{opacity:"show"},fadeOut:{opacity:"hide"},fadeToggle:{opacity:"toggle"}},function(a,b){n.fn[a]=function(a,c,d){return this.animate(b,a,c,d)}}),n.timers=[],n.fx.tick=function(){var a,b=0,c=n.timers;for(Lb=n.now();b<c.length;b++)a=c[b],a()||c[b]!==a||c.splice(b--,1);c.length||n.fx.stop(),Lb=void 0},n.fx.timer=function(a){n.timers.push(a),a()?n.fx.start():n.timers.pop()},n.fx.interval=13,n.fx.start=function(){Mb||(Mb=setInterval(n.fx.tick,n.fx.interval))},n.fx.stop=function(){clearInterval(Mb),Mb=null},n.fx.speeds={slow:600,fast:200,_default:400},n.fn.delay=function(a,b){return a=n.fx?n.fx.speeds[a]||a:a,b=b||"fx",this.queue(b,function(b,c){var d=setTimeout(b,a);c.stop=function(){clearTimeout(d)}})},function(){var a=l.createElement("input"),b=l.createElement("select"),c=b.appendChild(l.createElement("option"));a.type="checkbox",k.checkOn=""!==a.value,k.optSelected=c.selected,b.disabled=!0,k.optDisabled=!c.disabled,a=l.createElement("input"),a.value="t",a.type="radio",k.radioValue="t"===a.value}();var Yb,Zb,$b=n.expr.attrHandle;n.fn.extend({attr:function(a,b){return J(this,n.attr,a,b,arguments.length>1)},removeAttr:function(a){return this.each(function(){n.removeAttr(this,a)})}}),n.extend({attr:function(a,b,c){var d,e,f=a.nodeType;if(a&&3!==f&&8!==f&&2!==f)return typeof a.getAttribute===U?n.prop(a,b,c):(1===f&&n.isXMLDoc(a)||(b=b.toLowerCase(),d=n.attrHooks[b]||(n.expr.match.bool.test(b)?Zb:Yb)),void 0===c?d&&"get"in d&&null!==(e=d.get(a,b))?e:(e=n.find.attr(a,b),null==e?void 0:e):null!==c?d&&"set"in d&&void 0!==(e=d.set(a,c,b))?e:(a.setAttribute(b,c+""),c):void n.removeAttr(a,b))
 },removeAttr:function(a,b){var c,d,e=0,f=b&&b.match(E);if(f&&1===a.nodeType)while(c=f[e++])d=n.propFix[c]||c,n.expr.match.bool.test(c)&&(a[d]=!1),a.removeAttribute(c)},attrHooks:{type:{set:function(a,b){if(!k.radioValue&&"radio"===b&&n.nodeName(a,"input")){var c=a.value;return a.setAttribute("type",b),c&&(a.value=c),b}}}}}),Zb={set:function(a,b,c){return b===!1?n.removeAttr(a,c):a.setAttribute(c,c),c}},n.each(n.expr.match.bool.source.match(/\w+/g),function(a,b){var c=$b[b]||n.find.attr;$b[b]=function(a,b,d){var e,f;return d||(f=$b[b],$b[b]=e,e=null!=c(a,b,d)?b.toLowerCase():null,$b[b]=f),e}});var _b=/^(?:input|select|textarea|button)$/i;n.fn.extend({prop:function(a,b){return J(this,n.prop,a,b,arguments.length>1)},removeProp:function(a){return this.each(function(){delete this[n.propFix[a]||a]})}}),n.extend({propFix:{"for":"htmlFor","class":"className"},prop:function(a,b,c){var d,e,f,g=a.nodeType;if(a&&3!==g&&8!==g&&2!==g)return f=1!==g||!n.isXMLDoc(a),f&&(b=n.propFix[b]||b,e=n.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&&"get"in e&&null!==(d=e.get(a,b))?d:a[b]},propHooks:{tabIndex:{get:function(a){return a.hasAttribute("tabindex")||_b.test(a.nodeName)||a.href?a.tabIndex:-1}}}}),k.optSelected||(n.propHooks.selected={get:function(a){var b=a.parentNode;return b&&b.parentNode&&b.parentNode.selectedIndex,null}}),n.each(["tabIndex","readOnly","maxLength","cellSpacing","cellPadding","rowSpan","colSpan","useMap","frameBorder","contentEditable"],function(){n.propFix[this.toLowerCase()]=this});var ac=/[\t\r\n\f]/g;n.fn.extend({addClass:function(a){var b,c,d,e,f,g,h="string"==typeof a&&a,i=0,j=this.length;if(n.isFunction(a))return this.each(function(b){n(this).addClass(a.call(this,b,this.className))});if(h)for(b=(a||"").match(E)||[];j>i;i++)if(c=this[i],d=1===c.nodeType&&(c.className?(" "+c.className+" ").replace(ac," "):" ")){f=0;while(e=b[f++])d.indexOf(" "+e+" ")<0&&(d+=e+" ");g=n.trim(d),c.className!==g&&(c.className=g)}return this},removeClass:function(a){var b,c,d,e,f,g,h=0===arguments.length||"string"==typeof a&&a,i=0,j=this.length;if(n.isFunction(a))return this.each(function(b){n(this).removeClass(a.call(this,b,this.className))});if(h)for(b=(a||"").match(E)||[];j>i;i++)if(c=this[i],d=1===c.nodeType&&(c.className?(" "+c.className+" ").replace(ac," "):"")){f=0;while(e=b[f++])while(d.indexOf(" "+e+" ")>=0)d=d.replace(" "+e+" "," ");g=a?n.trim(d):"",c.className!==g&&(c.className=g)}return this},toggleClass:function(a,b){var c=typeof a;return"boolean"==typeof b&&"string"===c?b?this.addClass(a):this.removeClass(a):this.each(n.isFunction(a)?function(c){n(this).toggleClass(a.call(this,c,this.className,b),b)}:function(){if("string"===c){var b,d=0,e=n(this),f=a.match(E)||[];while(b=f[d++])e.hasClass(b)?e.removeClass(b):e.addClass(b)}else(c===U||"boolean"===c)&&(this.className&&L.set(this,"__className__",this.className),this.className=this.className||a===!1?"":L.get(this,"__className__")||"")})},hasClass:function(a){for(var b=" "+a+" ",c=0,d=this.length;d>c;c++)if(1===this[c].nodeType&&(" "+this[c].className+" ").replace(ac," ").indexOf(b)>=0)return!0;return!1}});var bc=/\r/g;n.fn.extend({val:function(a){var b,c,d,e=this[0];{if(arguments.length)return d=n.isFunction(a),this.each(function(c){var e;1===this.nodeType&&(e=d?a.call(this,c,n(this).val()):a,null==e?e="":"number"==typeof e?e+="":n.isArray(e)&&(e=n.map(e,function(a){return null==a?"":a+""})),b=n.valHooks[this.type]||n.valHooks[this.nodeName.toLowerCase()],b&&"set"in b&&void 0!==b.set(this,e,"value")||(this.value=e))});if(e)return b=n.valHooks[e.type]||n.valHooks[e.nodeName.toLowerCase()],b&&"get"in b&&void 0!==(c=b.get(e,"value"))?c:(c=e.value,"string"==typeof c?c.replace(bc,""):null==c?"":c)}}}),n.extend({valHooks:{option:{get:function(a){var b=n.find.attr(a,"value");return null!=b?b:n.trim(n.text(a))}},select:{get:function(a){for(var b,c,d=a.options,e=a.selectedIndex,f="select-one"===a.type||0>e,g=f?null:[],h=f?e+1:d.length,i=0>e?h:f?e:0;h>i;i++)if(c=d[i],!(!c.selected&&i!==e||(k.optDisabled?c.disabled:null!==c.getAttribute("disabled"))||c.parentNode.disabled&&n.nodeName(c.parentNode,"optgroup"))){if(b=n(c).val(),f)return b;g.push(b)}return g},set:function(a,b){var c,d,e=a.options,f=n.makeArray(b),g=e.length;while(g--)d=e[g],(d.selected=n.inArray(d.value,f)>=0)&&(c=!0);return c||(a.selectedIndex=-1),f}}}}),n.each(["radio","checkbox"],function(){n.valHooks[this]={set:function(a,b){return n.isArray(b)?a.checked=n.inArray(n(a).val(),b)>=0:void 0}},k.checkOn||(n.valHooks[this].get=function(a){return null===a.getAttribute("value")?"on":a.value})}),n.each("blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error contextmenu".split(" "),function(a,b){n.fn[b]=function(a,c){return arguments.length>0?this.on(b,null,a,c):this.trigger(b)}}),n.fn.extend({hover:function(a,b){return this.mouseenter(a).mouseleave(b||a)},bind:function(a,b,c){return this.on(a,null,b,c)},unbind:function(a,b){return this.off(a,null,b)},delegate:function(a,b,c,d){return this.on(b,a,c,d)},undelegate:function(a,b,c){return 1===arguments.length?this.off(a,"**"):this.off(b,a||"**",c)}});var cc=n.now(),dc=/\?/;n.parseJSON=function(a){return JSON.parse(a+"")},n.parseXML=function(a){var b,c;if(!a||"string"!=typeof a)return null;try{c=new DOMParser,b=c.parseFromString(a,"text/xml")}catch(d){b=void 0}return(!b||b.getElementsByTagName("parsererror").length)&&n.error("Invalid XML: "+a),b};var ec=/#.*$/,fc=/([?&])_=[^&]*/,gc=/^(.*?):[ \t]*([^\r\n]*)$/gm,hc=/^(?:about|app|app-storage|.+-extension|file|res|widget):$/,ic=/^(?:GET|HEAD)$/,jc=/^\/\//,kc=/^([\w.+-]+:)(?:\/\/(?:[^\/?#]*@|)([^\/?#:]*)(?::(\d+)|)|)/,lc={},mc={},nc="*/".concat("*"),oc=a.location.href,pc=kc.exec(oc.toLowerCase())||[];function qc(a){return function(b,c){"string"!=typeof b&&(c=b,b="*");var d,e=0,f=b.toLowerCase().match(E)||[];if(n.isFunction(c))while(d=f[e++])"+"===d[0]?(d=d.slice(1)||"*",(a[d]=a[d]||[]).unshift(c)):(a[d]=a[d]||[]).push(c)}}function rc(a,b,c,d){var e={},f=a===mc;function g(h){var i;return e[h]=!0,n.each(a[h]||[],function(a,h){var j=h(b,c,d);return"string"!=typeof j||f||e[j]?f?!(i=j):void 0:(b.dataTypes.unshift(j),g(j),!1)}),i}return g(b.dataTypes[0])||!e["*"]&&g("*")}function sc(a,b){var c,d,e=n.ajaxSettings.flatOptions||{};for(c in b)void 0!==b[c]&&((e[c]?a:d||(d={}))[c]=b[c]);return d&&n.extend(!0,a,d),a}function tc(a,b,c){var d,e,f,g,h=a.contents,i=a.dataTypes;while("*"===i[0])i.shift(),void 0===d&&(d=a.mimeType||b.getResponseHeader("Content-Type"));if(d)for(e in h)if(h[e]&&h[e].test(d)){i.unshift(e);break}if(i[0]in c)f=i[0];else{for(e in c){if(!i[0]||a.converters[e+" "+i[0]]){f=e;break}g||(g=e)}f=f||g}return f?(f!==i[0]&&i.unshift(f),c[f]):void 0}function uc(a,b,c,d){var e,f,g,h,i,j={},k=a.dataTypes.slice();if(k[1])for(g in a.converters)j[g.toLowerCase()]=a.converters[g];f=k.shift();while(f)if(a.responseFields[f]&&(c[a.responseFields[f]]=b),!i&&d&&a.dataFilter&&(b=a.dataFilter(b,a.dataType)),i=f,f=k.shift())if("*"===f)f=i;else if("*"!==i&&i!==f){if(g=j[i+" "+f]||j["* "+f],!g)for(e in j)if(h=e.split(" "),h[1]===f&&(g=j[i+" "+h[0]]||j["* "+h[0]])){g===!0?g=j[e]:j[e]!==!0&&(f=h[0],k.unshift(h[1]));break}if(g!==!0)if(g&&a["throws"])b=g(b);else try{b=g(b)}catch(l){return{state:"parsererror",error:g?l:"No conversion from "+i+" to "+f}}}return{state:"success",data:b}}n.extend({active:0,lastModified:{},etag:{},ajaxSettings:{url:oc,type:"GET",isLocal:hc.test(pc[1]),global:!0,processData:!0,async:!0,contentType:"application/x-www-form-urlencoded; charset=UTF-8",accepts:{"*":nc,text:"text/plain",html:"text/html",xml:"application/xml, text/xml",json:"application/json, text/javascript"},contents:{xml:/xml/,html:/html/,json:/json/},responseFields:{xml:"responseXML",text:"responseText",json:"responseJSON"},converters:{"* text":String,"text html":!0,"text json":n.parseJSON,"text xml":n.parseXML},flatOptions:{url:!0,context:!0}},ajaxSetup:function(a,b){return b?sc(sc(a,n.ajaxSettings),b):sc(n.ajaxSettings,a)},ajaxPrefilter:qc(lc),ajaxTransport:qc(mc),ajax:function(a,b){"object"==typeof a&&(b=a,a=void 0),b=b||{};var c,d,e,f,g,h,i,j,k=n.ajaxSetup({},b),l=k.context||k,m=k.context&&(l.nodeType||l.jquery)?n(l):n.event,o=n.Deferred(),p=n.Callbacks("once memory"),q=k.statusCode||{},r={},s={},t=0,u="canceled",v={readyState:0,getResponseHeader:function(a){var b;if(2===t){if(!f){f={};while(b=gc.exec(e))f[b[1].toLowerCase()]=b[2]}b=f[a.toLowerCase()]}return null==b?null:b},getAllResponseHeaders:function(){return 2===t?e:null},setRequestHeader:function(a,b){var c=a.toLowerCase();return t||(a=s[c]=s[c]||a,r[a]=b),this},overrideMimeType:function(a){return t||(k.mimeType=a),this},statusCode:function(a){var b;if(a)if(2>t)for(b in a)q[b]=[q[b],a[b]];else v.always(a[v.status]);return this},abort:function(a){var b=a||u;return c&&c.abort(b),x(0,b),this}};if(o.promise(v).complete=p.add,v.success=v.done,v.error=v.fail,k.url=((a||k.url||oc)+"").replace(ec,"").replace(jc,pc[1]+"//"),k.type=b.method||b.type||k.method||k.type,k.dataTypes=n.trim(k.dataType||"*").toLowerCase().match(E)||[""],null==k.crossDomain&&(h=kc.exec(k.url.toLowerCase()),k.crossDomain=!(!h||h[1]===pc[1]&&h[2]===pc[2]&&(h[3]||("http:"===h[1]?"80":"443"))===(pc[3]||("http:"===pc[1]?"80":"443")))),k.data&&k.processData&&"string"!=typeof k.data&&(k.data=n.param(k.data,k.traditional)),rc(lc,k,b,v),2===t)return v;i=n.event&&k.global,i&&0===n.active++&&n.event.trigger("ajaxStart"),k.type=k.type.toUpperCase(),k.hasContent=!ic.test(k.type),d=k.url,k.hasContent||(k.data&&(d=k.url+=(dc.test(d)?"&":"?")+k.data,delete k.data),k.cache===!1&&(k.url=fc.test(d)?d.replace(fc,"$1_="+cc++):d+(dc.test(d)?"&":"?")+"_="+cc++)),k.ifModified&&(n.lastModified[d]&&v.setRequestHeader("If-Modified-Since",n.lastModified[d]),n.etag[d]&&v.setRequestHeader("If-None-Match",n.etag[d])),(k.data&&k.hasContent&&k.contentType!==!1||b.contentType)&&v.setRequestHeader("Content-Type",k.contentType),v.setRequestHeader("Accept",k.dataTypes[0]&&k.accepts[k.dataTypes[0]]?k.accepts[k.dataTypes[0]]+("*"!==k.dataTypes[0]?", "+nc+"; q=0.01":""):k.accepts["*"]);for(j in k.headers)v.setRequestHeader(j,k.headers[j]);if(k.beforeSend&&(k.beforeSend.call(l,v,k)===!1||2===t))return v.abort();u="abort";for(j in{success:1,error:1,complete:1})v[j](k[j]);if(c=rc(mc,k,b,v)){v.readyState=1,i&&m.trigger("ajaxSend",[v,k]),k.async&&k.timeout>0&&(g=setTimeout(function(){v.abort("timeout")},k.timeout));try{t=1,c.send(r,x)}catch(w){if(!(2>t))throw w;x(-1,w)}}else x(-1,"No Transport");function x(a,b,f,h){var j,r,s,u,w,x=b;2!==t&&(t=2,g&&clearTimeout(g),c=void 0,e=h||"",v.readyState=a>0?4:0,j=a>=200&&300>a||304===a,f&&(u=tc(k,v,f)),u=uc(k,u,v,j),j?(k.ifModified&&(w=v.getResponseHeader("Last-Modified"),w&&(n.lastModified[d]=w),w=v.getResponseHeader("etag"),w&&(n.etag[d]=w)),204===a||"HEAD"===k.type?x="nocontent":304===a?x="notmodified":(x=u.state,r=u.data,s=u.error,j=!s)):(s=x,(a||!x)&&(x="error",0>a&&(a=0))),v.status=a,v.statusText=(b||x)+"",j?o.resolveWith(l,[r,x,v]):o.rejectWith(l,[v,x,s]),v.statusCode(q),q=void 0,i&&m.trigger(j?"ajaxSuccess":"ajaxError",[v,k,j?r:s]),p.fireWith(l,[v,x]),i&&(m.trigger("ajaxComplete",[v,k]),--n.active||n.event.trigger("ajaxStop")))}return v},getJSON:function(a,b,c){return n.get(a,b,c,"json")},getScript:function(a,b){return n.get(a,void 0,b,"script")}}),n.each(["get","post"],function(a,b){n[b]=function(a,c,d,e){return n.isFunction(c)&&(e=e||d,d=c,c=void 0),n.ajax({url:a,type:b,dataType:e,data:c,success:d})}}),n._evalUrl=function(a){return n.ajax({url:a,type:"GET",dataType:"script",async:!1,global:!1,"throws":!0})},n.fn.extend({wrapAll:function(a){var b;return n.isFunction(a)?this.each(function(b){n(this).wrapAll(a.call(this,b))}):(this[0]&&(b=n(a,this[0].ownerDocument).eq(0).clone(!0),this[0].parentNode&&b.insertBefore(this[0]),b.map(function(){var a=this;while(a.firstElementChild)a=a.firstElementChild;return a}).append(this)),this)},wrapInner:function(a){return this.each(n.isFunction(a)?function(b){n(this).wrapInner(a.call(this,b))}:function(){var b=n(this),c=b.contents();c.length?c.wrapAll(a):b.append(a)})},wrap:function(a){var b=n.isFunction(a);return this.each(function(c){n(this).wrapAll(b?a.call(this,c):a)})},unwrap:function(){return this.parent().each(function(){n.nodeName(this,"body")||n(this).replaceWith(this.childNodes)}).end()}}),n.expr.filters.hidden=function(a){return a.offsetWidth<=0&&a.offsetHeight<=0},n.expr.filters.visible=function(a){return!n.expr.filters.hidden(a)};var vc=/%20/g,wc=/\[\]$/,xc=/\r?\n/g,yc=/^(?:submit|button|image|reset|file)$/i,zc=/^(?:input|select|textarea|keygen)/i;function Ac(a,b,c,d){var e;if(n.isArray(b))n.each(b,function(b,e){c||wc.test(a)?d(a,e):Ac(a+"["+("object"==typeof e?b:"")+"]",e,c,d)});else if(c||"object"!==n.type(b))d(a,b);else for(e in b)Ac(a+"["+e+"]",b[e],c,d)}n.param=function(a,b){var c,d=[],e=function(a,b){b=n.isFunction(b)?b():null==b?"":b,d[d.length]=encodeURIComponent(a)+"="+encodeURIComponent(b)};if(void 0===b&&(b=n.ajaxSettings&&n.ajaxSettings.traditional),n.isArray(a)||a.jquery&&!n.isPlainObject(a))n.each(a,function(){e(this.name,this.value)});else for(c in a)Ac(c,a[c],b,e);return d.join("&").replace(vc,"+")},n.fn.extend({serialize:function(){return n.param(this.serializeArray())},serializeArray:function(){return this.map(function(){var a=n.prop(this,"elements");return a?n.makeArray(a):this}).filter(function(){var a=this.type;return this.name&&!n(this).is(":disabled")&&zc.test(this.nodeName)&&!yc.test(a)&&(this.checked||!T.test(a))}).map(function(a,b){var c=n(this).val();return null==c?null:n.isArray(c)?n.map(c,function(a){return{name:b.name,value:a.replace(xc,"\r\n")}}):{name:b.name,value:c.replace(xc,"\r\n")}}).get()}}),n.ajaxSettings.xhr=function(){try{return new XMLHttpRequest}catch(a){}};var Bc=0,Cc={},Dc={0:200,1223:204},Ec=n.ajaxSettings.xhr();a.attachEvent&&a.attachEvent("onunload",function(){for(var a in Cc)Cc[a]()}),k.cors=!!Ec&&"withCredentials"in Ec,k.ajax=Ec=!!Ec,n.ajaxTransport(function(a){var b;return k.cors||Ec&&!a.crossDomain?{send:function(c,d){var e,f=a.xhr(),g=++Bc;if(f.open(a.type,a.url,a.async,a.username,a.password),a.xhrFields)for(e in a.xhrFields)f[e]=a.xhrFields[e];a.mimeType&&f.overrideMimeType&&f.overrideMimeType(a.mimeType),a.crossDomain||c["X-Requested-With"]||(c["X-Requested-With"]="XMLHttpRequest");for(e in c)f.setRequestHeader(e,c[e]);b=function(a){return function(){b&&(delete Cc[g],b=f.onload=f.onerror=null,"abort"===a?f.abort():"error"===a?d(f.status,f.statusText):d(Dc[f.status]||f.status,f.statusText,"string"==typeof f.responseText?{text:f.responseText}:void 0,f.getAllResponseHeaders()))}},f.onload=b(),f.onerror=b("error"),b=Cc[g]=b("abort");try{f.send(a.hasContent&&a.data||null)}catch(h){if(b)throw h}},abort:function(){b&&b()}}:void 0}),n.ajaxSetup({accepts:{script:"text/javascript, application/javascript, application/ecmascript, application/x-ecmascript"},contents:{script:/(?:java|ecma)script/},converters:{"text script":function(a){return n.globalEval(a),a}}}),n.ajaxPrefilter("script",function(a){void 0===a.cache&&(a.cache=!1),a.crossDomain&&(a.type="GET")}),n.ajaxTransport("script",function(a){if(a.crossDomain){var b,c;return{send:function(d,e){b=n("<script>").prop({async:!0,charset:a.scriptCharset,src:a.url}).on("load error",c=function(a){b.remove(),c=null,a&&e("error"===a.type?404:200,a.type)}),l.head.appendChild(b[0])},abort:function(){c&&c()}}}});var Fc=[],Gc=/(=)\?(?=&|$)|\?\?/;n.ajaxSetup({jsonp:"callback",jsonpCallback:function(){var a=Fc.pop()||n.expando+"_"+cc++;return this[a]=!0,a}}),n.ajaxPrefilter("json jsonp",function(b,c,d){var e,f,g,h=b.jsonp!==!1&&(Gc.test(b.url)?"url":"string"==typeof b.data&&!(b.contentType||"").indexOf("application/x-www-form-urlencoded")&&Gc.test(b.data)&&"data");return h||"jsonp"===b.dataTypes[0]?(e=b.jsonpCallback=n.isFunction(b.jsonpCallback)?b.jsonpCallback():b.jsonpCallback,h?b[h]=b[h].replace(Gc,"$1"+e):b.jsonp!==!1&&(b.url+=(dc.test(b.url)?"&":"?")+b.jsonp+"="+e),b.converters["script json"]=function(){return g||n.error(e+" was not called"),g[0]},b.dataTypes[0]="json",f=a[e],a[e]=function(){g=arguments},d.always(function(){a[e]=f,b[e]&&(b.jsonpCallback=c.jsonpCallback,Fc.push(e)),g&&n.isFunction(f)&&f(g[0]),g=f=void 0}),"script"):void 0}),n.parseHTML=function(a,b,c){if(!a||"string"!=typeof a)return null;"boolean"==typeof b&&(c=b,b=!1),b=b||l;var d=v.exec(a),e=!c&&[];return d?[b.createElement(d[1])]:(d=n.buildFragment([a],b,e),e&&e.length&&n(e).remove(),n.merge([],d.childNodes))};var Hc=n.fn.load;n.fn.load=function(a,b,c){if("string"!=typeof a&&Hc)return Hc.apply(this,arguments);var d,e,f,g=this,h=a.indexOf(" ");return h>=0&&(d=n.trim(a.slice(h)),a=a.slice(0,h)),n.isFunction(b)?(c=b,b=void 0):b&&"object"==typeof b&&(e="POST"),g.length>0&&n.ajax({url:a,type:e,dataType:"html",data:b}).done(function(a){f=arguments,g.html(d?n("<div>").append(n.parseHTML(a)).find(d):a)}).complete(c&&function(a,b){g.each(c,f||[a.responseText,b,a])}),this},n.each(["ajaxStart","ajaxStop","ajaxComplete","ajaxError","ajaxSuccess","ajaxSend"],function(a,b){n.fn[b]=function(a){return this.on(b,a)}}),n.expr.filters.animated=function(a){return n.grep(n.timers,function(b){return a===b.elem}).length};var Ic=a.document.documentElement;function Jc(a){return n.isWindow(a)?a:9===a.nodeType&&a.defaultView}n.offset={setOffset:function(a,b,c){var d,e,f,g,h,i,j,k=n.css(a,"position"),l=n(a),m={};"static"===k&&(a.style.position="relative"),h=l.offset(),f=n.css(a,"top"),i=n.css(a,"left"),j=("absolute"===k||"fixed"===k)&&(f+i).indexOf("auto")>-1,j?(d=l.position(),g=d.top,e=d.left):(g=parseFloat(f)||0,e=parseFloat(i)||0),n.isFunction(b)&&(b=b.call(a,c,h)),null!=b.top&&(m.top=b.top-h.top+g),null!=b.left&&(m.left=b.left-h.left+e),"using"in b?b.using.call(a,m):l.css(m)}},n.fn.extend({offset:function(a){if(arguments.length)return void 0===a?this:this.each(function(b){n.offset.setOffset(this,a,b)});var b,c,d=this[0],e={top:0,left:0},f=d&&d.ownerDocument;if(f)return b=f.documentElement,n.contains(b,d)?(typeof d.getBoundingClientRect!==U&&(e=d.getBoundingClientRect()),c=Jc(f),{top:e.top+c.pageYOffset-b.clientTop,left:e.left+c.pageXOffset-b.clientLeft}):e},position:function(){if(this[0]){var a,b,c=this[0],d={top:0,left:0};return"fixed"===n.css(c,"position")?b=c.getBoundingClientRect():(a=this.offsetParent(),b=this.offset(),n.nodeName(a[0],"html")||(d=a.offset()),d.top+=n.css(a[0],"borderTopWidth",!0),d.left+=n.css(a[0],"borderLeftWidth",!0)),{top:b.top-d.top-n.css(c,"marginTop",!0),left:b.left-d.left-n.css(c,"marginLeft",!0)}}},offsetParent:function(){return this.map(function(){var a=this.offsetParent||Ic;while(a&&!n.nodeName(a,"html")&&"static"===n.css(a,"position"))a=a.offsetParent;return a||Ic})}}),n.each({scrollLeft:"pageXOffset",scrollTop:"pageYOffset"},function(b,c){var d="pageYOffset"===c;n.fn[b]=function(e){return J(this,function(b,e,f){var g=Jc(b);return void 0===f?g?g[c]:b[e]:void(g?g.scrollTo(d?a.pageXOffset:f,d?f:a.pageYOffset):b[e]=f)},b,e,arguments.length,null)}}),n.each(["top","left"],function(a,b){n.cssHooks[b]=yb(k.pixelPosition,function(a,c){return c?(c=xb(a,b),vb.test(c)?n(a).position()[b]+"px":c):void 0})}),n.each({Height:"height",Width:"width"},function(a,b){n.each({padding:"inner"+a,content:b,"":"outer"+a},function(c,d){n.fn[d]=function(d,e){var f=arguments.length&&(c||"boolean"!=typeof d),g=c||(d===!0||e===!0?"margin":"border");return J(this,function(b,c,d){var e;return n.isWindow(b)?b.document.documentElement["client"+a]:9===b.nodeType?(e=b.documentElement,Math.max(b.body["scroll"+a],e["scroll"+a],b.body["offset"+a],e["offset"+a],e["client"+a])):void 0===d?n.css(b,c,g):n.style(b,c,d,g)},b,f?d:void 0,f,null)}})}),n.fn.size=function(){return this.length},n.fn.andSelf=n.fn.addBack,"function"==typeof define&&define.amd&&define("jquery",[],function(){return n});var Kc=a.jQuery,Lc=a.$;return n.noConflict=function(b){return a.$===n&&(a.$=Lc),b&&a.jQuery===n&&(a.jQuery=Kc),n},typeof b===U&&(a.jQuery=a.$=n),n});
 //# sourceMappingURL=jquery.min.map
+;// ==ClosureCompiler==
+// @compilation_level ADVANCED_OPTIMIZATIONS
+// @externs_url http://closure-compiler.googlecode.com/svn/trunk/contrib/externs/maps/google_maps_api_v3.js
+// ==/ClosureCompiler==
+
+/**
+ * @name CSS3 InfoBubble with tabs for Google Maps API V3
+ * @version 0.8
+ * @author Luke Mahe
+ * @fileoverview
+ * This library is a CSS Infobubble with tabs. It uses css3 rounded corners and
+ * drop shadows and animations. It also allows tabs
+ */
+
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+/**
+ * A CSS3 InfoBubble v0.8
+ * @param {Object.<string, *>=} opt_options Optional properties to set.
+ * @extends {google.maps.OverlayView}
+ * @constructor
+ */
+function InfoBubble(opt_options) {
+  this.extend(InfoBubble, google.maps.OverlayView);
+  this.tabs_ = [];
+  this.activeTab_ = null;
+  this.baseZIndex_ = 100;
+  this.isOpen_ = false;
+
+  var options = opt_options || {};
+
+  if (options['backgroundColor'] == undefined) {
+    options['backgroundColor'] = this.BACKGROUND_COLOR_;
+  }
+
+  if (options['borderColor'] == undefined) {
+    options['borderColor'] = this.BORDER_COLOR_;
+  }
+
+  if (options['borderRadius'] == undefined) {
+    options['borderRadius'] = this.BORDER_RADIUS_;
+  }
+
+  if (options['borderWidth'] == undefined) {
+    options['borderWidth'] = this.BORDER_WIDTH_;
+  }
+
+  if (options['padding'] == undefined) {
+    options['padding'] = this.PADDING_;
+  }
+
+  if (options['arrowPosition'] == undefined) {
+    options['arrowPosition'] = this.ARROW_POSITION_;
+  }
+
+  if (options['disableAutoPan'] == undefined) {
+    options['disableAutoPan'] = false;
+  }
+
+  if (options['disableAnimation'] == undefined) {
+    options['disableAnimation'] = false;
+  }
+
+  if (options['minWidth'] == undefined) {
+    options['minWidth'] = this.MIN_WIDTH_;
+  }
+
+  if (options['shadowStyle'] == undefined) {
+    options['shadowStyle'] = this.SHADOW_STYLE_;
+  }
+
+  if (options['arrowSize'] == undefined) {
+    options['arrowSize'] = this.ARROW_SIZE_;
+  }
+
+  if (options['arrowStyle'] == undefined) {
+    options['arrowStyle'] = this.ARROW_STYLE_;
+  }
+
+  this.buildDom_();
+
+  this.setValues(options);
+}
+window['InfoBubble'] = InfoBubble;
+
+
+/**
+ * Default arrow size
+ * @const
+ * @private
+ */
+InfoBubble.prototype.ARROW_SIZE_ = 15;
+
+
+/**
+ * Default arrow style
+ * @const
+ * @private
+ */
+InfoBubble.prototype.ARROW_STYLE_ = 0;
+
+
+/**
+ * Default shadow style
+ * @const
+ * @private
+ */
+InfoBubble.prototype.SHADOW_STYLE_ = 1;
+
+
+/**
+ * Default min width
+ * @const
+ * @private
+ */
+InfoBubble.prototype.MIN_WIDTH_ = 50;
+
+
+/**
+ * Default arrow position
+ * @const
+ * @private
+ */
+InfoBubble.prototype.ARROW_POSITION_ = 50;
+
+
+/**
+ * Default padding
+ * @const
+ * @private
+ */
+InfoBubble.prototype.PADDING_ = 10;
+
+
+/**
+ * Default border width
+ * @const
+ * @private
+ */
+InfoBubble.prototype.BORDER_WIDTH_ = 1;
+
+
+/**
+ * Default border color
+ * @const
+ * @private
+ */
+InfoBubble.prototype.BORDER_COLOR_ = '#ccc';
+
+
+/**
+ * Default border radius
+ * @const
+ * @private
+ */
+InfoBubble.prototype.BORDER_RADIUS_ = 10;
+
+
+/**
+ * Default background color
+ * @const
+ * @private
+ */
+InfoBubble.prototype.BACKGROUND_COLOR_ = '#fff';
+
+
+/**
+ * Extends a objects prototype by anothers.
+ *
+ * @param {Object} obj1 The object to be extended.
+ * @param {Object} obj2 The object to extend with.
+ * @return {Object} The new extended object.
+ * @ignore
+ */
+InfoBubble.prototype.extend = function(obj1, obj2) {
+  return (function(object) {
+    for (var property in object.prototype) {
+      this.prototype[property] = object.prototype[property];
+    }
+    return this;
+  }).apply(obj1, [obj2]);
+};
+
+
+/**
+ * Builds the InfoBubble dom
+ * @private
+ */
+InfoBubble.prototype.buildDom_ = function() {
+  var bubble = this.bubble_ = document.createElement('DIV');
+  bubble.style['position'] = 'absolute';
+  bubble.style['zIndex'] = this.baseZIndex_;
+
+  var tabsContainer = this.tabsContainer_ = document.createElement('DIV');
+  tabsContainer.style['position'] = 'relative';
+
+  // Close button
+  var close = this.close_ = document.createElement('IMG');
+  close.style['position'] = 'absolute';
+  close.style['width'] = this.px(12);
+  close.style['height'] = this.px(12);
+  close.style['border'] = 0;
+  close.style['zIndex'] = this.baseZIndex_ + 1;
+  close.style['cursor'] = 'pointer';
+  close.src = 'http://maps.gstatic.com/intl/en_us/mapfiles/iw_close.gif';
+
+  var that = this;
+  google.maps.event.addDomListener(close, 'click', function() {
+    that.close();
+    google.maps.event.trigger(that, 'closeclick');
+  });
+
+  // Content area
+  var contentContainer = this.contentContainer_ = document.createElement('DIV');
+  contentContainer.style['overflowX'] = 'auto';
+  contentContainer.style['overflowY'] = 'auto';
+  contentContainer.style['cursor'] = 'default';
+  contentContainer.style['clear'] = 'both';
+  contentContainer.style['position'] = 'relative';
+
+  var content = this.content_ = document.createElement('DIV');
+  contentContainer.appendChild(content);
+
+  // Arrow
+  var arrow = this.arrow_ = document.createElement('DIV');
+  arrow.style['position'] = 'relative';
+
+  var arrowOuter = this.arrowOuter_ = document.createElement('DIV');
+  var arrowInner = this.arrowInner_ = document.createElement('DIV');
+
+  var arrowSize = this.getArrowSize_();
+
+  arrowOuter.style['position'] = arrowInner.style['position'] = 'absolute';
+  arrowOuter.style['left'] = arrowInner.style['left'] = '50%';
+  arrowOuter.style['height'] = arrowInner.style['height'] = '0';
+  arrowOuter.style['width'] = arrowInner.style['width'] = '0';
+  arrowOuter.style['marginLeft'] = this.px(-arrowSize);
+  arrowOuter.style['borderWidth'] = this.px(arrowSize);
+  arrowOuter.style['borderBottomWidth'] = 0;
+
+  // Shadow
+  var bubbleShadow = this.bubbleShadow_ = document.createElement('DIV');
+  bubbleShadow.style['position'] = 'absolute';
+
+  // Hide the InfoBubble by default
+  bubble.style['display'] = bubbleShadow.style['display'] = 'none';
+
+  bubble.appendChild(this.tabsContainer_);
+  bubble.appendChild(close);
+  bubble.appendChild(contentContainer);
+  arrow.appendChild(arrowOuter);
+  arrow.appendChild(arrowInner);
+  bubble.appendChild(arrow);
+
+  var stylesheet = document.createElement('style');
+  stylesheet.setAttribute('type', 'text/css');
+
+  /**
+   * The animation for the infobubble
+   * @type {string}
+   */
+  this.animationName_ = '_ibani_' + Math.round(Math.random() * 10000);
+
+  var css = '.' + this.animationName_ + '{-webkit-animation-name:' +
+      this.animationName_ + ';-webkit-animation-duration:0.5s;' +
+      '-webkit-animation-iteration-count:1;}' +
+      '@-webkit-keyframes ' + this.animationName_ + ' {from {' +
+      '-webkit-transform: scale(0)}50% {-webkit-transform: scale(1.2)}90% ' +
+      '{-webkit-transform: scale(0.95)}to {-webkit-transform: scale(1)}}';
+
+  stylesheet.textContent = css;
+  document.getElementsByTagName('head')[0].appendChild(stylesheet);
+};
+
+
+/**
+ * Sets the background class name
+ *
+ * @param {string} className The class name to set.
+ */
+InfoBubble.prototype.setBackgroundClassName = function(className) {
+  this.set('backgroundClassName', className);
+};
+InfoBubble.prototype['setBackgroundClassName'] =
+    InfoBubble.prototype.setBackgroundClassName;
+
+
+/**
+ * changed MVC callback
+ */
+InfoBubble.prototype.backgroundClassName_changed = function() {
+  this.content_.className = this.get('backgroundClassName');
+};
+InfoBubble.prototype['backgroundClassName_changed'] =
+    InfoBubble.prototype.backgroundClassName_changed;
+
+
+/**
+ * Sets the class of the tab
+ *
+ * @param {string} className the class name to set.
+ */
+InfoBubble.prototype.setTabClassName = function(className) {
+  this.set('tabClassName', className);
+};
+InfoBubble.prototype['setTabClassName'] =
+    InfoBubble.prototype.setTabClassName;
+
+
+/**
+ * tabClassName changed MVC callback
+ */
+InfoBubble.prototype.tabClassName_changed = function() {
+  this.updateTabStyles_();
+};
+InfoBubble.prototype['tabClassName_changed'] =
+    InfoBubble.prototype.tabClassName_changed;
+
+
+/**
+ * Gets the style of the arrow
+ *
+ * @private
+ * @return {number} The style of the arrow.
+ */
+InfoBubble.prototype.getArrowStyle_ = function() {
+  return parseInt(this.get('arrowStyle'), 10) || 0;
+};
+
+
+/**
+ * Sets the style of the arrow
+ *
+ * @param {number} style The style of the arrow.
+ */
+InfoBubble.prototype.setArrowStyle = function(style) {
+  this.set('arrowStyle', style);
+};
+InfoBubble.prototype['setArrowStyle'] =
+    InfoBubble.prototype.setArrowStyle;
+
+
+/**
+ * Arrow style changed MVC callback
+ */
+InfoBubble.prototype.arrowStyle_changed = function() {
+  this.arrowSize_changed();
+};
+InfoBubble.prototype['arrowStyle_changed'] =
+    InfoBubble.prototype.arrowStyle_changed;
+
+
+/**
+ * Gets the size of the arrow
+ *
+ * @private
+ * @return {number} The size of the arrow.
+ */
+InfoBubble.prototype.getArrowSize_ = function() {
+  return parseInt(this.get('arrowSize'), 10) || 0;
+};
+
+
+/**
+ * Sets the size of the arrow
+ *
+ * @param {number} size The size of the arrow.
+ */
+InfoBubble.prototype.setArrowSize = function(size) {
+  this.set('arrowSize', size);
+};
+InfoBubble.prototype['setArrowSize'] =
+    InfoBubble.prototype.setArrowSize;
+
+
+/**
+ * Arrow size changed MVC callback
+ */
+InfoBubble.prototype.arrowSize_changed = function() {
+  this.borderWidth_changed();
+};
+InfoBubble.prototype['arrowSize_changed'] =
+    InfoBubble.prototype.arrowSize_changed;
+
+
+/**
+ * Set the position of the InfoBubble arrow
+ *
+ * @param {number} pos The position to set.
+ */
+InfoBubble.prototype.setArrowPosition = function(pos) {
+  this.set('arrowPosition', pos);
+};
+InfoBubble.prototype['setArrowPosition'] =
+    InfoBubble.prototype.setArrowPosition;
+
+
+/**
+ * Get the position of the InfoBubble arrow
+ *
+ * @private
+ * @return {number} The position..
+ */
+InfoBubble.prototype.getArrowPosition_ = function() {
+  return parseInt(this.get('arrowPosition'), 10) || 0;
+};
+
+
+/**
+ * arrowPosition changed MVC callback
+ */
+InfoBubble.prototype.arrowPosition_changed = function() {
+  var pos = this.getArrowPosition_();
+  this.arrowOuter_.style['left'] = this.arrowInner_.style['left'] = pos + '%';
+
+  this.redraw_();
+};
+InfoBubble.prototype['arrowPosition_changed'] =
+    InfoBubble.prototype.arrowPosition_changed;
+
+
+/**
+ * Set the zIndex of the InfoBubble
+ *
+ * @param {number} zIndex The zIndex to set.
+ */
+InfoBubble.prototype.setZIndex = function(zIndex) {
+  this.set('zIndex', zIndex);
+};
+InfoBubble.prototype['setZIndex'] = InfoBubble.prototype.setZIndex;
+
+
+/**
+ * Get the zIndex of the InfoBubble
+ *
+ * @return {number} The zIndex to set.
+ */
+InfoBubble.prototype.getZIndex = function() {
+  return parseInt(this.get('zIndex'), 10) || this.baseZIndex_;
+};
+
+
+/**
+ * zIndex changed MVC callback
+ */
+InfoBubble.prototype.zIndex_changed = function() {
+  var zIndex = this.getZIndex();
+
+  this.bubble_.style['zIndex'] = this.baseZIndex_ = zIndex;
+  this.close_.style['zIndex'] = zIndex + 1;
+};
+InfoBubble.prototype['zIndex_changed'] = InfoBubble.prototype.zIndex_changed;
+
+
+/**
+ * Set the style of the shadow
+ *
+ * @param {number} shadowStyle The style of the shadow.
+ */
+InfoBubble.prototype.setShadowStyle = function(shadowStyle) {
+  this.set('shadowStyle', shadowStyle);
+};
+InfoBubble.prototype['setShadowStyle'] = InfoBubble.prototype.setShadowStyle;
+
+
+/**
+ * Get the style of the shadow
+ *
+ * @private
+ * @return {number} The style of the shadow.
+ */
+InfoBubble.prototype.getShadowStyle_ = function() {
+  return parseInt(this.get('shadowStyle'), 10) || 0;
+};
+
+
+/**
+ * shadowStyle changed MVC callback
+ */
+InfoBubble.prototype.shadowStyle_changed = function() {
+  var shadowStyle = this.getShadowStyle_();
+
+  var display = '';
+  var shadow = '';
+  var backgroundColor = '';
+  switch (shadowStyle) {
+    case 0:
+      display = 'none';
+      break;
+    case 1:
+      shadow = '40px 15px 10px rgba(33,33,33,0.3)';
+      backgroundColor = 'transparent';
+      break;
+    case 2:
+      shadow = '0 0 2px rgba(33,33,33,0.3)';
+      backgroundColor = 'rgba(33,33,33,0.35)';
+      break;
+  }
+  this.bubbleShadow_.style['boxShadow'] =
+      this.bubbleShadow_.style['webkitBoxShadow'] =
+      this.bubbleShadow_.style['MozBoxShadow'] = shadow;
+  this.bubbleShadow_.style['backgroundColor'] = backgroundColor;
+  if (this.isOpen_) {
+    this.bubbleShadow_.style['display'] = display;
+    this.draw();
+  }
+};
+InfoBubble.prototype['shadowStyle_changed'] =
+    InfoBubble.prototype.shadowStyle_changed;
+
+
+/**
+ * Show the close button
+ */
+InfoBubble.prototype.showCloseButton = function() {
+  this.set('hideCloseButton', false);
+};
+InfoBubble.prototype['showCloseButton'] = InfoBubble.prototype.showCloseButton;
+
+
+/**
+ * Hide the close button
+ */
+InfoBubble.prototype.hideCloseButton = function() {
+  this.set('hideCloseButton', true);
+};
+InfoBubble.prototype['hideCloseButton'] = InfoBubble.prototype.hideCloseButton;
+
+
+/**
+ * hideCloseButton changed MVC callback
+ */
+InfoBubble.prototype.hideCloseButton_changed = function() {
+  this.close_.style['display'] = this.get('hideCloseButton') ? 'none' : '';
+};
+InfoBubble.prototype['hideCloseButton_changed'] =
+    InfoBubble.prototype.hideCloseButton_changed;
+
+
+/**
+ * Set the background color
+ *
+ * @param {string} color The color to set.
+ */
+InfoBubble.prototype.setBackgroundColor = function(color) {
+  if (color) {
+    this.set('backgroundColor', color);
+  }
+};
+InfoBubble.prototype['setBackgroundColor'] =
+    InfoBubble.prototype.setBackgroundColor;
+
+
+/**
+ * backgroundColor changed MVC callback
+ */
+InfoBubble.prototype.backgroundColor_changed = function() {
+  var backgroundColor = this.get('backgroundColor');
+  this.contentContainer_.style['backgroundColor'] = backgroundColor;
+
+  this.arrowInner_.style['borderColor'] = backgroundColor +
+      ' transparent transparent';
+  this.updateTabStyles_();
+};
+InfoBubble.prototype['backgroundColor_changed'] =
+    InfoBubble.prototype.backgroundColor_changed;
+
+
+/**
+ * Set the border color
+ *
+ * @param {string} color The border color.
+ */
+InfoBubble.prototype.setBorderColor = function(color) {
+  if (color) {
+    this.set('borderColor', color);
+  }
+};
+InfoBubble.prototype['setBorderColor'] = InfoBubble.prototype.setBorderColor;
+
+
+/**
+ * borderColor changed MVC callback
+ */
+InfoBubble.prototype.borderColor_changed = function() {
+  var borderColor = this.get('borderColor');
+
+  var contentContainer = this.contentContainer_;
+  var arrowOuter = this.arrowOuter_;
+  contentContainer.style['borderColor'] = borderColor;
+
+  arrowOuter.style['borderColor'] = borderColor +
+      ' transparent transparent';
+
+  contentContainer.style['borderStyle'] =
+      arrowOuter.style['borderStyle'] =
+      this.arrowInner_.style['borderStyle'] = 'solid';
+
+  this.updateTabStyles_();
+};
+InfoBubble.prototype['borderColor_changed'] =
+    InfoBubble.prototype.borderColor_changed;
+
+
+/**
+ * Set the radius of the border
+ *
+ * @param {number} radius The radius of the border.
+ */
+InfoBubble.prototype.setBorderRadius = function(radius) {
+  this.set('borderRadius', radius);
+};
+InfoBubble.prototype['setBorderRadius'] = InfoBubble.prototype.setBorderRadius;
+
+
+/**
+ * Get the radius of the border
+ *
+ * @private
+ * @return {number} The radius of the border.
+ */
+InfoBubble.prototype.getBorderRadius_ = function() {
+  return parseInt(this.get('borderRadius'), 10) || 0;
+};
+
+
+/**
+ * borderRadius changed MVC callback
+ */
+InfoBubble.prototype.borderRadius_changed = function() {
+  var borderRadius = this.getBorderRadius_();
+  var borderWidth = this.getBorderWidth_();
+
+  this.contentContainer_.style['borderRadius'] =
+      this.contentContainer_.style['MozBorderRadius'] =
+      this.contentContainer_.style['webkitBorderRadius'] =
+      this.bubbleShadow_.style['borderRadius'] =
+      this.bubbleShadow_.style['MozBorderRadius'] =
+      this.bubbleShadow_.style['webkitBorderRadius'] = this.px(borderRadius);
+
+  this.tabsContainer_.style['paddingLeft'] =
+      this.tabsContainer_.style['paddingRight'] =
+      this.px(borderRadius + borderWidth);
+
+  this.redraw_();
+};
+InfoBubble.prototype['borderRadius_changed'] =
+    InfoBubble.prototype.borderRadius_changed;
+
+
+/**
+ * Get the width of the border
+ *
+ * @private
+ * @return {number} width The width of the border.
+ */
+InfoBubble.prototype.getBorderWidth_ = function() {
+  return parseInt(this.get('borderWidth'), 10) || 0;
+};
+
+
+/**
+ * Set the width of the border
+ *
+ * @param {number} width The width of the border.
+ */
+InfoBubble.prototype.setBorderWidth = function(width) {
+  this.set('borderWidth', width);
+};
+InfoBubble.prototype['setBorderWidth'] = InfoBubble.prototype.setBorderWidth;
+
+
+/**
+ * borderWidth change MVC callback
+ */
+InfoBubble.prototype.borderWidth_changed = function() {
+  var borderWidth = this.getBorderWidth_();
+
+  this.contentContainer_.style['borderWidth'] = this.px(borderWidth);
+  this.tabsContainer_.style['top'] = this.px(borderWidth);
+
+  this.updateArrowStyle_();
+  this.updateTabStyles_();
+  this.borderRadius_changed();
+  this.redraw_();
+};
+InfoBubble.prototype['borderWidth_changed'] =
+    InfoBubble.prototype.borderWidth_changed;
+
+
+/**
+ * Update the arrow style
+ * @private
+ */
+InfoBubble.prototype.updateArrowStyle_ = function() {
+  var borderWidth = this.getBorderWidth_();
+  var arrowSize = this.getArrowSize_();
+  var arrowStyle = this.getArrowStyle_();
+  var arrowOuterSizePx = this.px(arrowSize);
+  var arrowInnerSizePx = this.px(Math.max(0, arrowSize - borderWidth));
+
+  var outer = this.arrowOuter_;
+  var inner = this.arrowInner_;
+
+  this.arrow_.style['marginTop'] = this.px(-borderWidth);
+  outer.style['borderTopWidth'] = arrowOuterSizePx;
+  inner.style['borderTopWidth'] = arrowInnerSizePx;
+
+  // Full arrow or arrow pointing to the left
+  if (arrowStyle == 0 || arrowStyle == 1) {
+    outer.style['borderLeftWidth'] = arrowOuterSizePx;
+    inner.style['borderLeftWidth'] = arrowInnerSizePx;
+  } else {
+    outer.style['borderLeftWidth'] = inner.style['borderLeftWidth'] = 0;
+  }
+
+  // Full arrow or arrow pointing to the right
+  if (arrowStyle == 0 || arrowStyle == 2) {
+    outer.style['borderRightWidth'] = arrowOuterSizePx;
+    inner.style['borderRightWidth'] = arrowInnerSizePx;
+  } else {
+    outer.style['borderRightWidth'] = inner.style['borderRightWidth'] = 0;
+  }
+
+  if (arrowStyle < 2) {
+    outer.style['marginLeft'] = this.px(-(arrowSize));
+    inner.style['marginLeft'] = this.px(-(arrowSize - borderWidth));
+  } else {
+    outer.style['marginLeft'] = inner.style['marginLeft'] = 0;
+  }
+
+  // If there is no border then don't show thw outer arrow
+  if (borderWidth == 0) {
+    outer.style['display'] = 'none';
+  } else {
+    outer.style['display'] = '';
+  }
+};
+
+
+/**
+ * Set the padding of the InfoBubble
+ *
+ * @param {number} padding The padding to apply.
+ */
+InfoBubble.prototype.setPadding = function(padding) {
+  this.set('padding', padding);
+};
+InfoBubble.prototype['setPadding'] = InfoBubble.prototype.setPadding;
+
+
+/**
+ * Set the padding of the InfoBubble
+ *
+ * @private
+ * @return {number} padding The padding to apply.
+ */
+InfoBubble.prototype.getPadding_ = function() {
+  return parseInt(this.get('padding'), 10) || 0;
+};
+
+
+/**
+ * padding changed MVC callback
+ */
+InfoBubble.prototype.padding_changed = function() {
+  var padding = this.getPadding_();
+  this.contentContainer_.style['padding'] = this.px(padding);
+  this.updateTabStyles_();
+
+  this.redraw_();
+};
+InfoBubble.prototype['padding_changed'] = InfoBubble.prototype.padding_changed;
+
+
+/**
+ * Add px extention to the number
+ *
+ * @param {number} num The number to wrap.
+ * @return {string|number} A wrapped number.
+ */
+InfoBubble.prototype.px = function(num) {
+  if (num) {
+    // 0 doesn't need to be wrapped
+    return num + 'px';
+  }
+  return num;
+};
+
+
+/**
+ * Add events to stop propagation
+ * @private
+ */
+InfoBubble.prototype.addEvents_ = function() {
+  // We want to cancel all the events so they do not go to the map
+  var events = ['mousedown', 'mousemove', 'mouseover', 'mouseout', 'mouseup',
+      'mousewheel', 'DOMMouseScroll', 'touchstart', 'touchend', 'touchmove',
+      'dblclick', 'contextmenu', 'click'];
+
+  var bubble = this.bubble_;
+  this.listeners_ = [];
+  for (var i = 0, event; event = events[i]; i++) {
+    this.listeners_.push(
+      google.maps.event.addDomListener(bubble, event, function(e) {
+        e.cancelBubble = true;
+        if (e.stopPropagation) {
+          e.stopPropagation();
+        }
+      })
+    );
+  }
+};
+
+
+/**
+ * On Adding the InfoBubble to a map
+ * Implementing the OverlayView interface
+ */
+InfoBubble.prototype.onAdd = function() {
+  if (!this.bubble_) {
+    this.buildDom_();
+  }
+
+  this.addEvents_();
+
+  var panes = this.getPanes();
+  if (panes) {
+    panes.floatPane.appendChild(this.bubble_);
+    panes.floatShadow.appendChild(this.bubbleShadow_);
+  }
+};
+InfoBubble.prototype['onAdd'] = InfoBubble.prototype.onAdd;
+
+
+/**
+ * Draw the InfoBubble
+ * Implementing the OverlayView interface
+ */
+InfoBubble.prototype.draw = function() {
+  var projection = this.getProjection();
+
+  if (!projection) {
+    // The map projection is not ready yet so do nothing
+    return;
+  }
+
+  var latLng = /** @type {google.maps.LatLng} */ (this.get('position'));
+
+  if (!latLng) {
+    this.close();
+    return;
+  }
+
+  var tabHeight = 0;
+
+  if (this.activeTab_) {
+    tabHeight = this.activeTab_.offsetHeight;
+  }
+
+  var anchorHeight = this.getAnchorHeight_();
+  var arrowSize = this.getArrowSize_();
+  var arrowPosition = this.getArrowPosition_();
+
+  arrowPosition = arrowPosition / 100;
+
+  var pos = projection.fromLatLngToDivPixel(latLng);
+  var width = this.contentContainer_.offsetWidth;
+  var height = this.bubble_.offsetHeight;
+
+  if (!width) {
+    return;
+  }
+
+  // Adjust for the height of the info bubble
+  var top = pos.y - (height + arrowSize);
+
+  if (anchorHeight) {
+    // If there is an anchor then include the height
+    top -= anchorHeight;
+  }
+
+  var left = pos.x - (width * arrowPosition);
+
+  this.bubble_.style['top'] = this.px(top);
+  this.bubble_.style['left'] = this.px(left);
+
+  var shadowStyle = parseInt(this.get('shadowStyle'), 10);
+
+  switch (shadowStyle) {
+    case 1:
+      // Shadow is behind
+      this.bubbleShadow_.style['top'] = this.px(top + tabHeight - 1);
+      this.bubbleShadow_.style['left'] = this.px(left);
+      this.bubbleShadow_.style['width'] = this.px(width);
+      this.bubbleShadow_.style['height'] =
+          this.px(this.contentContainer_.offsetHeight - arrowSize);
+      break;
+    case 2:
+      // Shadow is below
+      width = width * 0.8;
+      if (anchorHeight) {
+        this.bubbleShadow_.style['top'] = this.px(pos.y);
+      } else {
+        this.bubbleShadow_.style['top'] = this.px(pos.y + arrowSize);
+      }
+      this.bubbleShadow_.style['left'] = this.px(pos.x - width * arrowPosition);
+
+      this.bubbleShadow_.style['width'] = this.px(width);
+      this.bubbleShadow_.style['height'] = this.px(2);
+      break;
+  }
+};
+InfoBubble.prototype['draw'] = InfoBubble.prototype.draw;
+
+
+/**
+ * Removing the InfoBubble from a map
+ */
+InfoBubble.prototype.onRemove = function() {
+  if (this.bubble_ && this.bubble_.parentNode) {
+    this.bubble_.parentNode.removeChild(this.bubble_);
+  }
+  if (this.bubbleShadow_ && this.bubbleShadow_.parentNode) {
+    this.bubbleShadow_.parentNode.removeChild(this.bubbleShadow_);
+  }
+
+  for (var i = 0, listener; listener = this.listeners_[i]; i++) {
+    google.maps.event.removeListener(listener);
+  }
+};
+InfoBubble.prototype['onRemove'] = InfoBubble.prototype.onRemove;
+
+
+/**
+ * Is the InfoBubble open
+ *
+ * @return {boolean} If the InfoBubble is open.
+ */
+InfoBubble.prototype.isOpen = function() {
+  return this.isOpen_;
+};
+InfoBubble.prototype['isOpen'] = InfoBubble.prototype.isOpen;
+
+
+/**
+ * Close the InfoBubble
+ */
+InfoBubble.prototype.close = function() {
+  if (this.bubble_) {
+    this.bubble_.style['display'] = 'none';
+    // Remove the animation so we next time it opens it will animate again
+    this.bubble_.className =
+        this.bubble_.className.replace(this.animationName_, '');
+  }
+
+  if (this.bubbleShadow_) {
+    this.bubbleShadow_.style['display'] = 'none';
+    this.bubbleShadow_.className =
+        this.bubbleShadow_.className.replace(this.animationName_, '');
+  }
+  this.isOpen_ = false;
+};
+InfoBubble.prototype['close'] = InfoBubble.prototype.close;
+
+
+/**
+ * Open the InfoBubble (asynchronous).
+ *
+ * @param {google.maps.Map=} opt_map Optional map to open on.
+ * @param {google.maps.MVCObject=} opt_anchor Optional anchor to position at.
+ */
+InfoBubble.prototype.open = function(opt_map, opt_anchor) {
+  var that = this;
+  window.setTimeout(function() {
+    that.open_(opt_map, opt_anchor);
+  }, 0);
+};
+
+/**
+ * Open the InfoBubble
+ * @private
+ * @param {google.maps.Map=} opt_map Optional map to open on.
+ * @param {google.maps.MVCObject=} opt_anchor Optional anchor to position at.
+ */
+InfoBubble.prototype.open_ = function(opt_map, opt_anchor) {
+  this.updateContent_();
+
+  if (opt_map) {
+    this.setMap(opt_map);
+  }
+
+  if (opt_anchor) {
+    this.set('anchor', opt_anchor);
+    this.bindTo('anchorPoint', opt_anchor);
+    this.bindTo('position', opt_anchor);
+  }
+
+  // Show the bubble and the show
+  this.bubble_.style['display'] = this.bubbleShadow_.style['display'] = '';
+  var animation = !this.get('disableAnimation');
+
+  if (animation) {
+    // Add the animation
+    this.bubble_.className += ' ' + this.animationName_;
+    this.bubbleShadow_.className += ' ' + this.animationName_;
+  }
+
+  this.redraw_();
+  this.isOpen_ = true;
+
+  var pan = !this.get('disableAutoPan');
+  if (pan) {
+    var that = this;
+    window.setTimeout(function() {
+      // Pan into view, done in a time out to make it feel nicer :)
+      that.panToView();
+    }, 200);
+  }
+};
+InfoBubble.prototype['open'] = InfoBubble.prototype.open;
+
+
+/**
+ * Set the position of the InfoBubble
+ *
+ * @param {google.maps.LatLng} position The position to set.
+ */
+InfoBubble.prototype.setPosition = function(position) {
+  if (position) {
+    this.set('position', position);
+  }
+};
+InfoBubble.prototype['setPosition'] = InfoBubble.prototype.setPosition;
+
+
+/**
+ * Returns the position of the InfoBubble
+ *
+ * @return {google.maps.LatLng} the position.
+ */
+InfoBubble.prototype.getPosition = function() {
+  return /** @type {google.maps.LatLng} */ (this.get('position'));
+};
+InfoBubble.prototype['getPosition'] = InfoBubble.prototype.getPosition;
+
+
+/**
+ * position changed MVC callback
+ */
+InfoBubble.prototype.position_changed = function() {
+  this.draw();
+};
+InfoBubble.prototype['position_changed'] =
+    InfoBubble.prototype.position_changed;
+
+
+/**
+ * Pan the InfoBubble into view
+ */
+InfoBubble.prototype.panToView = function() {
+  var projection = this.getProjection();
+
+  if (!projection) {
+    // The map projection is not ready yet so do nothing
+    return;
+  }
+
+  if (!this.bubble_) {
+    // No Bubble yet so do nothing
+    return;
+  }
+
+  var anchorHeight = this.getAnchorHeight_();
+  var height = this.bubble_.offsetHeight + anchorHeight;
+  var map = this.get('map');
+  var mapDiv = map.getDiv();
+  var mapHeight = mapDiv.offsetHeight;
+
+  var latLng = this.getPosition();
+  var centerPos = projection.fromLatLngToContainerPixel(map.getCenter());
+  var pos = projection.fromLatLngToContainerPixel(latLng);
+
+  // Find out how much space at the top is free
+  var spaceTop = centerPos.y - height;
+
+  // Fine out how much space at the bottom is free
+  var spaceBottom = mapHeight - centerPos.y;
+
+  var needsTop = spaceTop < 0;
+  var deltaY = 0;
+
+  if (needsTop) {
+    spaceTop *= -1;
+    deltaY = (spaceTop + spaceBottom) / 2;
+  }
+
+  pos.y -= deltaY;
+  latLng = projection.fromContainerPixelToLatLng(pos);
+
+  if (map.getCenter() != latLng) {
+    map.panTo(latLng);
+  }
+};
+InfoBubble.prototype['panToView'] = InfoBubble.prototype.panToView;
+
+
+/**
+ * Converts a HTML string to a document fragment.
+ *
+ * @param {string} htmlString The HTML string to convert.
+ * @return {Node} A HTML document fragment.
+ * @private
+ */
+InfoBubble.prototype.htmlToDocumentFragment_ = function(htmlString) {
+  htmlString = htmlString.replace(/^\s*([\S\s]*)\b\s*$/, '$1');
+  var tempDiv = document.createElement('DIV');
+  tempDiv.innerHTML = htmlString;
+  if (tempDiv.childNodes.length == 1) {
+    return /** @type {!Node} */ (tempDiv.removeChild(tempDiv.firstChild));
+  } else {
+    var fragment = document.createDocumentFragment();
+    while (tempDiv.firstChild) {
+      fragment.appendChild(tempDiv.firstChild);
+    }
+    return fragment;
+  }
+};
+
+
+/**
+ * Removes all children from the node.
+ *
+ * @param {Node} node The node to remove all children from.
+ * @private
+ */
+InfoBubble.prototype.removeChildren_ = function(node) {
+  if (!node) {
+    return;
+  }
+
+  var child;
+  while (child = node.firstChild) {
+    node.removeChild(child);
+  }
+};
+
+
+/**
+ * Sets the content of the infobubble.
+ *
+ * @param {string|Node} content The content to set.
+ */
+InfoBubble.prototype.setContent = function(content) {
+  this.set('content', content);
+};
+InfoBubble.prototype['setContent'] = InfoBubble.prototype.setContent;
+
+
+/**
+ * Get the content of the infobubble.
+ *
+ * @return {string|Node} The marker content.
+ */
+InfoBubble.prototype.getContent = function() {
+  return /** @type {Node|string} */ (this.get('content'));
+};
+InfoBubble.prototype['getContent'] = InfoBubble.prototype.getContent;
+
+
+/**
+ * Sets the marker content and adds loading events to images
+ */
+InfoBubble.prototype.updateContent_ = function() {
+  if (!this.content_) {
+    // The Content area doesnt exist.
+    return;
+  }
+
+  this.removeChildren_(this.content_);
+  var content = this.getContent();
+  if (content) {
+    if (typeof content == 'string') {
+      content = this.htmlToDocumentFragment_(content);
+    }
+    this.content_.appendChild(content);
+
+    var that = this;
+    var images = this.content_.getElementsByTagName('IMG');
+    for (var i = 0, image; image = images[i]; i++) {
+      // Because we don't know the size of an image till it loads, add a
+      // listener to the image load so the marker can resize and reposition
+      // itself to be the correct height.
+      google.maps.event.addDomListener(image, 'load', function() {
+        that.imageLoaded_();
+      });
+    }
+    google.maps.event.trigger(this, 'domready');
+  }
+  this.redraw_();
+};
+
+/**
+ * Image loaded
+ * @private
+ */
+InfoBubble.prototype.imageLoaded_ = function() {
+  var pan = !this.get('disableAutoPan');
+  this.redraw_();
+  if (pan && (this.tabs_.length == 0 || this.activeTab_.index == 0)) {
+    this.panToView();
+  }
+};
+
+/**
+ * Updates the styles of the tabs
+ * @private
+ */
+InfoBubble.prototype.updateTabStyles_ = function() {
+  if (this.tabs_ && this.tabs_.length) {
+    for (var i = 0, tab; tab = this.tabs_[i]; i++) {
+      this.setTabStyle_(tab.tab);
+    }
+    this.activeTab_.style['zIndex'] = this.baseZIndex_;
+    var borderWidth = this.getBorderWidth_();
+    var padding = this.getPadding_() / 2;
+    this.activeTab_.style['borderBottomWidth'] = 0;
+    this.activeTab_.style['paddingBottom'] = this.px(padding + borderWidth);
+  }
+};
+
+
+/**
+ * Sets the style of a tab
+ * @private
+ * @param {Element} tab The tab to style.
+ */
+InfoBubble.prototype.setTabStyle_ = function(tab) {
+  var backgroundColor = this.get('backgroundColor');
+  var borderColor = this.get('borderColor');
+  var borderRadius = this.getBorderRadius_();
+  var borderWidth = this.getBorderWidth_();
+  var padding = this.getPadding_();
+
+  var marginRight = this.px(-(Math.max(padding, borderRadius)));
+  var borderRadiusPx = this.px(borderRadius);
+
+  var index = this.baseZIndex_;
+  if (tab.index) {
+    index -= tab.index;
+  }
+
+  // The styles for the tab
+  var styles = {
+    'cssFloat': 'left',
+    'position': 'relative',
+    'cursor': 'pointer',
+    'backgroundColor': backgroundColor,
+    'border': this.px(borderWidth) + ' solid ' + borderColor,
+    'padding': this.px(padding / 2) + ' ' + this.px(padding),
+    'marginRight': marginRight,
+    'whiteSpace': 'nowrap',
+    'borderRadiusTopLeft': borderRadiusPx,
+    'MozBorderRadiusTopleft': borderRadiusPx,
+    'webkitBorderTopLeftRadius': borderRadiusPx,
+    'borderRadiusTopRight': borderRadiusPx,
+    'MozBorderRadiusTopright': borderRadiusPx,
+    'webkitBorderTopRightRadius': borderRadiusPx,
+    'zIndex': index,
+    'display': 'inline'
+  };
+
+  for (var style in styles) {
+    tab.style[style] = styles[style];
+  }
+
+  var className = this.get('tabClassName');
+  if (className != undefined) {
+    tab.className += ' ' + className;
+  }
+};
+
+
+/**
+ * Add user actions to a tab
+ * @private
+ * @param {Object} tab The tab to add the actions to.
+ */
+InfoBubble.prototype.addTabActions_ = function(tab) {
+  var that = this;
+  tab.listener_ = google.maps.event.addDomListener(tab, 'click', function() {
+    that.setTabActive_(this);
+  });
+};
+
+
+/**
+ * Set a tab at a index to be active
+ *
+ * @param {number} index The index of the tab.
+ */
+InfoBubble.prototype.setTabActive = function(index) {
+  var tab = this.tabs_[index - 1];
+
+  if (tab) {
+    this.setTabActive_(tab.tab);
+  }
+};
+InfoBubble.prototype['setTabActive'] = InfoBubble.prototype.setTabActive;
+
+
+/**
+ * Set a tab to be active
+ * @private
+ * @param {Object} tab The tab to set active.
+ */
+InfoBubble.prototype.setTabActive_ = function(tab) {
+  if (!tab) {
+    this.setContent('');
+    this.updateContent_();
+    return;
+  }
+
+  var padding = this.getPadding_() / 2;
+  var borderWidth = this.getBorderWidth_();
+
+  if (this.activeTab_) {
+    var activeTab = this.activeTab_;
+    activeTab.style['zIndex'] = this.baseZIndex_ - activeTab.index;
+    activeTab.style['paddingBottom'] = this.px(padding);
+    activeTab.style['borderBottomWidth'] = this.px(borderWidth);
+  }
+
+  tab.style['zIndex'] = this.baseZIndex_;
+  tab.style['borderBottomWidth'] = 0;
+  tab.style['marginBottomWidth'] = '-10px';
+  tab.style['paddingBottom'] = this.px(padding + borderWidth);
+
+  this.setContent(this.tabs_[tab.index].content);
+  this.updateContent_();
+
+  this.activeTab_ = tab;
+
+  this.redraw_();
+};
+
+
+/**
+ * Set the max width of the InfoBubble
+ *
+ * @param {number} width The max width.
+ */
+InfoBubble.prototype.setMaxWidth = function(width) {
+  this.set('maxWidth', width);
+};
+InfoBubble.prototype['setMaxWidth'] = InfoBubble.prototype.setMaxWidth;
+
+
+/**
+ * maxWidth changed MVC callback
+ */
+InfoBubble.prototype.maxWidth_changed = function() {
+  this.redraw_();
+};
+InfoBubble.prototype['maxWidth_changed'] =
+    InfoBubble.prototype.maxWidth_changed;
+
+
+/**
+ * Set the max height of the InfoBubble
+ *
+ * @param {number} height The max height.
+ */
+InfoBubble.prototype.setMaxHeight = function(height) {
+  this.set('maxHeight', height);
+};
+InfoBubble.prototype['setMaxHeight'] = InfoBubble.prototype.setMaxHeight;
+
+
+/**
+ * maxHeight changed MVC callback
+ */
+InfoBubble.prototype.maxHeight_changed = function() {
+  this.redraw_();
+};
+InfoBubble.prototype['maxHeight_changed'] =
+    InfoBubble.prototype.maxHeight_changed;
+
+
+/**
+ * Set the min width of the InfoBubble
+ *
+ * @param {number} width The min width.
+ */
+InfoBubble.prototype.setMinWidth = function(width) {
+  this.set('minWidth', width);
+};
+InfoBubble.prototype['setMinWidth'] = InfoBubble.prototype.setMinWidth;
+
+
+/**
+ * minWidth changed MVC callback
+ */
+InfoBubble.prototype.minWidth_changed = function() {
+  this.redraw_();
+};
+InfoBubble.prototype['minWidth_changed'] =
+    InfoBubble.prototype.minWidth_changed;
+
+
+/**
+ * Set the min height of the InfoBubble
+ *
+ * @param {number} height The min height.
+ */
+InfoBubble.prototype.setMinHeight = function(height) {
+  this.set('minHeight', height);
+};
+InfoBubble.prototype['setMinHeight'] = InfoBubble.prototype.setMinHeight;
+
+
+/**
+ * minHeight changed MVC callback
+ */
+InfoBubble.prototype.minHeight_changed = function() {
+  this.redraw_();
+};
+InfoBubble.prototype['minHeight_changed'] =
+    InfoBubble.prototype.minHeight_changed;
+
+
+/**
+ * Add a tab
+ *
+ * @param {string} label The label of the tab.
+ * @param {string|Element} content The content of the tab.
+ */
+InfoBubble.prototype.addTab = function(label, content) {
+  var tab = document.createElement('DIV');
+  tab.innerHTML = label;
+
+  this.setTabStyle_(tab);
+  this.addTabActions_(tab);
+
+  this.tabsContainer_.appendChild(tab);
+
+  this.tabs_.push({
+    label: label,
+    content: content,
+    tab: tab
+  });
+
+  tab.index = this.tabs_.length - 1;
+  tab.style['zIndex'] = this.baseZIndex_ - tab.index;
+
+  if (!this.activeTab_) {
+    this.setTabActive_(tab);
+  }
+
+  tab.className = tab.className + ' ' + this.animationName_;
+
+  this.redraw_();
+};
+InfoBubble.prototype['addTab'] = InfoBubble.prototype.addTab;
+
+/**
+ * Update a tab at a speicifc index
+ *
+ * @param {number} index The index of the tab.
+ * @param {?string} opt_label The label to change to.
+ * @param {?string} opt_content The content to update to.
+ */
+InfoBubble.prototype.updateTab = function(index, opt_label, opt_content) {
+  if (!this.tabs_.length || index < 0 || index >= this.tabs_.length) {
+    return;
+  }
+
+  var tab = this.tabs_[index];
+  if (opt_label != undefined) {
+    tab.tab.innerHTML = tab.label = opt_label;
+  }
+
+  if (opt_content != undefined) {
+    tab.content = opt_content;
+  }
+
+  if (this.activeTab_ == tab.tab) {
+    this.setContent(tab.content);
+    this.updateContent_();
+  }
+  this.redraw_();
+};
+InfoBubble.prototype['updateTab'] = InfoBubble.prototype.updateTab;
+
+
+/**
+ * Remove a tab at a specific index
+ *
+ * @param {number} index The index of the tab to remove.
+ */
+InfoBubble.prototype.removeTab = function(index) {
+  if (!this.tabs_.length || index < 0 || index >= this.tabs_.length) {
+    return;
+  }
+
+  var tab = this.tabs_[index];
+  tab.tab.parentNode.removeChild(tab.tab);
+
+  google.maps.event.removeListener(tab.tab.listener_);
+
+  this.tabs_.splice(index, 1);
+
+  delete tab;
+
+  for (var i = 0, t; t = this.tabs_[i]; i++) {
+    t.tab.index = i;
+  }
+
+  if (tab.tab == this.activeTab_) {
+    // Removing the current active tab
+    if (this.tabs_[index]) {
+      // Show the tab to the right
+      this.activeTab_ = this.tabs_[index].tab;
+    } else if (this.tabs_[index - 1]) {
+      // Show a tab to the left
+      this.activeTab_ = this.tabs_[index - 1].tab;
+    } else {
+      // No tabs left to sho
+      this.activeTab_ = undefined;
+    }
+
+    this.setTabActive_(this.activeTab_);
+  }
+
+  this.redraw_();
+};
+InfoBubble.prototype['removeTab'] = InfoBubble.prototype.removeTab;
+
+
+/**
+ * Get the size of an element
+ * @private
+ * @param {Node|string} element The element to size.
+ * @param {number=} opt_maxWidth Optional max width of the element.
+ * @param {number=} opt_maxHeight Optional max height of the element.
+ * @return {google.maps.Size} The size of the element.
+ */
+InfoBubble.prototype.getElementSize_ = function(element, opt_maxWidth,
+                                                opt_maxHeight) {
+  var sizer = document.createElement('DIV');
+  sizer.style['display'] = 'inline';
+  sizer.style['position'] = 'absolute';
+  sizer.style['visibility'] = 'hidden';
+
+  if (typeof element == 'string') {
+    sizer.innerHTML = element;
+  } else {
+    sizer.appendChild(element.cloneNode(true));
+  }
+
+  document.body.appendChild(sizer);
+  var size = new google.maps.Size(sizer.offsetWidth, sizer.offsetHeight);
+
+  // If the width is bigger than the max width then set the width and size again
+  if (opt_maxWidth && size.width > opt_maxWidth) {
+    sizer.style['width'] = this.px(opt_maxWidth);
+    size = new google.maps.Size(sizer.offsetWidth, sizer.offsetHeight);
+  }
+
+  // If the height is bigger than the max height then set the height and size
+  // again
+  if (opt_maxHeight && size.height > opt_maxHeight) {
+    sizer.style['height'] = this.px(opt_maxHeight);
+    size = new google.maps.Size(sizer.offsetWidth, sizer.offsetHeight);
+  }
+
+  document.body.removeChild(sizer);
+  delete sizer;
+  return size;
+};
+
+
+/**
+ * Redraw the InfoBubble
+ * @private
+ */
+InfoBubble.prototype.redraw_ = function() {
+  this.figureOutSize_();
+  this.positionCloseButton_();
+  this.draw();
+};
+
+
+/**
+ * Figure out the optimum size of the InfoBubble
+ * @private
+ */
+InfoBubble.prototype.figureOutSize_ = function() {
+  var map = this.get('map');
+
+  if (!map) {
+    return;
+  }
+
+  var padding = this.getPadding_();
+  var borderWidth = this.getBorderWidth_();
+  var borderRadius = this.getBorderRadius_();
+  var arrowSize = this.getArrowSize_();
+
+  var mapDiv = map.getDiv();
+  var gutter = arrowSize * 2;
+  var mapWidth = mapDiv.offsetWidth - gutter;
+  var mapHeight = mapDiv.offsetHeight - gutter - this.getAnchorHeight_();
+  var tabHeight = 0;
+  var width = /** @type {number} */ (this.get('minWidth') || 0);
+  var height = /** @type {number} */ (this.get('minHeight') || 0);
+  var maxWidth = /** @type {number} */ (this.get('maxWidth') || 0);
+  var maxHeight = /** @type {number} */ (this.get('maxHeight') || 0);
+
+  maxWidth = Math.min(mapWidth, maxWidth);
+  maxHeight = Math.min(mapHeight, maxHeight);
+
+  var tabWidth = 0;
+  if (this.tabs_.length) {
+    // If there are tabs then you need to check the size of each tab's content
+    for (var i = 0, tab; tab = this.tabs_[i]; i++) {
+      var tabSize = this.getElementSize_(tab.tab, maxWidth, maxHeight);
+      var contentSize = this.getElementSize_(tab.content, maxWidth, maxHeight);
+
+      if (width < tabSize.width) {
+        width = tabSize.width;
+      }
+
+      // Add up all the tab widths because they might end up being wider than
+      // the content
+      tabWidth += tabSize.width;
+
+      if (height < tabSize.height) {
+        height = tabSize.height;
+      }
+
+      if (tabSize.height > tabHeight) {
+        tabHeight = tabSize.height;
+      }
+
+      if (width < contentSize.width) {
+        width = contentSize.width;
+      }
+
+      if (height < contentSize.height) {
+        height = contentSize.height;
+      }
+    }
+  } else {
+    var content = /** @type {string|Node} */ (this.get('content'));
+    if (typeof content == 'string') {
+      content = this.htmlToDocumentFragment_(content);
+    }
+    if (content) {
+      var contentSize = this.getElementSize_(content, maxWidth, maxHeight);
+
+      if (width < contentSize.width) {
+        width = contentSize.width;
+      }
+
+      if (height < contentSize.height) {
+        height = contentSize.height;
+      }
+    }
+  }
+
+  if (maxWidth) {
+    width = Math.min(width, maxWidth);
+  }
+
+  if (maxHeight) {
+    height = Math.min(height, maxHeight);
+  }
+
+  width = Math.max(width, tabWidth);
+
+  if (width == tabWidth) {
+    width = width + 2 * padding;
+  }
+
+  arrowSize = arrowSize * 2;
+  width = Math.max(width, arrowSize);
+
+  // Maybe add this as a option so they can go bigger than the map if the user
+  // wants
+  if (width > mapWidth) {
+    width = mapWidth;
+  }
+
+  if (height > mapHeight) {
+    height = mapHeight - tabHeight;
+  }
+
+  if (this.tabsContainer_) {
+    this.tabHeight_ = tabHeight;
+    this.tabsContainer_.style['width'] = this.px(tabWidth);
+  }
+
+  this.contentContainer_.style['width'] = this.px(width);
+  this.contentContainer_.style['height'] = this.px(height);
+};
+
+
+/**
+ *  Get the height of the anchor
+ *
+ *  This function is a hack for now and doesn't really work that good, need to
+ *  wait for pixelBounds to be correctly exposed.
+ *  @private
+ *  @return {number} The height of the anchor.
+ */
+InfoBubble.prototype.getAnchorHeight_ = function() {
+  var anchor = this.get('anchor');
+  if (anchor) {
+    var anchorPoint = /** @type google.maps.Point */(this.get('anchorPoint'));
+
+    if (anchorPoint) {
+      return -1 * anchorPoint.y;
+    }
+  }
+  return 0;
+};
+
+InfoBubble.prototype.anchorPoint_changed = function() {
+  this.draw();
+};
+InfoBubble.prototype['anchorPoint_changed'] = InfoBubble.prototype.anchorPoint_changed;
+
+
+/**
+ * Position the close button in the right spot.
+ * @private
+ */
+InfoBubble.prototype.positionCloseButton_ = function() {
+  var br = this.getBorderRadius_();
+  var bw = this.getBorderWidth_();
+
+  var right = 2;
+  var top = 2;
+
+  if (this.tabs_.length && this.tabHeight_) {
+    top += this.tabHeight_;
+  }
+
+  top += bw;
+  right += bw;
+
+  var c = this.contentContainer_;
+  if (c && c.clientHeight < c.scrollHeight) {
+    // If there are scrollbars then move the cross in so it is not over
+    // scrollbar
+    right += 15;
+  }
+
+  this.close_.style['right'] = this.px(right);
+  this.close_.style['top'] = this.px(top);
+};
+
 ;
 //# sourceMappingURL=scripts.js.map

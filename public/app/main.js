@@ -303,6 +303,160 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 
 /***/ }),
 
+/***/ "./src/app/Register/Register.component.html":
+/*!**************************************************!*\
+  !*** ./src/app/Register/Register.component.html ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n<div class=\"alert alert-success\" *ngIf=\"isSucessful\">\n  Registered {{user.name}}\n</div>\n<h2>Register</h2>\n\n<div *ngIf=\"!isSuccessful\" mat-dialog-content>\n  <form [formGroup]=\"registerForm\" (ngSubmit)=\"onSubmit()\">\n      <div class=\"form-group\">\n          <label for=\"name\">Name</label>\n          <input type=\"text\" formControlName=\"name\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': submitted && f.name.errors }\" />\n          <div *ngIf=\"submitted && f.name.errors\" class=\"invalid-feedback\">\n              <div *ngIf=\"f.name.errors.required\">Name is required</div>\n          </div>\n      </div>\n      <div class=\"form-group\">\n          <label for=\"email\">Email</label>\n          <input type=\"email\" formControlName=\"email\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': submitted && f.email.errors }\" />\n          <div *ngIf=\"submitted && f.email.errors\" class=\"invalid-feedback\">\n              <div *ngIf=\"f.email.errors.required\">Email is required</div>\n              <!-- <div *ngIf=\"f.email.errors.email\">Invalid email address</div> -->\n          </div>\n      </div>\n      <div class=\"form-group\">\n          <label for=\"password\">Password</label>\n          <input id=\"password\" type=\"password\" formControlName=\"password\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" />\n          <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\n              <div *ngIf=\"f.password.errors.required\">Password is required</div>\n          </div>\n      </div>\n      <div class=\"form-group\">\n          <label for=\"confirm_password\">Confirm Password</label>\n          <input id=\"confirmPassword\" type=\"password\" formControlName=\"confirm_password\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': submitted && f.confirm_password.errors }\" />\n          <div *ngIf=\"submitted && f.confirm_password.errors\" class=\"invalid-feedback\">\n              <div *ngIf=\"f.confirm_password.errors.required\">Please confirm your password</div>\n          </div>\n          <div class=\"alert alert-danger\"\n          *ngIf=\"f.confirm_password.errors?.MatchPassword\">Password not match</div>\n      </div>\n      <div class=\"form-group\">\n          <button mat-flat-button [disabled]=\"loading\" color=\"primary\">register</button>\n          <img *ngIf=\"loading\" src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\" />\n      </div>\n      <div *ngIf=\"error\" class=\"alert alert-danger\">{{error}}</div>\n  </form>\n</div>\n<div *ngIf=\"isSuccessful\" mat-dialog-content>\n  <h3>Sucess!</h3>\n</div>\n<div class=\"right move-up\" mat-dialog-actions>\n  <button *ngIf=\"!isSuccessful\" mat-flat-button [disabled]=\"loading\" color=\"warn\" (click)=\"closeModal()\">Cancel</button>\n  <button *ngIf=\"isSuccessful\" mat-flat-button [mat-dialog-close]=\"user\" cdkFocusInitial color=\"primary\">OK</button>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/Register/Register.component.scss":
+/*!**************************************************!*\
+  !*** ./src/app/Register/Register.component.scss ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".right {\n  float: right; }\n"
+
+/***/ }),
+
+/***/ "./src/app/Register/Register.component.ts":
+/*!************************************************!*\
+  !*** ./src/app/Register/Register.component.ts ***!
+  \************************************************/
+/*! exports provided: RegisterComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterComponent", function() { return RegisterComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _services_authentication_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../_services/authentication.service */ "./src/app/_services/authentication.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _password_validator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./password.validator */ "./src/app/Register/password.validator.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var RegisterComponent = /** @class */ (function () {
+    function RegisterComponent(formBuilder, authenticationService, dialogRef) {
+        this.formBuilder = formBuilder;
+        this.authenticationService = authenticationService;
+        this.dialogRef = dialogRef;
+        this.loading = false;
+        this.submitted = false;
+        this.error = '';
+        this.isSuccessful = false;
+    }
+    RegisterComponent.prototype.ngOnInit = function () {
+        this.registerForm = this.formBuilder.group({
+            name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            email: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            confirm_password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]
+        }, {
+            validator: _password_validator__WEBPACK_IMPORTED_MODULE_5__["PasswordValidation"].MatchPassword // your validation method
+        });
+    };
+    Object.defineProperty(RegisterComponent.prototype, "f", {
+        // convenience getter for easy access to form fields
+        get: function () { return this.registerForm.controls; },
+        enumerable: true,
+        configurable: true
+    });
+    RegisterComponent.prototype.onSubmit = function () {
+        var _this = this;
+        this.submitted = true;
+        this.isSuccessful = false;
+        // stop here if form is invalid
+        if (this.registerForm.invalid) {
+            return;
+        }
+        this.loading = true;
+        this.authenticationService.register(this.f.name.value, this.f.email.value, this.f.password.value)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])())
+            .subscribe(function (data) {
+            // this.router.navigate([this.returnUrl]);
+            _this.user = data.user;
+            _this.loading = false;
+            _this.isSuccessful = true;
+            setTimeout(_this.closeModal(), 1000);
+        }, function (error) {
+            _this.error = error;
+            _this.loading = false;
+            console.log(error);
+        });
+    };
+    RegisterComponent.prototype.closeModal = function () {
+        this.dialogRef.close();
+        this.registerForm.reset();
+    };
+    RegisterComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-register',
+            template: __webpack_require__(/*! ./Register.component.html */ "./src/app/Register/Register.component.html"),
+            styles: [__webpack_require__(/*! ./Register.component.scss */ "./src/app/Register/Register.component.scss")]
+        }),
+        __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"],
+            _services_authentication_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticationService"], _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"]])
+    ], RegisterComponent);
+    return RegisterComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/Register/password.validator.ts":
+/*!************************************************!*\
+  !*** ./src/app/Register/password.validator.ts ***!
+  \************************************************/
+/*! exports provided: PasswordValidation */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PasswordValidation", function() { return PasswordValidation; });
+var PasswordValidation = /** @class */ (function () {
+    function PasswordValidation() {
+    }
+    PasswordValidation.MatchPassword = function (AC) {
+        var password = AC.get('password').value; // to get value in input tag
+        var confirmPassword = AC.get('confirm_password').value; // to get value in input tag
+        if (password !== confirmPassword) {
+            console.log('false');
+            AC.get('confirm_password').setErrors({ MatchPassword: true });
+        }
+        else {
+            console.log('true');
+            return null;
+        }
+    };
+    return PasswordValidation;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/_guards/auth.guard.ts":
 /*!***************************************!*\
   !*** ./src/app/_guards/auth.guard.ts ***!
@@ -435,16 +589,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jwt-decode */ "./node_modules/jwt-decode/lib/index.js");
 /* harmony import */ var jwt_decode__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jwt_decode__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _services_authentication_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../_services/authentication.service */ "./src/app/_services/authentication.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
 
 
 var JwtInterceptor = /** @class */ (function () {
-    function JwtInterceptor() {
+    function JwtInterceptor(authService, router) {
+        this.authService = authService;
+        this.router = router;
     }
     JwtInterceptor.prototype.openDialog = function () {
         console.log('Session has ended, please sign in again');
@@ -462,6 +625,8 @@ var JwtInterceptor = /** @class */ (function () {
                 });
             }
             else {
+                this.authService.logout();
+                this.router.navigate(['map']);
                 this.openDialog();
             }
         }
@@ -478,7 +643,6 @@ var JwtInterceptor = /** @class */ (function () {
         }
         var date = new Date(0);
         date.setUTCSeconds(decoded.exp);
-        console.log(date);
         return date;
     };
     JwtInterceptor.prototype.isTokenExpired = function (token) {
@@ -493,11 +657,12 @@ var JwtInterceptor = /** @class */ (function () {
             return false;
         }
         var answer = !(date.valueOf() > new Date().valueOf());
-        console.log(answer);
+        console.log('Has the access token expired? ', answer);
         return !(date.valueOf() > new Date().valueOf());
     };
     JwtInterceptor = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])()
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        __metadata("design:paramtypes", [_services_authentication_service__WEBPACK_IMPORTED_MODULE_2__["AuthenticationService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], JwtInterceptor);
     return JwtInterceptor;
 }());
@@ -539,10 +704,23 @@ var AuthenticationService = /** @class */ (function () {
         this.apiUrl = _constants__WEBPACK_IMPORTED_MODULE_3__["api_base"];
     }
     AuthenticationService.prototype.getToken = function () {
-        return localStorage.getItem('currentUser');
+        var user = JSON.parse(localStorage.getItem('currentUser'));
+        return user.token;
     };
     AuthenticationService.prototype.setToken = function (token, email, res) {
         localStorage.setItem('currentUser', JSON.stringify({ email: email, token: res.access_token, user: res.user }));
+    };
+    AuthenticationService.prototype.register = function (name, email, password) {
+        return this.http.post(this.apiUrl + 'register', { name: name, email: email, password: password })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) {
+            // login successful if there's a jwt token in the response
+            console.log(res);
+            if (res && res.access_token) {
+                // store username and jwt token in local storage to keep user logged in between page refreshes
+                // this.setToken(res.access_token, email, res);
+            }
+            return res;
+        }));
     };
     AuthenticationService.prototype.login = function (email, password) {
         var _this = this;
@@ -560,7 +738,7 @@ var AuthenticationService = /** @class */ (function () {
     AuthenticationService.prototype.logout = function () {
         // remove user from local storage to log user out
         this.http.get(this.apiUrl + 'logout').subscribe(function (data) {
-            console.table(data);
+            console.log(data);
         });
         localStorage.removeItem('currentUser');
     };
@@ -670,7 +848,7 @@ var GalleryService = /** @class */ (function () {
 /*!************************************!*\
   !*** ./src/app/_services/index.ts ***!
   \************************************/
-/*! exports provided: UserService, GalleryService, AuthenticationService */
+/*! exports provided: AuthenticationService, UserService, GalleryService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -718,12 +896,12 @@ var UserService = /** @class */ (function () {
     function UserService(http) {
         this.http = http;
     }
-    UserService.prototype.getAll = function () {
-        return this.http.get('/api/users');
-    };
     UserService.prototype.getCurrentUser = function () {
         var user = localStorage.getItem('currentUser');
-        return user;
+        if (user) {
+            this._currentUser = JSON.parse(user);
+        }
+        return this._currentUser;
     };
     UserService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({ providedIn: 'root' }),
@@ -743,7 +921,7 @@ var UserService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/* #upload-images {\r\n} */\r\n\r\n.form {\r\n    height: 50px;\r\n}\r\n\r\nmat-spinner {\r\n    height: 200px;\r\n}\r\n\r\n.d-content {\r\n    height: 300px;\r\n}\r\n\r\n.center {\r\n    margin: auto;\r\n    width: 85%;\r\n}\r\n\r\n.center-image {\r\n    display: block;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n}\r\n\r\n.progress {\r\n    height: 200px;\r\n    background-color: #fff;\r\n}\r\n\r\n.failed {\r\n    background-color: #fff;\r\n    width: 75%;\r\n    height: auto;\r\n}\r\n"
+module.exports = "/* #upload-images {\r\n} */\r\n\r\n.form {\r\n    height: 50px;\r\n}\r\n\r\nmat-spinner {\r\n    height: 200px;\r\n}\r\n\r\n.d-content {\r\n    height: 300px;\r\n}\r\n\r\n.center {\r\n    margin: auto;\r\n}\r\n\r\n.center-image, .center-text {\r\n    display: block;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n}\r\n\r\n.progress {\r\n    height: 200px;\r\n    background-color: #fff;\r\n}\r\n\r\n.failed {\r\n    background-color: #fff;\r\n    width: 75%;\r\n    height: auto;\r\n}\r\n\r\n.center-text {\r\n    text-align: center;\r\n}\r\n\r\n.responsive {\r\n    width: 200px;\r\n    height: 200px;\r\n}\r\n"
 
 /***/ }),
 
@@ -754,7 +932,7 @@ module.exports = "/* #upload-images {\r\n} */\r\n\r\n.form {\r\n    height: 50px
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n<!-- This is the content of the dialog, containing a list of the files to upload -->\r\n<h1 mat-dialog-title class=\"center-text\" *ngIf=\"uploadSuccessful\">Done!</h1>\r\n<h1 mat-dialog-title class=\"center-text\" *ngIf=\"!uploadSuccessful && !uploadFailed\">Add images to this project</h1>\r\n<h1 mat-dialog-title class=\"center-text\" *ngIf=\"uploadFailed\">Failed</h1>\r\n<div mat-dialog-content class=\"\">\r\n    <div *ngIf=\"uploadSuccessful\" class=\"d-content\">\r\n       <img src=\"./images/like.png\" alt=\"Upload complete\" class=\"responsive center-image\">\r\n      <!-- <mat-icon svgIcon=\"thumbs-up\"></mat-icon> -->\r\n    </div>\r\n    \r\n    <div *ngIf=\"!uploadSuccessful && !uploading\">\r\n        <form class=\"form\" id=\"upload-images\" [formGroup]=\"addImagesForm\" (ngSubmit)=\"onSubmit()\">\r\n                <input type=\"file\" multiple (change)=\"onFilesAdded($event.target.files)\" #imageFile required>\r\n                <button id=\"submit-button\" mat-raised-button color=\"primary\" type=\"submit\" style=\"display: none\">Upload</button>\r\n        </form>\r\n    </div>\r\n    <div class=\"progress\" *ngIf=\"uploading\">\r\n        <mat-spinner class=\"center\"></mat-spinner>\r\n    </div>\r\n    <div *ngIf=\"uploadFailed\" class=\"center\">\r\n        <img src=\"./images/cancel.png\" alt=\"Upload failed\" class=\"center-image failed\">\r\n     </div>\r\n</div>\r\n<div class=\"right\" mat-dialog-actions>\r\n    <button mat-raised-button color=\"primary\" [disabled]=\"uploading || uploadSuccessful || addImagesForm.invalid\" (click)=\"clickButton()\">Upload</button>\r\n    <button mat-raised-button color='{{secondButtonColor}}' [disabled]=\"uploading\" (click)=\"closeModal()\">{{secondButtonText}}</button>\r\n</div>"
+module.exports = "\r\n\r\n<!-- This is the content of the dialog, containing a list of the files to upload -->\r\n<h1 mat-dialog-title class=\"center-text\" *ngIf=\"uploadSuccessful\">Done!</h1>\r\n<h1 mat-dialog-title class=\"center-text\" *ngIf=\"!uploadSuccessful && !uploadFailed\">Add images to this project</h1>\r\n<h1 mat-dialog-title class=\"center-text\" *ngIf=\"uploadFailed\">Failed</h1>\r\n<div mat-dialog-content class=\"center\">\r\n    <div *ngIf=\"uploadSuccessful\" class=\"d-content\">\r\n       <img src=\"./images/like.png\" alt=\"Upload complete\" class=\"responsive center-image\">\r\n      <!-- <mat-icon svgIcon=\"thumbs-up\"></mat-icon> -->\r\n    </div>\r\n    \r\n    <div *ngIf=\"!uploadSuccessful && !uploading\">\r\n        <form class=\"form\" id=\"upload-images\" [formGroup]=\"addImagesForm\" (ngSubmit)=\"onSubmit()\">\r\n                <input type=\"file\" multiple (change)=\"onFilesAdded($event.target.files)\" #imageFile required>\r\n                <button id=\"submit-button\" mat-raised-button color=\"primary\" type=\"submit\" style=\"display: none\">Upload</button>\r\n        </form>\r\n    </div>\r\n    <div class=\"progress\" *ngIf=\"uploading\">\r\n        <mat-spinner class=\"center\"></mat-spinner>\r\n    </div>\r\n    <div *ngIf=\"uploadFailed\" class=\"center\">\r\n        <img src=\"./images/cancel.png\" alt=\"Upload failed\" class=\"center-image failed\">\r\n     </div>\r\n</div>\r\n<div class=\"right\" mat-dialog-actions>\r\n    <button mat-raised-button color=\"primary\" [disabled]=\"uploading || uploadSuccessful || addImagesForm.invalid\" (click)=\"clickButton()\">Upload</button>\r\n    <button mat-raised-button color='{{secondButtonColor}}' [disabled]=\"uploading\" (click)=\"closeModal()\">{{secondButtonText}}</button>\r\n</div>"
 
 /***/ }),
 
@@ -900,7 +1078,7 @@ var AddImagesComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "mat-card {\r\n    margin-top: 100px;\r\n    margin-bottom: 50px;\r\n    width: 100%;\r\n}\r\n\r\n.left {\r\n    float: left;\r\n}\r\n\r\n.right {\r\n    float: right;\r\n}\r\n\r\n.upload-form {\r\n    min-width: 150px;\r\n    max-width: 1000px;\r\n    width: 100%;\r\n  }\r\n\r\n.upload-map {\r\n    min-width: 150px;\r\n    max-width: 1000px;\r\n    width: 400px;\r\n    padding: 10px;\r\n  }\r\n\r\n.input-full-width {\r\n    width: 100%;\r\n}\r\n\r\nngui-map {\r\n    height: 350px;\r\n}\r\n\r\ncite {\r\n    color: grey;\r\n    font-size: 12px;\r\n}\r\n\r\nmat-form-field {\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.progress {\r\n    height: 200px;\r\n    background-color: #fff;\r\n}\r\n\r\n.center {\r\n    margin: auto;\r\n    width: 85%;\r\n}\r\n\r\n.center-image {\r\n    display: block;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    width: 40%;\r\n}\r\n\r\n.center-text {\r\n    text-align: center;\r\n}\r\n\r\n.mat-icon svg {\r\n    width: 50%;\r\n    -webkit-transform: scale(2);\r\n            transform: scale(2);\r\n}\r\n\r\n.responsive {\r\n    max-width: 100%;\r\n    height: auto;\r\n}"
+module.exports = "mat-card {\r\n    margin-top: 100px;\r\n    margin-bottom: 50px;\r\n    width: 100%;\r\n}\r\n\r\n.left {\r\n    float: left;\r\n}\r\n\r\n.right {\r\n    float: right;\r\n}\r\n\r\n.upload-form {\r\n    min-width: 150px;\r\n    max-width: 1000px;\r\n    width: 100%;\r\n  }\r\n\r\n.upload-map {\r\n    min-width: 150px;\r\n    max-width: 1000px;\r\n    width: 400px;\r\n    padding: 10px;\r\n  }\r\n\r\n.input-full-width {\r\n    width: 100%;\r\n}\r\n\r\nngui-map {\r\n    height: 350px;\r\n}\r\n\r\ncite {\r\n    color: grey;\r\n    font-size: 12px;\r\n}\r\n\r\nmat-form-field {\r\n    margin-bottom: 15px;\r\n}\r\n\r\n.progress {\r\n    height: 200px;\r\n    background-color: #fff;\r\n}\r\n\r\n.center {\r\n    margin: auto;\r\n    width: 85%;\r\n}\r\n\r\n.center-image {\r\n    display: block;\r\n    margin-left: auto;\r\n    margin-right: auto;\r\n    width: 50%;\r\n}\r\n\r\n.center-text {\r\n    text-align: center;\r\n}\r\n\r\n.mat-icon svg {\r\n    width: 50%;\r\n    -webkit-transform: scale(2);\r\n            transform: scale(2);\r\n}\r\n\r\n.responsive {\r\n    width: 200px;\r\n    height: 200px;\r\n}"
 
 /***/ }),
 
@@ -911,7 +1089,7 @@ module.exports = "mat-card {\r\n    margin-top: 100px;\r\n    margin-bottom: 50p
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"container-fluid\">\n    <p><button mat-raised-button color=\"warning\" (click)=\"backToMap()\">Back to map</button></p>\n    <div class=\"row mx-auto\"> \n        <div class=\"col-6 col-md-8\">\n          <mat-card>\n            <mat-card-header>\n              <mat-card-title>New Portfolio Item</mat-card-title>\n              <mat-card-subtitle>Add a new project to your portfolio</mat-card-subtitle>\n            </mat-card-header>\n            <mat-card-content>\n              <form  class=\"upload-form\" [formGroup]=\"newProjectForm\" (ngSubmit)=\"openDialog()\">\n                  <mat-form-field class=\"input-full-width\">\n                      <input type=\"text\" minlength=\"5\" matInput placeholder=\"Name\" formControlName=\"name\" required>\n                      <mat-error *ngIf=\"newProjectForm.controls.name.invalid\">{{getErrorMessage(name)}}</mat-error>\n                  </mat-form-field>\n                  \n                  <mat-form-field class=\"input-full-width\" hintLabel=\"Max 300 characters\">\n                    <textarea #description matInput placeholder=\"Describe the project\" formControlName=\"description\" maxlength=\"300\" required></textarea>\n                    <mat-hint align=\"end\">{{description.value?.length || 0}}/300</mat-hint>\n                    <mat-error *ngIf=\"newProjectForm.controls.description.invalid\">{{getErrorMessage(description)}}</mat-error>\n                  </mat-form-field>\n          \n                  <table class=\"input-full-width\" cellspacing=\"10\">\n                    <tr>\n                      <td><mat-form-field class=\"input-full-width\" hintLabel=\"Click on the map and drag marker\">\n                          <input type=\"number\" matInput placeholder=\"Latitude\"  formControlName=\"latitude\" required>\n                      </mat-form-field></td>\n                      <td><mat-form-field class=\"input-full-width\">\n                        <input type=\"number\" matInput placeholder=\"Longitude\"  formControlName=\"longitude\" required>\n                      </mat-form-field></td>\n                    </tr>\n                  </table>\n          \n                  <table class=\"input-full-width\" cellspacing=\"20\">\n                    <tr>\n                      <td><mat-form-field class=\"input-full-width\" hintLabel=\"Pick a date\">\n                          <input matInput [matDatepicker]=\"startpicker\" placeholder=\"When did it start?\" formControlName=\"start_date\">\n                          <mat-datepicker-toggle matSuffix [for]=\"startpicker\">\n                          </mat-datepicker-toggle>\n                          <mat-datepicker #startpicker></mat-datepicker>\n                        </mat-form-field>\n                      </td>\n                      <td><mat-form-field class=\"input-full-width\" hintLabel=\"Pick a date\">\n                          <input matInput [matDatepicker]=\"endpicker\" placeholder=\"When did it end?\" formControlName=\"end_date\">\n                          <mat-datepicker-toggle matSuffix [for]=\"endpicker\">\n                          </mat-datepicker-toggle>\n                          <mat-datepicker #endpicker></mat-datepicker>\n                        </mat-form-field>\n                      </td>\n                    </tr>\n                  </table>\n\n                  <input #imageFile type=\"file\" multiple (change)=\"onFilesAdded($event.target.files)\" style=\"display: none\">\n                  <!-- <button mat-stroked-button (click)=\"openDialog()\" color=\"primary\">test dialog</button> -->\n                  <button class=\"right\" mat-raised-button color=\"primary\" type=\"submit\" [disabled]=\"newProjectForm.invalid || newProjectForm.pristine\">Create project</button>\n          \n              </form>\n              <button mat-stroked-button (click)=\"imageFile.click()\">Add images</button><cite *ngIf=\"filesLoaded\"> {{file_count}} image(s) loaded</cite>\n\n            </mat-card-content>\n            <mat-card-actions align=\"end\">\n              \n            </mat-card-actions>\n          </mat-card>\n        </div>\n        <div class=\"col-6 col-md-4\">\n            <mat-card class=\"upload-map\">\n                <mat-form-field class=\"input-full-width\">\n                    <input matInput placeholder=\"Pan the map here\" [(ngModel)]=\"map_center\" name=\"latitude\">\n                </mat-form-field>\n                <ngui-map center={{map_center}} zoom=\"15\" (click)=\"onMapClick($event)\">\n                    <marker [position]=\"marker_position\" draggable=\"true\" #markerRef (dragend)=\"dragged($event)\"></marker>\n                </ngui-map>\n            </mat-card>\n        </div>\n      </div>\n</div> \n\n<!-- <mat-grid-list cols=\"2\" rowHeight=\"2:1\" [gutterSize]=\"10\">\n    <mat-grid-tile>\n        <mat-card>\n            <mat-card-header>\n              <mat-card-title>New Portfolio Item</mat-card-title>\n              <mat-card-subtitle>Add a new project to your portfolio</mat-card-subtitle>\n            </mat-card-header>\n            <mat-card-content>\n              <form action=\"\" class=\"upload-form\">\n                  <mat-form-field class=\"input-full-width\">\n                      <input matInput placeholder=\"Name\" value=\"Land survey\">\n                  </mat-form-field>\n                  \n                  <mat-form-field class=\"input-full-width\">\n                    <textarea matInput placeholder=\"Describe the project\"></textarea>\n                  </mat-form-field>\n          \n                  <table class=\"input-full-width\" cellspacing=\"10\">\n                    <tr>\n                      <td><mat-form-field class=\"input-full-width\">\n                        <input matInput placeholder=\"Longitude\">\n                      </mat-form-field></td>\n                      <td><mat-form-field class=\"input-full-width\">\n                        <input matInput placeholder=\"Latitude\">\n                      </mat-form-field></td>\n                    </tr>\n                  </table>\n          \n                  <table class=\"input-full-width\" cellspacing=\"20\">\n                    <tr>\n                      <td><mat-form-field class=\"input-full-width\">\n                          <input matInput [matDatepicker]=\"startpicker\" placeholder=\"When did it start?\">\n                          <mat-datepicker-toggle matSuffix [for]=\"startpicker\">\n                          </mat-datepicker-toggle>\n                          <mat-datepicker #startpicker></mat-datepicker>\n                        </mat-form-field>\n                      </td>\n                      <td><mat-form-field class=\"input-full-width\">\n                          <input matInput [matDatepicker]=\"endpicker\" placeholder=\"When did it end?\">\n                          <mat-datepicker-toggle matSuffix [for]=\"endpicker\">\n                          </mat-datepicker-toggle>\n                          <mat-datepicker #endpicker></mat-datepicker>\n                        </mat-form-field>\n                      </td>\n                    </tr>\n                  </table>\n          \n                  <button mat-button (click)=\"openDialog()\" color=\"primary\">Add images</button>\n              </form>\n            </mat-card-content>\n            <mat-card-actions align=\"end\">\n              <button mat-raised-button color=\"primary\">Create project</button>\n            </mat-card-actions>\n          </mat-card>\n    </mat-grid-tile>\n\n    <mat-grid-tile>\n        <mat-card class=\"upload-map\">\n            <ngui-map center=\"Lagos, Nigeria\" zoom=\"15\" class=\"\">\n            </ngui-map>\n        </mat-card>\n    </mat-grid-tile>\n  </mat-grid-list> -->\n"
+module.exports = "\n<div class=\"container-fluid\">\n    <p><button mat-raised-button color=\"warning\" (click)=\"backToMap()\">Back to map</button></p>\n    <div class=\"row mx-auto\"> \n        <div class=\"col-6 col-md-8\">\n          <mat-card>\n            <mat-card-header>\n              <mat-card-title>New Portfolio Item</mat-card-title>\n              <mat-card-subtitle>Add a new project to your portfolio</mat-card-subtitle>\n            </mat-card-header>\n            <mat-card-content>\n              <form  class=\"upload-form\" [formGroup]=\"newProjectForm\" (ngSubmit)=\"openDialog()\">\n                  <mat-form-field class=\"input-full-width\">\n                      <input type=\"text\" minlength=\"5\" matInput placeholder=\"Name\" formControlName=\"name\" required>\n                      <mat-error *ngIf=\"newProjectForm.controls.name.invalid\">{{getErrorMessage(name)}}</mat-error>\n                  </mat-form-field>\n                  \n                  <mat-form-field class=\"input-full-width\" hintLabel=\"Max 300 characters\">\n                    <textarea #description matInput placeholder=\"Describe the project\" formControlName=\"description\" maxlength=\"300\" required></textarea>\n                    <mat-hint align=\"end\">{{description.value?.length || 0}}/300</mat-hint>\n                    <mat-error *ngIf=\"newProjectForm.controls.description.invalid\">{{getErrorMessage(description)}}</mat-error>\n                  </mat-form-field>\n          \n                  <table class=\"input-full-width\" cellspacing=\"10\">\n                    <tr>\n                      <td><mat-form-field class=\"input-full-width\" hintLabel=\"Click on the map and drag marker\">\n                          <input type=\"number\" matInput placeholder=\"Latitude\"  formControlName=\"latitude\" required>\n                      </mat-form-field></td>\n                      <td><mat-form-field class=\"input-full-width\">\n                        <input type=\"number\" matInput placeholder=\"Longitude\"  formControlName=\"longitude\" required>\n                      </mat-form-field></td>\n                    </tr>\n                  </table>\n          \n                  <table class=\"input-full-width\" cellspacing=\"20\">\n                    <tr>\n                      <td><mat-form-field class=\"input-full-width\" hintLabel=\"Pick a date\">\n                          <input matInput [matDatepicker]=\"startpicker\" placeholder=\"When did the project start?\" formControlName=\"start_date\">\n                          <mat-datepicker-toggle matSuffix [for]=\"startpicker\">\n                          </mat-datepicker-toggle>\n                          <mat-datepicker #startpicker></mat-datepicker>\n                        </mat-form-field>\n                      </td>\n                      <td><mat-form-field class=\"input-full-width\" hintLabel=\"Pick a date\">\n                          <input matInput [matDatepicker]=\"endpicker\" placeholder=\"When did the project end?\" formControlName=\"end_date\">\n                          <mat-datepicker-toggle matSuffix [for]=\"endpicker\">\n                          </mat-datepicker-toggle>\n                          <mat-datepicker #endpicker></mat-datepicker>\n                        </mat-form-field>\n                      </td>\n                    </tr>\n                  </table>\n\n                  <input #imageFile type=\"file\" multiple (change)=\"onFilesAdded($event.target.files)\" style=\"display: none\">\n                  <!-- <button mat-stroked-button (click)=\"openDialog()\" color=\"primary\">test dialog</button> -->\n                  <button class=\"right\" mat-raised-button color=\"primary\" type=\"submit\" [disabled]=\"newProjectForm.invalid || newProjectForm.pristine\">Create project</button>\n          \n              </form>\n              <button mat-stroked-button (click)=\"imageFile.click()\">Add images</button><cite *ngIf=\"filesLoaded\"> {{file_count}} image(s) loaded</cite>\n\n            </mat-card-content>\n            <mat-card-actions align=\"end\">\n              \n            </mat-card-actions>\n          </mat-card>\n        </div>\n        <div class=\"col-6 col-md-4\">\n            <mat-card class=\"upload-map\">\n                <mat-form-field class=\"input-full-width\">\n                    <input matInput placeholder=\"Pan the map here\" [(ngModel)]=\"map_center\" name=\"latitude\">\n                </mat-form-field>\n                <ngui-map center={{map_center}} zoom=\"6\" (click)=\"onMapClick($event)\">\n                    <marker [position]=\"marker_position\" draggable=\"true\" #markerRef (dragend)=\"dragged($event)\"></marker>\n                </ngui-map>\n            </mat-card>\n        </div>\n      </div>\n</div> \n"
 
 /***/ }),
 
@@ -968,7 +1146,7 @@ var AddProjectComponent = /** @class */ (function () {
         this.cd = cd;
         this.user_name = 'Jeffo';
         this.marker_position = [0, 0];
-        this.map_center = 'Lagos, Nigeria';
+        this.map_center = 'Nigeria';
         this.status = { project_status: null };
         // State properties
         this.filesLoaded = false;
@@ -1017,37 +1195,6 @@ var AddProjectComponent = /** @class */ (function () {
         payload.append('images', '');
         return payload;
     };
-    /* private handleProgress(event) {
-      // create a new progress-subject for every file
-      const progress = new Subject<number>();
-      this.uploading = true;
-  
-      if (event.type === HttpEventType.DownloadProgress) {
-        this.uploading = true;
-        this.uploadProgress  = Math.round(100 * event.loaded / event.total);
-        progress.next(this.uploadProgress);
-      }
-  
-      if (event.type === HttpEventType.UploadProgress) {
-        this.uploading = true;
-        this.uploadProgress  = Math.round(100 * event.loaded / event.total);
-        progress.next(this.uploadProgress);
-        console.log('Uploading');
-      }
-  
-      if (event.type === HttpEventType.Response) {
-        // console.log(event.body);
-        this.uploadSuccessful = true;
-        this.serverResponse = event.body;
-        progress.complete();
-        console.log('upload complete');
-      }
-  
-      // Save every progress-observable in a map of all observables
-      return this.status.project_status = {
-        progress: progress.asObservable()
-      };
-    } */
     AddProjectComponent.prototype.addFiles = function () {
     };
     AddProjectComponent.prototype.onFilesAdded = function (fileList) {
@@ -1285,7 +1432,7 @@ module.exports = "<!-- <h1 mat-dialog-title>Hi {{data.name}}</h1>\r\n<div mat-di
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".action-area {\r\n    padding: 20px;\r\n    float: right;\r\n}\r\n\r\n.action-area button {\r\n    margin-left: 20px;\r\n}"
+module.exports = ".action-area {\r\n    padding: 20px;\r\n    float: right;\r\n}\r\n\r\n.action-area button {\r\n    margin-left: 15px;\r\n}\r\n\r\n.heading {\r\n    text-align:center;\r\n    padding-top: 15px;\r\n}"
 
 /***/ }),
 
@@ -1296,7 +1443,7 @@ module.exports = ".action-area {\r\n    padding: 20px;\r\n    float: right;\r\n}
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h4>\n    Hi {{ user?.name }}!\n  </h4>\n  <h2>\n    Explore {{ title }}!\n  </h2>\n</div>\n\n\n<div class=\"action-area justify-content-end\">\n  <!-- <mat-slide-toggle \n    [color]=\"color\" \n    [disabled]='switch_disabled'\n    [checked]=\"switch_checked\"\n    [labelPosition]=\"switch_label_position\" >\n      Switch views\n  </mat-slide-toggle> -->\n  <button *ngIf=\"!isAuthenticated\" mat-stroked-button color=\"primary\" (click)=\"openLoginModal()\">Admin</button>\n  <div *ngIf=\"isAuthenticated\">\n    <button mat-raised-button color=\"primary\" (click)=\"goToUploadForm()\">Add a project</button>\n    <button mat-stroked-button color=\"primary\" (click)=\"onLogout()\">Logout</button>\n  </div>\n</div>\n\n<router-outlet class=\"container\"></router-outlet>\n\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div class=\"heading\">\n  <h2>\n    Explore {{ title }}!\n  </h2>\n</div>\n\n\n<div class=\"action-area justify-content-end\">\n\n  <button *ngIf=\"!isAuthenticated\" mat-stroked-button color=\"primary\" (click)=\"openLoginModal()\">Admin</button>\n  <div *ngIf=\"isAuthenticated\">\n    <button mat-stroked-button color=\"primary\" (click)=\"openRegisterModal()\">Add a user</button>\n    <button mat-stroked-button color=\"primary\" (click)=\"onLogout()\">Logout</button>\n  </div>\n</div>\n\n<router-outlet class=\"container\"></router-outlet>\n\n"
 
 /***/ }),
 
@@ -1316,6 +1463,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _login_login_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./login/login.component */ "./src/app/login/login.component.ts");
 /* harmony import */ var _services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./_services */ "./src/app/_services/index.ts");
+/* harmony import */ var _Register_Register_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Register/Register.component */ "./src/app/Register/Register.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1331,9 +1479,11 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AppComponent = /** @class */ (function () {
-    function AppComponent(router, dialog, route, authenticationService, http) {
+    function AppComponent(router, userService, dialog, route, authenticationService, http) {
         this.router = router;
+        this.userService = userService;
         this.dialog = dialog;
         this.route = route;
         this.authenticationService = authenticationService;
@@ -1345,10 +1495,6 @@ var AppComponent = /** @class */ (function () {
         this.isAuthenticated = false;
     }
     AppComponent.prototype.ngOnInit = function () {
-        /* this.http.get<User>('http://localhost:8200/auth').subscribe(data => {
-          console.log(data);
-          this.user = data;
-        }); */
         var current_user = JSON.parse(localStorage.getItem('currentUser'));
         if (current_user) {
             // logged in so return true
@@ -1360,6 +1506,21 @@ var AppComponent = /** @class */ (function () {
     };
     AppComponent.prototype.goToUploadForm = function () {
         this.router.navigate(['add-a-project']);
+    };
+    AppComponent.prototype.openRegisterModal = function () {
+        var dialogRef = this.dialog.open(_Register_Register_component__WEBPACK_IMPORTED_MODULE_6__["RegisterComponent"], {
+            width: '50%',
+            /// height: '50%',
+            disableClose: true,
+            data: { user: this.user }
+        });
+        dialogRef.afterClosed().subscribe(function (result) {
+            console.log('The login dialog was closed', result);
+            if (result) {
+                console.log(result);
+                // this.isAuthenticated = true;
+            }
+        });
     };
     AppComponent.prototype.openLoginModal = function () {
         var _this = this;
@@ -1374,6 +1535,7 @@ var AppComponent = /** @class */ (function () {
             if (result) {
                 _this.user = result;
                 _this.isAuthenticated = true;
+                location.reload();
             }
         });
     };
@@ -1388,7 +1550,7 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _services__WEBPACK_IMPORTED_MODULE_5__["UserService"],
             _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
             _services__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
@@ -1450,6 +1612,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_images_add_images_component__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./add-images/add-images.component */ "./src/app/add-images/add-images.component.ts");
 /* harmony import */ var _confirm_delete_confirm_delete_component__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./confirm-delete/confirm-delete.component */ "./src/app/confirm-delete/confirm-delete.component.ts");
 /* harmony import */ var _confirm_delete_DeleteSuccess_DeleteSuccess_component__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./confirm-delete/DeleteSuccess/DeleteSuccess.component */ "./src/app/confirm-delete/DeleteSuccess/DeleteSuccess.component.ts");
+/* harmony import */ var _yellowspot_ng_truncate__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! @yellowspot/ng-truncate */ "./node_modules/@yellowspot/ng-truncate/dist/index.js");
+/* harmony import */ var _Register_Register_component__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./Register/Register.component */ "./src/app/Register/Register.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1496,21 +1660,29 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
-                _app_component__WEBPACK_IMPORTED_MODULE_24__["AppComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_33__["LoginComponent"],
-                _map_map_component__WEBPACK_IMPORTED_MODULE_27__["MapComponent"], _add_images_add_images_component__WEBPACK_IMPORTED_MODULE_37__["AddImagesComponent"],
-                _gallery_gallery_component__WEBPACK_IMPORTED_MODULE_28__["GalleryComponent"], _confirm_delete_confirm_delete_component__WEBPACK_IMPORTED_MODULE_38__["ConfirmDeleteComponent"],
+                _app_component__WEBPACK_IMPORTED_MODULE_24__["AppComponent"],
+                _login_login_component__WEBPACK_IMPORTED_MODULE_33__["LoginComponent"],
+                _map_map_component__WEBPACK_IMPORTED_MODULE_27__["MapComponent"],
+                _add_images_add_images_component__WEBPACK_IMPORTED_MODULE_37__["AddImagesComponent"],
+                _gallery_gallery_component__WEBPACK_IMPORTED_MODULE_28__["GalleryComponent"],
+                _confirm_delete_confirm_delete_component__WEBPACK_IMPORTED_MODULE_38__["ConfirmDeleteComponent"],
                 _project_folders_project_folders_component__WEBPACK_IMPORTED_MODULE_29__["ProjectFoldersComponent"],
-                _addProject_addProject_component__WEBPACK_IMPORTED_MODULE_31__["AddProjectComponent"], _confirm_delete_DeleteSuccess_DeleteSuccess_component__WEBPACK_IMPORTED_MODULE_39__["DeleteSuccessComponent"],
-                _addProject_addProject_component__WEBPACK_IMPORTED_MODULE_31__["UploadImageDialogComponent"]
+                _addProject_addProject_component__WEBPACK_IMPORTED_MODULE_31__["AddProjectComponent"],
+                _confirm_delete_DeleteSuccess_DeleteSuccess_component__WEBPACK_IMPORTED_MODULE_39__["DeleteSuccessComponent"],
+                _addProject_addProject_component__WEBPACK_IMPORTED_MODULE_31__["UploadImageDialogComponent"],
+                _Register_Register_component__WEBPACK_IMPORTED_MODULE_41__["RegisterComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+                _yellowspot_ng_truncate__WEBPACK_IMPORTED_MODULE_40__["TruncateModule"],
                 _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_1__["BrowserAnimationsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"],
                 _routing_module__WEBPACK_IMPORTED_MODULE_5__["RoutingModule"],
@@ -1519,24 +1691,20 @@ var AppModule = /** @class */ (function () {
                 _ngx_gallery_core__WEBPACK_IMPORTED_MODULE_21__["GalleryModule"].forRoot(),
                 _ngx_gallery_lightbox__WEBPACK_IMPORTED_MODULE_22__["LightboxModule"].forRoot(),
                 _ngx_gallery_gallerize__WEBPACK_IMPORTED_MODULE_23__["GallerizeModule"],
-                _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_7__["MatGridListModule"],
-                _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_8__["MatSlideToggleModule"],
-                _angular_material_button__WEBPACK_IMPORTED_MODULE_9__["MatButtonModule"],
-                _angular_material_card__WEBPACK_IMPORTED_MODULE_10__["MatCardModule"],
-                _angular_material_form_field__WEBPACK_IMPORTED_MODULE_11__["MatFormFieldModule"],
-                _angular_material_icon__WEBPACK_IMPORTED_MODULE_12__["MatIconModule"],
-                _angular_material_select__WEBPACK_IMPORTED_MODULE_14__["MatSelectModule"],
-                _angular_material_input__WEBPACK_IMPORTED_MODULE_13__["MatInputModule"],
-                _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_15__["MatDatepickerModule"], _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_20__["MatSnackBarModule"],
+                _angular_material_grid_list__WEBPACK_IMPORTED_MODULE_7__["MatGridListModule"], _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_8__["MatSlideToggleModule"],
+                _angular_material_button__WEBPACK_IMPORTED_MODULE_9__["MatButtonModule"], _angular_material_card__WEBPACK_IMPORTED_MODULE_10__["MatCardModule"], _angular_material_form_field__WEBPACK_IMPORTED_MODULE_11__["MatFormFieldModule"],
+                _angular_material_icon__WEBPACK_IMPORTED_MODULE_12__["MatIconModule"], _angular_material_select__WEBPACK_IMPORTED_MODULE_14__["MatSelectModule"],
+                _angular_material_input__WEBPACK_IMPORTED_MODULE_13__["MatInputModule"], _angular_material_datepicker__WEBPACK_IMPORTED_MODULE_15__["MatDatepickerModule"], _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_20__["MatSnackBarModule"],
                 _angular_material_core__WEBPACK_IMPORTED_MODULE_16__["MatNativeDateModule"], _angular_material_progress_spinner__WEBPACK_IMPORTED_MODULE_19__["MatProgressSpinnerModule"],
                 _angular_material_dialog__WEBPACK_IMPORTED_MODULE_17__["MatDialogModule"], _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatListModule"], _angular_material__WEBPACK_IMPORTED_MODULE_18__["MatProgressBarModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"].forRoot([]),
+                _angular_router__WEBPACK_IMPORTED_MODULE_6__["RouterModule"].forRoot([], { useHash: true }),
                 _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_26__["NgbModule"].forRoot(),
                 _ngui_map__WEBPACK_IMPORTED_MODULE_25__["NguiMapModule"].forRoot({ apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDZeWQdbJXb-6PMmRBvfxHKdj6MJQs4jDY' })
             ],
             entryComponents: [
                 _addProject_addProject_component__WEBPACK_IMPORTED_MODULE_31__["AddProjectComponent"], _add_images_add_images_component__WEBPACK_IMPORTED_MODULE_37__["AddImagesComponent"], _confirm_delete_DeleteSuccess_DeleteSuccess_component__WEBPACK_IMPORTED_MODULE_39__["DeleteSuccessComponent"],
-                _addProject_addProject_component__WEBPACK_IMPORTED_MODULE_31__["UploadImageDialogComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_33__["LoginComponent"], _confirm_delete_confirm_delete_component__WEBPACK_IMPORTED_MODULE_38__["ConfirmDeleteComponent"]
+                _addProject_addProject_component__WEBPACK_IMPORTED_MODULE_31__["UploadImageDialogComponent"], _login_login_component__WEBPACK_IMPORTED_MODULE_33__["LoginComponent"], _confirm_delete_confirm_delete_component__WEBPACK_IMPORTED_MODULE_38__["ConfirmDeleteComponent"],
+                _Register_Register_component__WEBPACK_IMPORTED_MODULE_41__["RegisterComponent"]
             ],
             providers: [
                 { provide: _angular_common__WEBPACK_IMPORTED_MODULE_30__["APP_BASE_HREF"], useValue: '/' },
@@ -1624,7 +1792,7 @@ var DeleteSuccessComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 mat-dialog-title class=\"center-text\">Are you sure?</h1>\n\n<div mat-dialog-content class=\"main-body\">\n  <div *ngIf=\"deleted\" class=\"d-content\">\n     <img src=\"./images/like.png\" alt=\"Upload complete\" class=\"responsive center-image\">\n  </div>\n  \n  <div class=\"center\" *ngIf=\"deleting\">\n      <mat-spinner class=\"center\"></mat-spinner>\n  </div>\n\n  <div *ngIf=\"deleteFailed\" class=\"center\">\n      <img src=\"./images/cancel.png\" alt=\"Upload failed\" class=\"center-image failed\">\n   </div>\n</div>\n\n<div class=\"right\" mat-dialog-actions>\n  <button mat-raised-button color=\"primary\" (click)=\"confirmDelete()\">Yes</button>\n  <button mat-raised-button color='warn' [mat-dialog-close]=\"deleted\" cdkFocusInitial>Back</button>\n</div>\n\n"
+module.exports = "<h2 mat-dialog-title class=\"center-text\">Are you sure?</h2>\n<p>This action will delete the whole album</p>\n\n<div mat-dialog-content class=\"main-body\">\n  <div *ngIf=\"deleted\" class=\"d-content\">\n     <img src=\"./images/like.png\" alt=\"Upload complete\" class=\"responsive center-image\">\n  </div>\n  \n  <div class=\"center\" *ngIf=\"deleting\">\n      <mat-spinner class=\"center\"></mat-spinner>\n  </div>\n\n  <div *ngIf=\"deleteFailed\" class=\"center\">\n      <img src=\"./images/cancel.png\" alt=\"Upload failed\" class=\"center-image failed\">\n   </div>\n</div>\n\n<div class=\"right\" mat-dialog-actions>\n  <button mat-raised-button color=\"primary\" (click)=\"confirmDelete()\">Yes</button>\n  <button mat-raised-button color='warn' [mat-dialog-close]=\"deleted\" cdkFocusInitial>Cancel</button>\n</div>\n\n"
 
 /***/ }),
 
@@ -1635,7 +1803,7 @@ module.exports = "<h1 mat-dialog-title class=\"center-text\">Are you sure?</h1>\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".center-text {\n  text-align: center; }\n"
 
 /***/ }),
 
@@ -1733,7 +1901,7 @@ var api_base = 'http://fisas-gallery.herokuapp.com/api/';
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n.project-image {\r\n\twidth:100%;\r\n\theight: auto;\r\n}\r\n\r\n.image-name {\r\n\ttext-transform: capitalize;\r\n}"
+module.exports = "\r\n.project-image {\r\n\twidth:100%;\r\n\theight: auto;\r\n}\r\n\r\n.image-name {\r\n\ttext-transform: capitalize;\r\n}\r\n\r\n.display-1 {\r\n\tfont-size: 5rem;\r\n\tline-height: 0.2;\r\n}\r\n\r\n#back-to-map {\r\n\tmargin-left: 15px;\r\n}\r\n\r\n#gallery {\r\n\tmargin: 6px;\r\n}"
 
 /***/ }),
 
@@ -1744,7 +1912,7 @@ module.exports = "\r\n.project-image {\r\n\twidth:100%;\r\n\theight: auto;\r\n}\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n\r\n<!-- <div class=\"container column\" gallerize>\r\n        <img *ngFor=\"let image of images\" src={{image.imageUrl}}>\r\n</div> -->\r\n\r\n<!-- <mat-grid-list cols=\"3\" rowHeight=\"300px\" gallerize>\r\n        <mat-grid-tile\r\n            *ngFor=\"let image of images\"\r\n            [colspan]=\"image.cols\"\r\n            [rowspan]=\"image.rows\"\r\n            [style.background]=\"image.color\">\r\n          {{image.name}}\r\n          <img src={{image.imageUrl}}>\r\n        </mat-grid-tile>\r\n</mat-grid-list> -->\r\n<p><button mat-raised-button color=\"warning\" (click)=\"backToMap()\">Back to map</button></p>\r\n<div class=\"jumbotron\">\r\n    <h1 class=\"display-1\">Gallery</h1>\r\n</div>\r\n\r\n  <div *ngIf=\"project$ | async as project\">\r\n    <div>\r\n      <h3 class=\"text-center\">{{ project.data.name }}</h3>\r\n      <p class=\"text-center lead\">{{project.data.description}}</p> <br/>\r\n    </div>\r\n    <mat-grid-list cols=\"3\" rowHeight=\"2:1\" gallerize gutterSize = '5px'>\r\n        <mat-grid-tile\r\n            *ngFor=\"let image of project.data.photos\"\r\n            [style.background]=\"blue\">\r\n          <img src ='./images/projects/{{image.project_id}}/{{image.image}}' class=\"project-image\" layout-fill>\r\n          <mat-grid-tile-footer> \r\n                <span class=\"image-name\">{{image.description}}</span>\r\n          </mat-grid-tile-footer>\r\n        </mat-grid-tile>\r\n    </mat-grid-list>\r\n  </div>\r\n\r\n<!-- <mat-grid-list cols=\"3\" rowHeight=\"2:1\" gallerize gutterSize = '5px'>\r\n        <mat-grid-tile\r\n            *ngFor=\"let image of images\"\r\n            [style.background]=\"blue\">\r\n          <img src={{image.imageUrl}} class=\"project-image\" layout-fill>\r\n          <mat-grid-tile-footer> \r\n                <span class=\"image-name\">{{image.name}}</span>\r\n          </mat-grid-tile-footer>\r\n        </mat-grid-tile>\r\n</mat-grid-list> -->"
+module.exports = "\r\n\r\n\r\n<p><button mat-raised-button color=\"warning\" (click)=\"backToMap()\" id=\"back-to-map\">Back to map</button></p>\r\n<div class=\"jumbotron\">\r\n    <p class=\"display-1\">Gallery</p>\r\n</div>\r\n\r\n  <div *ngIf=\"project$ | async as project\">\r\n    <div>\r\n      <h3 class=\"text-center\">{{ project.data.name }}</h3>\r\n      <p class=\"text-center lead\">{{project.data.description}}</p> <br/>\r\n    </div>\r\n    <mat-grid-list cols=\"3\" rowHeight=\"2:1\" gallerize gutterSize = '5px' id=\"gallery\">\r\n        <mat-grid-tile\r\n            *ngFor=\"let image of project.data.photos\"\r\n            [style.background]=\"blue\">\r\n          <img src ='./images/projects/{{image.project_id}}/{{image.image}}' class=\"project-image\" layout-fill>\r\n          <mat-grid-tile-footer> \r\n                <span class=\"image-name\">{{image.description}}</span>\r\n          </mat-grid-tile-footer>\r\n        </mat-grid-tile>\r\n    </mat-grid-list>\r\n  </div>\r\n"
 
 /***/ }),
 
@@ -2137,6 +2305,7 @@ var LoginComponent = /** @class */ (function () {
             _this.user = data.user;
             _this.loading = false;
             _this.isAuthenticated = true;
+            setTimeout(_this.dialogRef.close(_this.user), 1000);
         }, function (error) {
             _this.error = error;
             _this.loading = false;
@@ -2169,7 +2338,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".ze-map {\r\n    height: 500px;\r\n}\r\n\r\n.info-thumbnail {\r\n    width:100%;\r\n\theight: 200px;\r\n}\r\n\r\n.info-button {\r\n    margin-right: 5px;\r\n}\r\n\r\nsection.content {\r\n    padding-top: 15px;\r\n}\r\n"
+module.exports = ".ze-map {\r\n    height: 700px;\r\n    padding: 5px;\r\n}\r\n\r\n#gal-preview .carousel-inner {\r\n    height: 250px;\r\n}\r\n\r\n.info-thumbnail {\r\n    width:100%;\r\n\theight: 300px;\r\n}\r\n\r\n.info-button {\r\n    margin-right: 5px;\r\n}\r\n\r\nsection.content {\r\n    padding-left: 10px;\r\n}\r\n\r\n.content p {\r\n    padding-top: 10px;\r\n}\r\n\r\n.project-title {\r\n    font-family: 'Open Sans Condensed', sans-serif;\r\n    font-size: 20px;\r\n    font-weight: 400;\r\n    padding: 7px;\r\n    background-color: #099efe;\r\n    color: white;\r\n    margin: 1px;\r\n    border-radius: 2px 2px 0 0; /* In accordance with the rounding of the default infowindow corners. */\r\n}\r\n\r\n.ze-map .google-map div.gm-style-iw {\r\n    width: 350px !important;\r\n    top: 0 !important;\r\n    left: 0 !important;\r\n    border-radius: 2px 2px 0 0;\r\n}\r\n\r\n.phoneytext {\r\n    text-shadow: 0 -1px 0 #000;\r\n    color: #fff;\r\n    font-family: Helvetica Neue, Helvetica, arial;\r\n    font-size: 18px;\r\n    height: 125px;\r\n    padding: 4px 45px 4px 15px;\r\n    font-weight: bold;\r\n}\r\n\r\n#fake-bubble {\r\n    display: none;\r\n    height: 0px;\r\n}\r\n\r\n#new-project {\r\n    margin-left: 15px;\r\n    float: left;\r\n}\r\n\r\n.map-info {\r\n    float: left;\r\n    padding-top: 5px;\r\n    padding-left: 15px;\r\n}\r\n\r\n.input-full-width {\r\n    width: 100%;\r\n    padding: 20px;\r\n}\r\n"
 
 /***/ }),
 
@@ -2180,7 +2349,7 @@ module.exports = ".ze-map {\r\n    height: 500px;\r\n}\r\n\r\n.info-thumbnail {\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>Click on a project to see pictures of our work: </p>\n<ngui-map center=\"Lagos, Nigeria\" zoom=\"15\" class=\"ze-map\">\n  <marker *ngFor=\"let project of projects\" \n          [position]=\"project.position\" \n          [title] = \"project.name\"\n          [label] = \"project.name\"\n          draggable=\"false\" \n          (click)=\"clicked($event, project.description, project.id, project.photos)\" \n          (initialized$)=\"onMarkerInit($event, project.description)\">\n    <info-window id =\"iw\" [maxWidth]=\"300\">\n      <ngb-carousel *ngIf=\"images\">\n        <ng-template ngbSlide>\n          <img [src]=\"marker.images[0]\" alt=\"Random first slide\" class=\"info-thumbnail\">\n        </ng-template>\n        <ng-template ngbSlide>\n          <img [src]=\"marker.images[1]\" alt=\"Random second slide\" class=\"info-thumbnail\">\n        </ng-template>\n        <ng-template ngbSlide>\n          <img [src]=\"marker.images[2]\" alt=\"Random third slide\" class=\"info-thumbnail\">\n        </ng-template>\n      </ngb-carousel>\n      <section class=\"content\">\n        <p>{{marker.description}}</p>\n      </section>\n\n      <button class='info-button' mat-stroked-button color=\"primary\" (click)=\"hideMarkerInfo(marker.id)\">Gallery</button>\n      <span *ngIf=\"isAuthenticated\">\n        <button class='info-button' mat-stroked-button color=\"primary\" (click)=\"openDialog()\">Add images</button>\n        <button class='info-button' mat-stroked-button color=\"accent\" (click)=\"openDeleteDialog(marker.id)\">Delete</button>  \n      </span>\n    </info-window>\n  </marker>\n\n</ngui-map>\n"
+module.exports = "\n<div class=\"action-info\">\n  <button *ngIf=\"isAuthenticated\" id=\"new-project\" mat-raised-button color=\"primary\" (click)=\"goToUploadForm()\" [disabled]=\"\">Add a project</button>\n  <p class=\"map-info\">Click on a Marker to see pictures of our work: </p>\n</div>\n<mat-form-field class=\"input-full-width\">\n    <input matInput placeholder=\"Pan the map here\" [(ngModel)]=\"map_center\" name=\"location\">\n</mat-form-field>\n<ngui-map center={{map_center}} zoom=\"7\" class=\"ze-map\" (mapReady$)=\"onMapReady($event)\">\n  <marker *ngFor=\"let project of projects\" \n          [position]=\"project.position\" \n          [title] = \"project.name\"\n          [label] = \"project.name\"\n          draggable=\"false\" \n          (click)=\"clicked($event, project.description, project.id, project.photos, project.name)\" \n          (initialized$)=\"onMarkerInit($event, project.description)\">\n\n    <section id=\"fake-bubble\">\n      <div id =\"bubble-content\" >\n        <section class=\"project-title\">{{marker.name}}</section>\n        <ngb-carousel *ngIf=\"images\" id=\"gal-preview\">\n          <ng-template ngbSlide>\n            <img [src]=\"marker.images[0]\" alt=\"Random first slide\" class=\"info-thumbnail\">\n          </ng-template>\n          <ng-template ngbSlide>\n            <img [src]=\"marker.images[1]\" alt=\"Random second slide\" class=\"info-thumbnail\">\n          </ng-template>\n          <ng-template ngbSlide>\n            <img [src]=\"marker.images[2]\" alt=\"Random third slide\" class=\"info-thumbnail\">\n          </ng-template>\n        </ngb-carousel>\n        <section class=\"content\">\n          <p>{{marker.description | truncate : 100}}</p>\n          <button class='info-button' mat-stroked-button color=\"primary\" (click)=\"hideMarkerInfo(marker.id)\">Open</button>\n          <span *ngIf=\"isAuthenticated\">\n            <button class='info-button' mat-stroked-button color=\"primary\" (click)=\"openDialog()\">Add images to album</button>\n            <button class='info-button' mat-stroked-button color=\"accent\" (click)=\"openDeleteDialog(marker.id)\">Delete</button>  \n          </span>\n        </section>\n      </div>\n    </section> \n  </marker>\n  <ng-content></ng-content>\n  \n</ngui-map>\n\n"
 
 /***/ }),
 
@@ -2203,6 +2372,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _add_images_add_images_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../add-images/add-images.component */ "./src/app/add-images/add-images.component.ts");
 /* harmony import */ var _confirm_delete_confirm_delete_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../confirm-delete/confirm-delete.component */ "./src/app/confirm-delete/confirm-delete.component.ts");
 /* harmony import */ var _confirm_delete_DeleteSuccess_DeleteSuccess_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../confirm-delete/DeleteSuccess/DeleteSuccess.component */ "./src/app/confirm-delete/DeleteSuccess/DeleteSuccess.component.ts");
+/* harmony import */ var _services_user_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../_services/user.service */ "./src/app/_services/user.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2221,29 +2391,45 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var MapComponent = /** @class */ (function () {
-    function MapComponent(_http, _galleryService, router, dialog, snackBar) {
+    function MapComponent(_http, _galleryService, userService, router, dialog, snackBar) {
         this._http = _http;
         this._galleryService = _galleryService;
+        this.userService = userService;
         this.router = router;
         this.dialog = dialog;
         this.snackBar = snackBar;
+        this.map_center = 'Nigeria';
         this.marker = {
+            id: null,
+            name: null,
+            description: null,
             display: false,
             lat: null,
             lng: null,
-            description: null,
-            id: null,
             images: null
         };
-        this.positions = this.getRandomMarkers();
     }
     MapComponent.prototype.ngOnInit = function () {
         this.checkAuth();
-        /* this._http.get('https://picsum.photos/list')
-            .pipe(map((images: Array<{id: number}>) => this._randomImageUrls(images)))
-            .subscribe(images => this.images = images); */
         this.getallProjects();
+        this.infoBubble = new InfoBubble({
+            maxWidth: 390,
+            padding: 0,
+            disableAutoPan: false
+        });
+        console.log(this.infoBubble);
+    };
+    MapComponent.prototype.ngAfterContentInit = function () {
+    };
+    MapComponent.prototype.ngAfterViewInit = function () {
+    };
+    MapComponent.prototype.goToUploadForm = function () {
+        this.router.navigate(['add-a-project']);
+    };
+    MapComponent.prototype.onMapReady = function (theMap) {
+        console.log('map: ', theMap);
     };
     MapComponent.prototype._randomImageUrls = function (images) {
         return [1, 2, 3].map(function () {
@@ -2252,13 +2438,13 @@ var MapComponent = /** @class */ (function () {
         });
     };
     MapComponent.prototype._ImageUrls = function (images) {
-        return [1, 2, 3].map(function () {
-            var imageObj = images[Math.floor(Math.random() * images.length)];
-            var image = imageObj.image;
-            var project_id = imageObj.project_id;
-            // return `https://picsum.photos/900/500?image=${randomId}`;
+        function getUrls(imageObject) {
+            var image = imageObject.image;
+            var project_id = imageObject.project_id;
             return "./images/projects/" + project_id + "/" + image;
-        });
+        }
+        var sliced_images = images.slice(0, 3);
+        return sliced_images.map(getUrls);
     };
     MapComponent.prototype.checkAuth = function () {
         var current_user = JSON.parse(localStorage.getItem('currentUser'));
@@ -2273,28 +2459,30 @@ var MapComponent = /** @class */ (function () {
         var _this = this;
         this._galleryService.getProjects().subscribe(function (data) {
             _this.projects = data.data;
-            console.log(_this.projects);
         });
     };
-    MapComponent.prototype.getRandomMarkers = function () {
-        var randomLat, randomLng;
-        var positions = [];
-        for (var i = 0; i < 10; i++) {
-            randomLat = Math.random() * (43.7399 - 43.7300) + 43.7300;
-            randomLng = Math.random() * (-79.7600 - -79.7699) + -79.7699;
-            positions.push([randomLat, randomLng]);
-        }
-        return positions;
-    };
-    MapComponent.prototype.clicked = function (_a, description, id, imageArray) {
+    MapComponent.prototype.clicked = function (_a, description, id, imageArray, name) {
         var marker = _a.target;
         this.checkAuth();
         this.marker.lat = marker.getPosition().lat();
         this.marker.lng = marker.getPosition().lng();
         this.marker.description = description;
         this.marker.id = id;
+        this.marker.name = name;
         this.marker.images = this.images = this._ImageUrls(imageArray);
-        marker.nguiMapComponent.openInfoWindow('iw', marker);
+        var bubble = document.getElementById('bubble-content');
+        console.log(bubble);
+        this.infoBubble.setContent(bubble);
+        // marker.nguiMapComponent.openInfoWindow('iw', marker);
+        // this.infoWindow.open(marker.map, marker);
+        if (!this.infoBubble.isOpen()) {
+            this.infoBubble.open(marker.map, marker);
+        }
+        else {
+            this.infoBubble.close();
+            this.infoBubble.open(marker.map, marker);
+        }
+        // this.infoBubble.open(marker);
     };
     MapComponent.prototype.onMarkerInit = function (marker) {
         // console.log('marker', marker);
@@ -2309,8 +2497,7 @@ var MapComponent = /** @class */ (function () {
     MapComponent.prototype.openDeleteDialog = function (id) {
         var _this = this;
         var dialogRef = this.dialog.open(_confirm_delete_confirm_delete_component__WEBPACK_IMPORTED_MODULE_7__["ConfirmDeleteComponent"], {
-            width: '50%',
-            // height: '50%',
+            width: '25%',
             disableClose: true,
             data: {
                 project_id: this.marker.id.toString()
@@ -2328,7 +2515,7 @@ var MapComponent = /** @class */ (function () {
     };
     MapComponent.prototype.openDialog = function () {
         var dialogRef = this.dialog.open(_add_images_add_images_component__WEBPACK_IMPORTED_MODULE_6__["AddImagesComponent"], {
-            width: '50%',
+            width: '25%',
             // height: '50%',
             disableClose: true,
             data: {
@@ -2352,7 +2539,7 @@ var MapComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./map.component.html */ "./src/app/map/map.component.html"),
             styles: [__webpack_require__(/*! ./map.component.css */ "./src/app/map/map.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _services__WEBPACK_IMPORTED_MODULE_3__["GalleryService"],
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"], _services__WEBPACK_IMPORTED_MODULE_3__["GalleryService"], _services_user_service__WEBPACK_IMPORTED_MODULE_9__["UserService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatDialog"], _angular_material__WEBPACK_IMPORTED_MODULE_5__["MatSnackBar"]])
     ], MapComponent);
     return MapComponent;
