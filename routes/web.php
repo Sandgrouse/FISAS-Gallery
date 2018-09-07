@@ -33,5 +33,5 @@ Route::get('/auth', function(){
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::redirect('/map', '/app', 301);
-Route::redirect('/add-a-project', '/app', 301);
+// Route::redirect('/map', '/app', 301);
+// Route::redirect('/add-a-project', '/app', 301);

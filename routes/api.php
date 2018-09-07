@@ -33,19 +33,3 @@ Route::post('addimage', array('as' => 'add_image','uses' => 'ImageController@sto
 Route::apiResource('projects', 'ProjectsController');
 // Route::apiResource('/project/{project}', 'ProjectsController');
 
-// Route::get('/create-project', array('as' => 'create_project_form','uses' => 'ProjectsController@getForm'));
-
-// Route::post('/create-project', array('as' => 'create_project','uses' => 'ProjectsController@postCreate'));
-
-// Route::get('/delete-project/{id}', array('as' => 'delete_project','uses' => 'ProjectsController@getDelete'));
-
-// Route::get('/project/{id}', array('as' => 'show_project','uses' => 'ProjectsController@getProject'));
-
-
-
-
-// Route::post('/addimage', array('as' => 'add_image_to_project','uses' => 'ImagesController@postAdd'));
-
-// Route::get('/deleteimage/{id}', array('as' => 'delete_image','uses' => 'ImagesController@getDelete'));
-
-// Route::post('/moveimage', array('as' => 'move_image', 'uses' => 'ImagesController@postMove'));
