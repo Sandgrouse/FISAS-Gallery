@@ -1,8 +1,5 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h4>
-    Hi {{ user?.name }}!
-  </h4>
+<div class="heading">
   <h2>
     Explore {{ title }}!
   </h2>
@@ -10,16 +7,10 @@
 
 
 <div class="action-area justify-content-end">
-  <!-- <mat-slide-toggle 
-    [color]="color" 
-    [disabled]='switch_disabled'
-    [checked]="switch_checked"
-    [labelPosition]="switch_label_position" >
-      Switch views
-  </mat-slide-toggle> -->
+
   <button *ngIf="!isAuthenticated" mat-stroked-button color="primary" (click)="openLoginModal()">Admin</button>
   <div *ngIf="isAuthenticated">
-    <button mat-raised-button color="primary" (click)="goToUploadForm()">Add a project</button>
+    <button mat-stroked-button color="primary" (click)="openRegisterModal()">Add a user</button>
     <button mat-stroked-button color="primary" (click)="onLogout()">Logout</button>
   </div>
 </div>

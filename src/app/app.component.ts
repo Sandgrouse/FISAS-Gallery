@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService, UserService } from './_services';
+import { RegisterComponent } from './Register/Register.component';
 
 
 
@@ -15,6 +16,7 @@ import { AuthenticationService, UserService } from './_services';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  message: boolean;
   returnUrl: string;
   title = 'FISAS Portfolio';
   user: User;
@@ -26,17 +28,13 @@ export class AppComponent implements OnInit {
 
 
   constructor(
-    private router: Router,
+    private router: Router, private userService: UserService,
     public dialog: MatDialog, private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
     private http: HttpClient
   ) {}
 
   ngOnInit(): void {
-    /* this.http.get<User>('http://localhost:8200/auth').subscribe(data => {
-      console.log(data);
-      this.user = data;
-    }); */
 
     const current_user = JSON.parse(localStorage.getItem('currentUser'));
 
@@ -55,6 +53,23 @@ export class AppComponent implements OnInit {
     this.router.navigate(['add-a-project']);
   }
 
+  openRegisterModal() {
+    const dialogRef = this.dialog.open(RegisterComponent, {
+      width: '50%',
+      /// height: '50%',
+      disableClose: true,
+      data: {user: this.user}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The login dialog was closed', result);
+      if (result) {
+        console.log(result);
+        // this.isAuthenticated = true;
+      }
+
+    });
+  }
   openLoginModal() {
     const dialogRef = this.dialog.open(LoginComponent, {
       width: '50%',
@@ -68,6 +83,7 @@ export class AppComponent implements OnInit {
       if (result) {
         this.user = result;
         this.isAuthenticated = true;
+        location.reload();
       }
 
     });

@@ -4,5 +4,10 @@
 }
 
 .action-area button {
-    margin-left: 20px;
+    margin-left: 15px;
+}
+
+.heading {
+    text-align:center;
+    padding-top: 15px;
 }
