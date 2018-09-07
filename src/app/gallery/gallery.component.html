@@ -1,22 +1,9 @@
 
 
-<!-- <div class="container column" gallerize>
-        <img *ngFor="let image of images" src={{image.imageUrl}}>
-</div> -->
 
-<!-- <mat-grid-list cols="3" rowHeight="300px" gallerize>
-        <mat-grid-tile
-            *ngFor="let image of images"
-            [colspan]="image.cols"
-            [rowspan]="image.rows"
-            [style.background]="image.color">
-          {{image.name}}
-          <img src={{image.imageUrl}}>
-        </mat-grid-tile>
-</mat-grid-list> -->
-<p><button mat-raised-button color="warning" (click)="backToMap()">Back to map</button></p>
+<p><button mat-raised-button color="warning" (click)="backToMap()" id="back-to-map">Back to map</button></p>
 <div class="jumbotron">
-    <h1 class="display-1">Gallery</h1>
+    <p class="display-1">Gallery</p>
 </div>
 
   <div *ngIf="project$ | async as project">
@@ -24,7 +11,7 @@
       <h3 class="text-center">{{ project.data.name }}</h3>
       <p class="text-center lead">{{project.data.description}}</p> <br/>
     </div>
-    <mat-grid-list cols="3" rowHeight="2:1" gallerize gutterSize = '5px'>
+    <mat-grid-list cols="3" rowHeight="2:1" gallerize gutterSize = '5px' id="gallery">
         <mat-grid-tile
             *ngFor="let image of project.data.photos"
             [style.background]="blue">
@@ -35,14 +22,3 @@
         </mat-grid-tile>
     </mat-grid-list>
   </div>
-
-<!-- <mat-grid-list cols="3" rowHeight="2:1" gallerize gutterSize = '5px'>
-        <mat-grid-tile
-            *ngFor="let image of images"
-            [style.background]="blue">
-          <img src={{image.imageUrl}} class="project-image" layout-fill>
-          <mat-grid-tile-footer> 
-                <span class="image-name">{{image.name}}</span>
-          </mat-grid-tile-footer>
-        </mat-grid-tile>
-</mat-grid-list> -->

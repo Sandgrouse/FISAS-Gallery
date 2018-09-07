@@ -7,3 +7,16 @@
 .image-name {
 	text-transform: capitalize;
 }
+
+.display-1 {
+	font-size: 5rem;
+	line-height: 0.2;
+}
+
+#back-to-map {
+	margin-left: 15px;
+}
+
+#gallery {
+	margin: 6px;
+}
