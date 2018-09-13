@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
-});
+}); */
 
 Auth::routes();
 
@@ -31,7 +31,7 @@ Route::get('/auth', function(){
 });
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
-// Route::redirect('/map', '/app', 301);
+Route::redirect('/', '/app', 301);
 // Route::redirect('/add-a-project', '/app', 301);
