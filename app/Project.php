@@ -10,7 +10,7 @@ class Project extends Model
     //
     protected $table = 'projects';
 
-    protected $fillable = array('name','description','cover_image', 'latitude', 'longitude', 'start_date', 'end_date');
+    protected $fillable = array('name','description','category', 'latitude', 'longitude', 'start_date', 'end_date');
 
     public function photos(){
 

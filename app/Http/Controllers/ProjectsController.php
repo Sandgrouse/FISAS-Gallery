@@ -78,7 +78,7 @@ class ProjectsController extends Controller
         'longitude' => $request->longitude,
         'start_date' => $request->start_date,
         'end_date' => $request->end_date,
-        'cover_image' => '',
+        'category' => $request->category
       ));
 
       $path = public_path().'/images/projects';
@@ -107,16 +107,12 @@ class ProjectsController extends Controller
 
       return new ProjectResource($project);
   
-      // return Redirect::route('show_project',array('id'=>$project->id));
 
     }
 
     public function update(Request $request, Project $project)
     {
-      // check if currently authenticated user is the owner of the book
-      /* if ($request->user()->id !== $book->user_id) {
-        return response()->json(['error' => 'You can only edit your own books.'], 403);
-      } */
+ 
 
       $project->update($request->only(['name', 'description', 'start_date', 'end_date']));
 

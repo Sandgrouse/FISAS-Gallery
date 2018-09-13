@@ -27,7 +27,7 @@ class ProjectResource extends JsonResource
             'end_date' => $this->end_date,
             'position' => [$this->latitude, $this->longitude],
             'photos' => $this->photos,
-            'iw_id' => str_random(8)
+            'category' => $this->category
         ];
     }
 }
